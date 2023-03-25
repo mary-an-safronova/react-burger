@@ -3,3 +3,8 @@
     width: 100%;
     background: #131316;
 }
+
+.app__main {
+    max-width: 1240px;
+    width: 100%;
+}

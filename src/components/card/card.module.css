@@ -1,0 +1,34 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    max-width: 272px;
+    width: 100%;
+    position: relative;
+}
+
+.card__price {
+    display: flex;
+    margin: 4px auto;
+}
+
+.card__title {
+    margin-left: 0;
+    margin: auto;
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.card__image {
+    max-width: 240px;
+    width: 100%;
+    margin: auto;
+}
+
+.card__counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+}
