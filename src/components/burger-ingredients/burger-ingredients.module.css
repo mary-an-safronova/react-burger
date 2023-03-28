@@ -6,7 +6,7 @@
 
 .scroll {
     overflow-y: auto;
-    max-height: 71.6vh;
+    max-height: 664px;
     width: 100%;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    height: 49.2vh;
+    height: 492px;
     width: 8px;
     background: #8585AD;
     border: 3px solid #8585AD;

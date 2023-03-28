@@ -1,37 +1,26 @@
 import React from "react";
+import ingredientCardsStyles from './ingredient-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
+import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
 
-import IngredientCardsStyles from './ingredient-cards.module.css'
-import { data } from '../../utils/constants.js';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-
-const IngredientCards = () => {
+const IngredientCards = (props) => {
     const position = {
         top: "top",
         bottom: "bottom"
     }
+    
+    const positionText = {
+        top: "(верх)",
+        bottom: "(низ)"
+    }
 
     return (
-        <div className={IngredientCardsStyles.cards}>
-            <ConstructorElement
-                type={position.top}
-                isLocked={true}
-                text={`${data[0].name} (верх)`}
-                price={data[0].price}
-                thumbnail={data[0].image}
-            />
-            <ConstructorElement
-                text={data[1].name}
-                price={data[1].price}
-                thumbnail={data[1].image}
-            />
-            <ConstructorElement
-                type={position.bottom}
-                isLocked={true}
-                text={`${data[14].name} (низ)`}
-                price={data[14].price}
-                thumbnail={data[14].image}
-            />
+        <div className={ingredientCardsStyles.cards}>
+            <IngredientCardOuter position={position.top} data={props.data} positionText={positionText.top} />
+            <div className={ingredientCardsStyles.scroll}>
+                <IngredientCard data={props.data} />
+            </div>
+            <IngredientCardOuter position={position.bottom} data={props.data} positionText={positionText.bottom} />
         </div>
     )
 }
