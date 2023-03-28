@@ -1,0 +1,11 @@
+.final__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 16px 52px 0;
+}
+
+.final__price {
+    display: flex;
+    margin-right: 40px;
+}
