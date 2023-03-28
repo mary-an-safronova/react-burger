@@ -16,11 +16,11 @@ const IngredientCards = (props) => {
 
     return (
         <div className={ingredientCardsStyles.cards}>
-            <IngredientCardOuter position={position.top} data={props.data} positionText={positionText.top} />
+            <IngredientCardOuter outerIngredients={props.outerIngredients} position={position.top} data={props.data} positionText={positionText.top} />
             <div className={ingredientCardsStyles.scroll}>
                 <IngredientCard data={props.data} />
             </div>
-            <IngredientCardOuter position={position.bottom} data={props.data} positionText={positionText.bottom} />
+            <IngredientCardOuter outerIngredients={props.outerIngredients} position={position.bottom} data={props.data} positionText={positionText.bottom} />
         </div>
     )
 }

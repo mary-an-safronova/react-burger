@@ -4,23 +4,14 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 
 const IngredientCardOuter = (props) => {
 
-    const outerItems = () => {
-        const item = props.data?.filter(item => {
-            return item.type === 'bun';
-        })
-        return item;
-    };
-
-    const outerIngredients = outerItems();
-
     return (
-        <div className={ingredientCardOuterStyles.card__outer} key={outerIngredients[0]._id}>
+        <div className={ingredientCardOuterStyles.card__outer} key={props.outerIngredients[0]._id}>
             <ConstructorElement
                 type={props.position}
                 isLocked={true}
-                text={`${outerIngredients[0].name} ${props.positionText}`}
-                price={outerIngredients[0].price}
-                thumbnail={outerIngredients[0].image}
+                text={`${props.outerIngredients[0].name} ${props.positionText}`}
+                price={props.outerIngredients[0].price}
+                thumbnail={props.outerIngredients[0].image}
             />
         </div>
     )
