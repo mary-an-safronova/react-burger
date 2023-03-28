@@ -6,6 +6,12 @@
     position: relative;
 }
 
+.card:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
 .card__price {
     display: flex;
     margin: 4px auto;

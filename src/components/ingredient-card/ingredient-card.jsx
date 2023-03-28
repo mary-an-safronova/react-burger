@@ -10,7 +10,7 @@ const IngredientCard = (props) => {
             {props.data?.map((ingredient, index) => {
                 return (ingredient.type !== 'bun' ?
                 <div className={ingredientCardStyles.card__wrap} id="inner-wrap" key={index}>
-                    <div className="mr-2">
+                    <div className={`${ingredientCardStyles.card__icon} mr-2`}>
                     <DragIcon type="primary" />
                     </div>
                     <div className={ingredientCardStyles.card__center} key={ingredient._id}>

@@ -9,3 +9,9 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+.card__icon:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
