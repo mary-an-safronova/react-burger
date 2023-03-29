@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ingredientCardOuterStyles from './ingredient-card-outer.module.css'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -15,6 +16,10 @@ const IngredientCardOuter = (props) => {
             />
         </div>
     )
+}
+
+IngredientCardOuter.propTypes = {
+    outerIngredients: PropTypes.array.isRequired
 }
 
 export default IngredientCardOuter;

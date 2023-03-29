@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import switchStyle from  './switch.module.css';
 
@@ -20,6 +21,10 @@ const Switch = ({ ingredients }) => {
       })}
     </div>
   );
+}
+
+Switch.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default Switch;

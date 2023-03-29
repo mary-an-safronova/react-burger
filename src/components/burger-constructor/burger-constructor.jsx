@@ -1,10 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import FinalPrice from '../final-price/final-price';
-
-import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
-import IngredientCard from '../ingredient-card/ingredient-card';
 
 const BurgerConstructor = (props) => {
     const outerItems = () => {
@@ -22,6 +20,10 @@ const BurgerConstructor = (props) => {
             <FinalPrice data={props.data} outerIngredients={outerIngredients} />
         </section>
     )
+}
+
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default BurgerConstructor;

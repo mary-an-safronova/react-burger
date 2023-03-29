@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cardStyle from './card.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -23,6 +24,11 @@ const Card = (props) => {
             <h3 className={`${cardStyle.card__title} text text_type_main-default ml-2`}>{props.item.name}</h3>
         </li>
     )
+}
+
+Card.propTypes = {
+    item: PropTypes.object.isRequired,
+    price: PropTypes.number.isRequired
 }
 
 export default Card;

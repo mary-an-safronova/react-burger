@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ingredientCardsStyles from './ingredient-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
@@ -23,6 +24,11 @@ const IngredientCards = (props) => {
             <IngredientCardOuter outerIngredients={props.outerIngredients} position={position.bottom} data={props.data} positionText={positionText.bottom} />
         </div>
     )
+}
+
+IngredientCards.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    outerIngredients: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default IngredientCards;

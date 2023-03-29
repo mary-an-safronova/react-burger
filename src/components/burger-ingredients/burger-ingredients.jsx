@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
@@ -16,6 +17,10 @@ const BurgerIngredients = (props) => {
             </div>
         </section>
     )
+}
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default BurgerIngredients;
