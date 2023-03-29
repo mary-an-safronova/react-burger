@@ -24,7 +24,10 @@ const Switch = ({ ingredients }) => {
 }
 
 Switch.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+})).isRequired
 }
 
 export default Switch;

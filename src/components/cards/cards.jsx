@@ -7,7 +7,7 @@ const Cards = (props) => {
 
     return (
         <div>
-            <h2 className="text text_type_main-medium pb-5 mb-1 mt-5 pt-5" id={props.types.text}>{props.types.text}</h2>
+            <h2 className="text text_type_main-medium pb-5 mb-1 mt-5 pt-5" id={props.typesText}>{props.typesText}</h2>
             <ul className={cardsStyle.cards}>
                 {props.cards?.map(card => {
                     return (card.type === props.typesItem ? <Card data={props.cards} item={card} key={card._id} price={card.price} onClick={props.onClick} /> : null)
@@ -18,8 +18,15 @@ const Cards = (props) => {
 }
 
 Cards.propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.object).isRequired,
-    types: PropTypes.arrayOf(PropTypes.object).isRequired,
+    cards: PropTypes.arrayOf(PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired
+      })).isRequired,
+    typesText: PropTypes.string.isRequired,
+    typesItem: PropTypes.string.isRequired
+
 }
 
 export default Cards;

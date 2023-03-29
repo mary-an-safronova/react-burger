@@ -27,8 +27,18 @@ const IngredientCards = (props) => {
 }
 
 IngredientCards.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    outerIngredients: PropTypes.arrayOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+    })).isRequired,
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+    })).isRequired
 }
 
 export default IngredientCards;

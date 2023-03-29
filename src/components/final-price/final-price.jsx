@@ -31,8 +31,13 @@ const FinalPrice = (props) => {
 }
 
 FinalPrice.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    outerIngredients: PropTypes.arrayOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    })).isRequired,
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
+        price: PropTypes.number.isRequired
+    })).isRequired
 }
 
 export default FinalPrice;

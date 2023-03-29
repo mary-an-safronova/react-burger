@@ -19,7 +19,14 @@ const IngredientCardOuter = (props) => {
 }
 
 IngredientCardOuter.propTypes = {
-    outerIngredients: PropTypes.array.isRequired
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+    })).isRequired,
+    position: PropTypes.string.isRequired,
+    positionText: PropTypes.string.isRequired
 }
 
 export default IngredientCardOuter;

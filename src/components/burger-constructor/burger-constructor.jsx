@@ -23,7 +23,13 @@ const BurgerConstructor = (props) => {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired
+    })).isRequired
 }
 
 export default BurgerConstructor;
