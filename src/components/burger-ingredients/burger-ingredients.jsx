@@ -12,7 +12,7 @@ const BurgerIngredients = (props) => {
             <Switch ingredients={ ingredientTypes } />
             <div className={burgerIngredientsStyle.scroll}>
                 {ingredientTypes.map((item, index) => {
-                    return <Cards cards={props.data} types={ingredientTypes} typesItem={item.type} typesText={item.text} key={index} onClick={props.onClick} />
+                    return <Cards cards={props.data} types={ingredientTypes} typesItem={item.type} typesText={item.text} key={index} />
                 })}
             </div>
         </section>
