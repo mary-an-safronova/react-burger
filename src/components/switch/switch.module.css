@@ -1,0 +1,16 @@
+.switch {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.switch__link {
+    text-decoration: none;
+}
+
+.switch__link:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}

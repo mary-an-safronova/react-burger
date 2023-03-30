@@ -1,0 +1,38 @@
+.header {
+    width: 100%;
+    background: #1C1C21;
+}
+
+.header__wrap {
+    width: 84%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.header__nav {
+    display: flex;
+}
+
+.header__link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.header__link:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.header__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.header__item {
+    display: flex;
+}

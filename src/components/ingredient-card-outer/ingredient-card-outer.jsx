@@ -1,0 +1,32 @@
+import React from "react";
+import PropTypes from 'prop-types';
+import ingredientCardOuterStyles from './ingredient-card-outer.module.css'
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+
+const IngredientCardOuter = (props) => {
+
+    return (
+        <div className={ingredientCardOuterStyles.card__outer} key={props.outerIngredients[0]._id}>
+            <ConstructorElement
+                type={props.position}
+                isLocked={true}
+                text={`${props.outerIngredients[0].name} ${props.positionText}`}
+                price={props.outerIngredients[0].price}
+                thumbnail={props.outerIngredients[0].image}
+            />
+        </div>
+    )
+}
+
+IngredientCardOuter.propTypes = {
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+    })).isRequired,
+    position: PropTypes.string.isRequired,
+    positionText: PropTypes.string.isRequired
+}
+
+export default IngredientCardOuter;
