@@ -4,6 +4,7 @@ import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
 import { ingredientTypes } from '../../utils/constants.js';
+import { ingredientType } from '../../utils/types';
 
 const BurgerIngredients = (props) => {
     return (
@@ -20,12 +21,7 @@ const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired
 }
 
 export default BurgerIngredients;

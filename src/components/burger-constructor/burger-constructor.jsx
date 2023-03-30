@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCards from '../ingredient-cards/ingredient-cards';
 import FinalPrice from '../final-price/final-price';
+import { ingredientType } from '../../utils/types';
 
 const BurgerConstructor = (props) => {
     const outerItems = () => {
@@ -23,13 +24,7 @@ const BurgerConstructor = (props) => {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired
 }
 
 export default BurgerConstructor;

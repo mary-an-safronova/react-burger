@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientType } from '../../utils/types';
 
 const FinalPrice = (props) => {
     const innerItems = () => {
@@ -31,13 +32,8 @@ const FinalPrice = (props) => {
 }
 
 FinalPrice.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-    })).isRequired,
-    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
-        price: PropTypes.number.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired,
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired
 }
 
 export default FinalPrice;

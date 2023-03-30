@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ingredientCardsStyles from './ingredient-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
+import { ingredientType } from '../../utils/types';
 
 const IngredientCards = (props) => {
     const position = {
@@ -27,18 +28,8 @@ const IngredientCards = (props) => {
 }
 
 IngredientCards.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-    })).isRequired,
-    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired,
+    outerIngredients: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired
 }
 
 export default IngredientCards;

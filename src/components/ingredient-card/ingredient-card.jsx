@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ingredientCardStyles from './ingredient-card.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientType } from '../../utils/types'
 
 const IngredientCard = (props) => {
 
@@ -28,13 +29,7 @@ const IngredientCard = (props) => {
 }
 
 IngredientCard.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired
 }
 
 export default IngredientCard;

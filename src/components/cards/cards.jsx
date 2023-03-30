@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cardsStyle from './cards.module.css';
 import Card from '../card/card';
+import { ingredientType } from '../../utils/types';
 
 const Cards = (props) => {
 
@@ -18,12 +19,7 @@ const Cards = (props) => {
 }
 
 Cards.propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired
-      })).isRequired,
+    cards: PropTypes.arrayOf(PropTypes.shape(ingredientType.data)).isRequired,
     typesText: PropTypes.string.isRequired,
     typesItem: PropTypes.string.isRequired
 
