@@ -10,17 +10,17 @@ const Switch = ({ ingredients }) => {
   const [current, setCurrent] = React.useState(defaultIngredient);
 
   return (
-    <div className={switchStyle.switch}>
+    <ul className={switchStyle.switch}>
       {ingredients.map((ingredient, index) => {
         return (
           <li key={index}>
             <a className={switchStyle.switch__link} href={`#${ingredient.text}`}>
-              <Tab value={ingredient.type} active={current === ingredient.type} onClick={setCurrent}>{ingredient.text}</Tab>
+              <Tab value={ingredient.type} active={current === ingredient.type} onClick={() => setCurrent}>{ingredient.text}</Tab>
             </a>
           </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
