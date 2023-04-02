@@ -1,6 +1,6 @@
 import modalOverlayStyles from './modal-overlay.module.css';
 
-export function ModalOverlay(props) {
+export const ModalOverlay = (props) => {
     
     const closeModalOverlay = (evt) => {
         if (evt.target.classList.contains(modalOverlayStyles.overlay)) {

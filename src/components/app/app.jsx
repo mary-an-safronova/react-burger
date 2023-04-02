@@ -9,6 +9,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { ingredientType } from '../../utils/types'
 import { apiConfig } from '../../utils/constants.js';
 import { Modal } from '../modal/modal';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -39,7 +40,9 @@ const App = () => {
         <BurgerIngredients data={ingredients} />
         <BurgerConstructor data={ingredients} />
       </main>
-      <Modal onClose={closeModal} />
+      <Modal onClose={closeModal}>
+        <IngredientDetails data={ingredients} />
+      </Modal>
     </div>
   );
 }

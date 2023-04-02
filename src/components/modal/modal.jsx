@@ -7,7 +7,7 @@ import { ModalOverlay } from '../modal-overlay/modal-overlay.jsx';
 
 const modalRoot = document.getElementById("modals");
 
-export function Modal(props) {
+export const Modal = (props) => {
 
     useEffect(() => {
         function onKeyDown(e) {
