@@ -15,7 +15,7 @@ const Switch = ({ ingredients }) => {
         return (
           <li key={index}>
             <a className={switchStyle.switch__link} href={`#${ingredient.text}`}>
-              <Tab value={ingredient.type} active={current === ingredient.type} onClick={() => setCurrent}>{ingredient.text}</Tab>
+              <Tab value={ingredient.type} active={current === ingredient.type} onClick={setCurrent}>{ingredient.text}</Tab>
             </a>
           </li>
         );

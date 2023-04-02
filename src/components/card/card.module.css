@@ -6,6 +6,11 @@
     position: relative;
 }
 
+.cardWrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .card:hover {
     opacity: 0.8;
     cursor: pointer;

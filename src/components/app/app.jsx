@@ -8,10 +8,11 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { ingredientType } from '../../utils/types'
 import { apiConfig } from '../../utils/constants.js';
+import { Modal } from '../modal/modal';
 
 const App = () => {
-
-  const [data, setData] = useState(null)
+  const [ingredients, setIngredients] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   const getData = () =>
     fetch(`${apiConfig.baseUrl}/ingredients`)
@@ -19,17 +20,26 @@ const App = () => {
 
   useEffect(() => {
     getData()
-    .then((data) => setData(data.data))
+    .then(({ success, data }) => {
+      if (success) {
+        setIngredients(data)
+      }
+    })
     .catch((err) => { console.log(err) })
   }, [])
+
+  const closeModal = () => {
+    setOpenModal(!openModal);
+  }
 
   return (
     <div className={appStyle.app}>
       <AppHeader />
       <main className={appStyle.app__main}>
-        <BurgerIngredients data={data} />
-        <BurgerConstructor data={data} />
+        <BurgerIngredients data={ingredients} />
+        <BurgerConstructor data={ingredients} />
       </main>
+      <Modal onClose={closeModal} />
     </div>
   );
 }
