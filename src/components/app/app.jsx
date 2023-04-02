@@ -10,6 +10,7 @@ import { ingredientType } from '../../utils/types'
 import { apiConfig } from '../../utils/constants.js';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { OrderDetails } from '../order-details/order-details';
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -35,6 +36,11 @@ const App = () => {
     setOpenModal(!openModal);
   }
 
+  const handleOrderButtonClick = () => {
+    setItem(false);
+    setOpenModal(!openModal);
+  }
+
   const closeModal = () => {
     setOpenModal(!openModal);
   }
@@ -44,11 +50,11 @@ const App = () => {
       <AppHeader />
       <main className={appStyle.app__main}>
         <BurgerIngredients data={ingredients} handleIngredientClick={handleIngredientClick} />
-        <BurgerConstructor data={ingredients} />
+        <BurgerConstructor data={ingredients} handleOrderButtonClick={handleOrderButtonClick} />
       </main>
       {
       openModal && <Modal onClose={closeModal}>
-        { item ? <IngredientDetails card={item} /> : null }
+        { item ? <IngredientDetails card={item} /> : <OrderDetails /> }
       </Modal>
       }
     </div>

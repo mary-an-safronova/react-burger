@@ -7,7 +7,7 @@ const BurgerConstructor = (props) => {
     return (
         <section className={burgerConstructorStyles.burgerConstructor}>
             <IngredientCards data={props.data} />
-            <FinalPrice data={props.data} />
+            <FinalPrice data={props.data} handleOrderButtonClick={props.handleOrderButtonClick} />
         </section>
     )
 }

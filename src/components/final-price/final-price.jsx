@@ -30,7 +30,7 @@ const FinalPrice = (props) => {
                 <p className="text text_type_digits-medium mr-2">{total}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
+            <Button onClick={props.handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
         </div>
     )
 }
