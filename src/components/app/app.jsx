@@ -14,6 +14,7 @@ import { IngredientDetails } from '../ingredient-details/ingredient-details';
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [item, setItem] = React.useState(false);
 
   const getData = () =>
     fetch(`${apiConfig.baseUrl}/ingredients`)
@@ -29,6 +30,11 @@ const App = () => {
     .catch((err) => { console.log(err) })
   }, [])
 
+  const handleIngredientClick = (item) => {
+    setItem(item)
+    setOpenModal(!openModal);
+  }
+
   const closeModal = () => {
     setOpenModal(!openModal);
   }
@@ -37,12 +43,14 @@ const App = () => {
     <div className={appStyle.app}>
       <AppHeader />
       <main className={appStyle.app__main}>
-        <BurgerIngredients data={ingredients} />
+        <BurgerIngredients data={ingredients} handleIngredientClick={handleIngredientClick} />
         <BurgerConstructor data={ingredients} />
       </main>
-      <Modal onClose={closeModal}>
-        <IngredientDetails data={ingredients} />
+      {
+      openModal && <Modal onClose={closeModal}>
+        { item ? <IngredientDetails card={item} /> : null }
       </Modal>
+      }
     </div>
   );
 }
