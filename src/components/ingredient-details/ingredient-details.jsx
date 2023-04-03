@@ -1,4 +1,5 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import ingredientDetailsStyles from './ingredient-details.module.css';
 
 export const IngredientDetails = (props) => {
@@ -30,4 +31,8 @@ export const IngredientDetails = (props) => {
             </div>
         </div>
     )
+}
+
+IngredientDetails.propTypes = {
+    card: ingredientType.isRequired,
 }

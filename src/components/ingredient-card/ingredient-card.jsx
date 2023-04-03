@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import ingredientCardStyles from './ingredient-card.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -23,6 +25,10 @@ const IngredientCard = (props) => {
             })}
         </>
     )
+}
+
+IngredientCard.propTypes = {
+    data: PropTypes.arrayOf(ingredientType).isRequired,
 }
 
 export default IngredientCard;

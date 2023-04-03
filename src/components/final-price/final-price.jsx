@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -33,6 +35,11 @@ const FinalPrice = (props) => {
             <Button onClick={props.handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
         </div>
     )
+}
+
+FinalPrice.propTypes = {
+    data: PropTypes.arrayOf(ingredientType).isRequired,
+    handleOrderButtonClick: PropTypes.func.isRequired,
 }
 
 export default FinalPrice;

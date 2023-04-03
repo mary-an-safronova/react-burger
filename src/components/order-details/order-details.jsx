@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import orderDetailsStyles from './order-details.module.css';
 import doneImage from '../../images/order accpeted-done.svg';
 

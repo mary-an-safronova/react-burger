@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import cardsStyle from './cards.module.css';
 import Card from '../card/card';
 
@@ -17,9 +18,10 @@ const Cards = (props) => {
 }
 
 Cards.propTypes = {
+    data: PropTypes.arrayOf(ingredientType).isRequired,
     typesText: PropTypes.string.isRequired,
-    typesItem: PropTypes.string.isRequired
-
+    typesItem: PropTypes.string.isRequired,
+    handleIngredientClick: PropTypes.func.isRequired,
 }
 
 export default Cards;
