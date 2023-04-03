@@ -27,8 +27,8 @@ const FinalPrice = (props) => {
     const total = prices.reduce((sum, price) => sum + price, 0)
 
     return (
-        <div className={finalPriceStyles.final__wrap}>
-            <div className={finalPriceStyles.final__price}>
+        <div className={`${finalPriceStyles.final__wrap} mr-4`}>
+            <div className={`${finalPriceStyles.final__price} mr-10`}>
                 <p className="text text_type_digits-medium mr-2">{total}</p>
                 <CurrencyIcon type="primary" />
             </div>

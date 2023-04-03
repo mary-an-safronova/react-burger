@@ -1,13 +1,11 @@
 .card__center {
     width: 94.36%;
-    margin-right: 8px;
 }
 
 .card__wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
 }
 
 .card__icon:hover {

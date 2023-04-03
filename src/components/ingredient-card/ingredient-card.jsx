@@ -10,11 +10,11 @@ const IngredientCard = (props) => {
         <>
             {props.data?.map((ingredient, index) => {
                 return (ingredient.type !== 'bun' ?
-                <div className={ingredientCardStyles.card__wrap} id="inner-wrap" key={index}>
+                <div className={`${ingredientCardStyles.card__wrap} mb-4`} id="inner-wrap" key={index}>
                     <div className={`${ingredientCardStyles.card__icon} mr-2`}>
                     <DragIcon type="primary" />
                     </div>
-                    <div className={ingredientCardStyles.card__center} key={ingredient._id}>
+                    <div className={`${ingredientCardStyles.card__center} mr-2`} key={ingredient._id}>
                         <ConstructorElement
                             text={ingredient.name}
                             price={ingredient.price}

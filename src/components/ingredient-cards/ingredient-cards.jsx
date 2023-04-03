@@ -16,7 +16,7 @@ const IngredientCards = (props) => {
     }
 
     return (
-        <div className={ingredientCardsStyles.cards}>
+        <div className={`${ingredientCardsStyles.cards} mt-25 mb-10 ml-4`}>
             <IngredientCardOuter data={props.data} position={position.top} positionText={positionText.top} />
             <div className={ingredientCardsStyles.scroll}>
                 <IngredientCard data={props.data} />

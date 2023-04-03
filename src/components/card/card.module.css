@@ -19,7 +19,7 @@
 
 .card__price {
     display: flex;
-    margin: 4px auto;
+    margin: auto;
 }
 
 .card__title {

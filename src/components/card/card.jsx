@@ -11,7 +11,7 @@ const Card = (props) => {
             <Counter className={cardStyle.card__counter} count={1} size={'default'} />
             <div className={cardStyle.cardWrap} key={props.card._id}>
                 <img className={cardStyle.card__image} src={props.card.image} alt={props.card.name} />
-                <div className={`${cardStyle.card__price} mb-1 mt-1`}>
+                <div className={`${cardStyle.card__price} pb-1 pt-1`}>
                     <p className="text text_type_digits-default mr-2">{props.card.price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
