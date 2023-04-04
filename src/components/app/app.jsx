@@ -16,7 +16,12 @@ const App = () => {
 
   const getData = () =>
     fetch(`${apiConfig.baseUrl}/ingredients`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+          return Promise.reject(`Ошибка: ${res.status}`);
+        })
 
   useEffect(() => {
     getData()

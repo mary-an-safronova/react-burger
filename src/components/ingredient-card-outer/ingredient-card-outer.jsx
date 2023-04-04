@@ -6,7 +6,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 const IngredientCardOuter = (props) => {
 
     return (
-        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`} key={props.data[0]?._id}>
+        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`}>
             <ConstructorElement
                 type={props.position}
                 isLocked={true}
