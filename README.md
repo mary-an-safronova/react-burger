@@ -7,7 +7,7 @@ ___________________________
 The space burger app.
 
 
-![Stellar burgers main screen](https://ibb.co/9shq1Lv)
+![Stellar burgers main screen](https://i.ibb.co/Ch6nYZt/Stellar-Burger.png)
 
 ___________________________
 
