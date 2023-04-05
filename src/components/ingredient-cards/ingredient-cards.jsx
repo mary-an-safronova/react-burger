@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import ingredientCardsStyles from './ingredient-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
@@ -16,29 +16,18 @@ const IngredientCards = (props) => {
     }
 
     return (
-        <div className={ingredientCardsStyles.cards}>
-            <IngredientCardOuter outerIngredients={props.outerIngredients} position={position.top} data={props.data} positionText={positionText.top} />
+        <div className={`${ingredientCardsStyles.cards} mt-25 mb-10 ml-4`}>
+            <IngredientCardOuter data={props.data} position={position.top} positionText={positionText.top} />
             <div className={ingredientCardsStyles.scroll}>
                 <IngredientCard data={props.data} />
             </div>
-            <IngredientCardOuter outerIngredients={props.outerIngredients} position={position.bottom} data={props.data} positionText={positionText.bottom} />
+            <IngredientCardOuter position={position.bottom} data={props.data} positionText={positionText.bottom} />
         </div>
     )
 }
 
 IngredientCards.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-    })).isRequired,
-    outerIngredients: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(ingredientType).isRequired,
 }
 
 export default IngredientCards;

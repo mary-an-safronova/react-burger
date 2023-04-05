@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/types';
 import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
@@ -12,7 +12,7 @@ const BurgerIngredients = (props) => {
             <Switch ingredients={ ingredientTypes } />
             <div className={burgerIngredientsStyle.scroll}>
                 {ingredientTypes.map((item, index) => {
-                    return <Cards cards={props.data} types={ingredientTypes} typesItem={item.type} typesText={item.text} key={index} onClick={props.onClick} />
+                    return <Cards data={props.data} types={ingredientTypes} typesItem={item.type} typesText={item.text} key={index} handleIngredientClick={props.handleIngredientClick} />
                 })}
             </div>
         </section>
@@ -20,12 +20,7 @@ const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        _id: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired
-    })).isRequired
+    data: PropTypes.arrayOf(ingredientType).isRequired,
 }
 
 export default BurgerIngredients;

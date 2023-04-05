@@ -6,6 +6,11 @@
     position: relative;
 }
 
+.cardWrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .card:hover {
     opacity: 0.8;
     cursor: pointer;
@@ -14,7 +19,7 @@
 
 .card__price {
     display: flex;
-    margin: 4px auto;
+    margin: auto;
 }
 
 .card__title {
