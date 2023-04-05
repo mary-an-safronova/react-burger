@@ -5,6 +5,10 @@ ___________________________
 ### Description
 
 The space burger app.
+
+
+![Stellar burgers main screen](https://ibb.co/9shq1Lv)
+
 ___________________________
 
 **Used technology**
