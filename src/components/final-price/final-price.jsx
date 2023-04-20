@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { IngredientsContext } from '../../services/ingredientsContext';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import finalPriceStyles from './final-price.module.css'
@@ -5,8 +7,10 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const FinalPrice = (props) => {
+    const ingredients = useContext(IngredientsContext);
+
     const innerItems = () => {
-        const item = props.data?.filter(item => {
+        const item = ingredients?.filter(item => {
             return item.type !== 'bun';
         })
         return item;
@@ -14,7 +18,7 @@ const FinalPrice = (props) => {
     const innerIngredients = innerItems();
 
     const outerItems = () => {
-        const item = props.data?.filter(item => {
+        const item = ingredients?.filter(item => {
             return item.type === 'bun';
         })
         return item;
@@ -38,7 +42,7 @@ const FinalPrice = (props) => {
 }
 
 FinalPrice.propTypes = {
-    data: PropTypes.arrayOf(ingredientType).isRequired,
+    ingredients: PropTypes.shape(ingredientType),
     handleOrderButtonClick: PropTypes.func.isRequired,
 }
 

@@ -1,14 +1,17 @@
+import { useContext } from 'react';
+import { IngredientsContext } from '../../services/ingredientsContext';
 import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import ingredientCardStyles from './ingredient-card.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCard = (props) => {
+const IngredientCard = () => {
+    const ingredients = useContext(IngredientsContext);
 
     return (
         <>
-            {props.data?.map((ingredient, index) => {
+            {ingredients.map((ingredient, index) => {
                 return (ingredient.type !== 'bun' ?
                 <div className={`${ingredientCardStyles.card__wrap} mb-4`} id="inner-wrap" key={index}>
                     <div className={`${ingredientCardStyles.card__icon} mr-2`}>
@@ -28,7 +31,7 @@ const IngredientCard = (props) => {
 }
 
 IngredientCard.propTypes = {
-    data: PropTypes.arrayOf(ingredientType).isRequired,
+    ingredients: PropTypes.shape(ingredientType),
 }
 
 export default IngredientCard;

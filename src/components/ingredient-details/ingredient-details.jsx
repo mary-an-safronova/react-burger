@@ -34,5 +34,5 @@ export const IngredientDetails = (props) => {
 }
 
 IngredientDetails.propTypes = {
-    card: ingredientType.isRequired,
+    card: PropTypes.shape(ingredientType),
 }
