@@ -1,49 +1,32 @@
-import { useContext } from 'react';
-import { IngredientsContext } from '../../services/ingredientsContext';
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const FinalPrice = (props) => {
-    const ingredients = useContext(IngredientsContext);
+const FinalPrice = ({ handleOrderButtonClick, prices, bunPrice }) => {
 
-    const innerItems = () => {
-        const item = ingredients?.filter(item => {
-            return item.type !== 'bun';
-        })
-        return item;
-    };
-    const innerIngredients = innerItems();
-
-    const outerItems = () => {
-        const item = ingredients?.filter(item => {
-            return item.type === 'bun';
-        })
-        return item;
-    };
-    const outerIngredients = outerItems();
-
-    const prices = [];
-    innerIngredients?.map(item => prices.push(item.price));
-    outerIngredients?.map(item => prices.push(item.price * 2));
-    const total = prices.reduce((sum, price) => sum + price, 0)
+    const total = useMemo(() =>
+        prices.reduce((sum, price) => {
+            return (sum += price);
+        }, bunPrice * 2),
+        [prices, bunPrice]
+    );
 
     return (
-        <div className={`${finalPriceStyles.final__wrap} mr-4`}>
-            <div className={`${finalPriceStyles.final__price} mr-10`}>
-                <p className="text text_type_digits-medium mr-2">{total}</p>
-                <CurrencyIcon type="primary" />
+            <div className={`${finalPriceStyles.final__wrap} mr-4`}>
+                <div className={`${finalPriceStyles.final__price} mr-10`}>
+                    <p className="text text_type_digits-medium mr-2">{bunPrice ? total : 0}</p>
+                    <CurrencyIcon type="primary" />
+                </div>
+                <Button onClick={handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
             </div>
-            <Button onClick={props.handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
-        </div>
     )
 }
 
 FinalPrice.propTypes = {
-    ingredients: PropTypes.shape(ingredientType),
     handleOrderButtonClick: PropTypes.func.isRequired,
+    prices: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default FinalPrice;

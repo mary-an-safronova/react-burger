@@ -21,7 +21,7 @@ const Cards = (props) => {
 }
 
 Cards.propTypes = {
-    ingredients: PropTypes.shape(ingredientType),
+    ingredients: ingredientType,
     typesText: PropTypes.string.isRequired,
     typesItem: PropTypes.string.isRequired,
     handleIngredientClick: PropTypes.func.isRequired,

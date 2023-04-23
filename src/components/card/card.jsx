@@ -22,7 +22,7 @@ const Card = (props) => {
 }
 
 Card.propTypes = {
-    card: PropTypes.shape(ingredientType),
+    card: ingredientType,
     handleIngredientClick: PropTypes.func.isRequired,
 }
 
