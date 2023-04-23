@@ -23,13 +23,13 @@ const FinalPrice = ({ prices, bunPrice }) => {
     );
 
     return (
-            <div className={`${finalPriceStyles.final__wrap} mr-4`}>
-                <div className={`${finalPriceStyles.final__price} mr-10`}>
-                    <p className="text text_type_digits-medium mr-2">{bunPrice ? total : 0}</p>
-                    <CurrencyIcon type="primary" />
-                </div>
-                <Button onClick={handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+        <div className={`${finalPriceStyles.final__wrap} mr-4`}>
+            <div className={`${finalPriceStyles.final__price} mr-10`}>
+                <p className="text text_type_digits-medium mr-2">{bunPrice ? total : 0}</p>
+                <CurrencyIcon type="primary" />
             </div>
+            <Button onClick={handleOrderButtonClick} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+        </div>
     )
 }
 

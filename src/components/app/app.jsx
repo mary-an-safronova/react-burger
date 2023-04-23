@@ -35,11 +35,6 @@ const App = () => {
     .catch((err) => { console.log(err) })
   }, [])
 
-  const handleIngredientClick = (item) => {
-    setItem(item)
-    setOpenModal(!openModal);
-  }
-
   const closeModal = () => {
     setOpenModal(!openModal);
   }
@@ -51,7 +46,7 @@ const App = () => {
           <itemContext.Provider value={{ item, setItem }}>
             <AppHeader />
             <main className={appStyle.app__main}>
-              <BurgerIngredients handleIngredientClick={handleIngredientClick} />
+              <BurgerIngredients />
               <BurgerConstructor />
             </main>
             {
