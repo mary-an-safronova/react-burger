@@ -17,6 +17,8 @@ const BurgerConstructor = () => {
         return (bun.type === 'bun')
     })
 
+    const ingredientsOder = [buns[0]?._id];
+
     const prices = [];
 
     const topBun = <IngredientCardOuter position={"top"} bun={buns[0]} />;
@@ -28,12 +30,13 @@ const BurgerConstructor = () => {
                 <div className={burgerConstructorStyles.scroll}>
                     {noBunIngredients.map((ingredient) => {
                         prices.push(ingredient.price)
+                        ingredientsOder.push(ingredient._id);
                         return <IngredientCard ingredient={ingredient} key={ingredient._id} />
                     })}
                 </div>
                 { topBun && <IngredientCardOuter position={"bottom"} bun={buns[0]} /> }
             </div>
-            <FinalPrice prices={prices} bunPrice={buns[0]?.price} />
+            <FinalPrice prices={prices} bunPrice={buns[0]?.price} ingredientsOder={ingredientsOder} />
         </section>
     )
 }

@@ -19,3 +19,9 @@ export const ingredientTypes = PropTypes.shape({
     type: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired
 })
+
+export const orderDetailsTypes = PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    order: PropTypes.objectOf(PropTypes.number).isRequired,
+    success: PropTypes.bool.isRequired,
+})

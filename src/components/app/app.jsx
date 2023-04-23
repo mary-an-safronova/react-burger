@@ -4,17 +4,19 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { apiConfig } from '../../utils/constants.js';
-import { Modal } from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
-import { OrderDetails } from '../order-details/order-details';
 import { IngredientsContext } from '../../services/ingredientsContext';
-import { openModalContext } from '../../services/openModalContext';
+import { openOrderModalContext } from '../../services/openOrderModalContext';
+import { openIngredientModalContext } from '../../services/openIngredientModal';
 import { itemContext } from '../../services/itemContext';
+import { dataOrderContext } from '../../services/dataOrderContext';
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [openOrderModal, setOpenOrderModal] = useState(false);
+  const [openIngredientModal, setOpenIngredientModal] = useState(false);
   const [item, setItem] = useState(false);
+
+  const [dataOrder, setDataOrder] = useState({});
 
   const getData = () =>
     fetch(`${apiConfig.baseUrl}/ingredients`)
@@ -35,28 +37,27 @@ const App = () => {
     .catch((err) => { console.log(err) })
   }, [])
 
-  const closeModal = () => {
-    setOpenModal(!openModal);
-  }
-
   return (
     <div className={appStyle.app}>
+
       <IngredientsContext.Provider value={ingredients}>
-        <openModalContext.Provider value={{ openModal, setOpenModal }}>
-          <itemContext.Provider value={{ item, setItem }}>
-            <AppHeader />
-            <main className={appStyle.app__main}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </main>
-            {
-            openModal && <Modal onClose={closeModal}>
-              { item ? <IngredientDetails card={item} /> : <OrderDetails /> }
-            </Modal>
-            }
-          </itemContext.Provider>
-        </openModalContext.Provider>
+        <openOrderModalContext.Provider value={{ openOrderModal, setOpenOrderModal }}>
+          <openIngredientModalContext.Provider value={{ openIngredientModal, setOpenIngredientModal }}>
+            <itemContext.Provider value={{ item, setItem }}>
+              <dataOrderContext.Provider value={{ dataOrder, setDataOrder }}>
+
+              <AppHeader />
+              <main className={appStyle.app__main}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </main>
+
+              </dataOrderContext.Provider>
+            </itemContext.Provider>
+          </openIngredientModalContext.Provider>
+        </openOrderModalContext.Provider>
       </IngredientsContext.Provider>
+      
     </div>
   );
 }
