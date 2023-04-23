@@ -1,6 +1,6 @@
 import { useMemo, useContext } from 'react';
-import { openOrderModalContext } from '../../services/openOrderModalContext';
-import { dataOrderContext } from '../../services/dataOrderContext';
+import { OpenOrderModalContext } from '../../services/OpenOrderModalContext';
+import { DataOrderContext } from '../../services/DataOrderContext';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,8 +10,8 @@ import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 
 const FinalPrice = ({ prices, bunPrice, ingredientsOder }) => {
-    const {openOrderModal, setOpenOrderModal} = useContext(openOrderModalContext);
-    const {setDataOrder} = useContext(dataOrderContext);
+    const {openOrderModal, setOpenOrderModal} = useContext(OpenOrderModalContext);
+    const {setDataOrder} = useContext(DataOrderContext);
 
     const postOrder = () =>
         fetch(`${apiConfig.baseUrl}/orders`, {

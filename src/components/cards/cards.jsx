@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import cardsStyle from './cards.module.css';
 import Card from '../card/card';
-import { IngredientsContext } from '../../services/ingredientsContext';
+import { IngredientsContext } from '../../services/IngredientsContext';
 
 const Cards = (props) => {
     const ingredients = useContext(IngredientsContext);

@@ -3,14 +3,14 @@ import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
 import { ingredientTypes } from '../../utils/constants.js';
-import { openIngredientModalContext } from '../../services/openIngredientModal';
-import { itemContext } from '../../services/itemContext';
+import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext.js';
+import { ItemContext } from '../../services/ItemContext.js';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details.jsx';
 
     const BurgerIngredients = () => {
-        const {openIngredientModal, setOpenIngredientModal} = useContext(openIngredientModalContext);
-        const {item, setItem} = useContext(itemContext);
+        const {openIngredientModal, setOpenIngredientModal} = useContext(OpenIngredientModalContext);
+        const {item, setItem} = useContext(ItemContext);
 
         const handleIngredientClick = (item) => {
             setItem(item)

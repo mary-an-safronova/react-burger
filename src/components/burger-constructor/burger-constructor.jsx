@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { IngredientsContext } from '../../services/ingredientsContext';
+import { IngredientsContext } from '../../services/IngredientsContext';
 import { ingredientType } from '../../utils/types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';

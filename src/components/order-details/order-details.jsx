@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import orderDetailsStyles from './order-details.module.css';
 import doneImage from '../../images/order accpeted-done.svg';
-import { dataOrderContext } from '../../services/dataOrderContext';
+import { DataOrderContext } from '../../services/DataOrderContext';
 import { orderDetailsTypes } from '../../utils/types';
 
 export const OrderDetails = () => {
-    const {dataOrder} = useContext(dataOrderContext);
+    const {dataOrder} = useContext(DataOrderContext);
 
     console.log(dataOrder.order)
 

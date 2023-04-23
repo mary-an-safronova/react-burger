@@ -4,11 +4,11 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { apiConfig } from '../../utils/constants.js';
-import { IngredientsContext } from '../../services/ingredientsContext';
-import { openOrderModalContext } from '../../services/openOrderModalContext';
-import { openIngredientModalContext } from '../../services/openIngredientModal';
-import { itemContext } from '../../services/itemContext';
-import { dataOrderContext } from '../../services/dataOrderContext';
+import { IngredientsContext } from '../../services/IngredientsContext';
+import { OpenOrderModalContext } from '../../services/OpenOrderModalContext';
+import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext';
+import { ItemContext } from '../../services/ItemContext';
+import { DataOrderContext } from '../../services/DataOrderContext';
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -41,10 +41,10 @@ const App = () => {
     <div className={appStyle.app}>
 
       <IngredientsContext.Provider value={ingredients}>
-        <openOrderModalContext.Provider value={{ openOrderModal, setOpenOrderModal }}>
-          <openIngredientModalContext.Provider value={{ openIngredientModal, setOpenIngredientModal }}>
-            <itemContext.Provider value={{ item, setItem }}>
-              <dataOrderContext.Provider value={{ dataOrder, setDataOrder }}>
+        <OpenOrderModalContext.Provider value={{ openOrderModal, setOpenOrderModal }}>
+          <OpenIngredientModalContext.Provider value={{ openIngredientModal, setOpenIngredientModal }}>
+            <ItemContext.Provider value={{ item, setItem }}>
+              <DataOrderContext.Provider value={{ dataOrder, setDataOrder }}>
 
               <AppHeader />
               <main className={appStyle.app__main}>
@@ -52,10 +52,10 @@ const App = () => {
                 <BurgerConstructor />
               </main>
 
-              </dataOrderContext.Provider>
-            </itemContext.Provider>
-          </openIngredientModalContext.Provider>
-        </openOrderModalContext.Provider>
+              </DataOrderContext.Provider>
+            </ItemContext.Provider>
+          </OpenIngredientModalContext.Provider>
+        </OpenOrderModalContext.Provider>
       </IngredientsContext.Provider>
       
     </div>
