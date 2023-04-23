@@ -1,10 +1,19 @@
-import { useMemo } from 'react';
+import { useMemo, useContext } from 'react';
+import { openModalContext } from '../../services/openModalContext';
+import { itemContext } from '../../services/itemContext';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const FinalPrice = ({ handleOrderButtonClick, prices, bunPrice }) => {
+const FinalPrice = ({ prices, bunPrice }) => {
+    const {openModal, setOpenModal} = useContext(openModalContext);
+    const {setItem} = useContext(itemContext);
+
+    const handleOrderButtonClick = () => {
+        setItem(false);
+        setOpenModal(!openModal);
+      }
 
     const total = useMemo(() =>
         prices.reduce((sum, price) => {
@@ -25,7 +34,6 @@ const FinalPrice = ({ handleOrderButtonClick, prices, bunPrice }) => {
 }
 
 FinalPrice.propTypes = {
-    handleOrderButtonClick: PropTypes.func.isRequired,
     prices: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 

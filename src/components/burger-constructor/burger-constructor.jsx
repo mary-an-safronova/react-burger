@@ -1,13 +1,12 @@
 import { useContext } from 'react';
 import { IngredientsContext } from '../../services/ingredientsContext';
-import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
 import FinalPrice from '../final-price/final-price';
 
-const BurgerConstructor = ({ handleOrderButtonClick}) => {
+const BurgerConstructor = () => {
     const ingredients = useContext(IngredientsContext);
 
     const noBunIngredients = ingredients.filter((ingredient) => {
@@ -34,14 +33,13 @@ const BurgerConstructor = ({ handleOrderButtonClick}) => {
                 </div>
                 { topBun && <IngredientCardOuter position={"bottom"} bun={buns[0]} /> }
             </div>
-            <FinalPrice handleOrderButtonClick={handleOrderButtonClick} prices={prices} bunPrice={buns[0]?.price} />
+            <FinalPrice prices={prices} bunPrice={buns[0]?.price} />
         </section>
     )
 }
 
 BurgerConstructor.propTypes = {
     ingredients: ingredientType,
-    handleOrderButtonClick: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;

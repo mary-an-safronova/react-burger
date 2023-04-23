@@ -7,7 +7,9 @@ import { apiConfig } from '../../utils/constants.js';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { OrderDetails } from '../order-details/order-details';
-import { IngredientsContext } from "../../services/ingredientsContext";
+import { IngredientsContext } from '../../services/ingredientsContext';
+import { openModalContext } from '../../services/openModalContext';
+import { itemContext } from '../../services/itemContext';
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -38,11 +40,6 @@ const App = () => {
     setOpenModal(!openModal);
   }
 
-  const handleOrderButtonClick = () => {
-    setItem(false);
-    setOpenModal(!openModal);
-  }
-
   const closeModal = () => {
     setOpenModal(!openModal);
   }
@@ -50,16 +47,20 @@ const App = () => {
   return (
     <div className={appStyle.app}>
       <IngredientsContext.Provider value={ingredients}>
-        <AppHeader />
-        <main className={appStyle.app__main}>
-          <BurgerIngredients handleIngredientClick={handleIngredientClick} />
-          <BurgerConstructor handleOrderButtonClick={handleOrderButtonClick} />
-        </main>
-        {
-        openModal && <Modal onClose={closeModal}>
-          { item ? <IngredientDetails card={item} /> : <OrderDetails /> }
-        </Modal>
-        }
+        <openModalContext.Provider value={{ openModal, setOpenModal }}>
+          <itemContext.Provider value={{ item, setItem }}>
+            <AppHeader />
+            <main className={appStyle.app__main}>
+              <BurgerIngredients handleIngredientClick={handleIngredientClick} />
+              <BurgerConstructor />
+            </main>
+            {
+            openModal && <Modal onClose={closeModal}>
+              { item ? <IngredientDetails card={item} /> : <OrderDetails /> }
+            </Modal>
+            }
+          </itemContext.Provider>
+        </openModalContext.Provider>
       </IngredientsContext.Provider>
     </div>
   );
