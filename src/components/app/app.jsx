@@ -3,12 +3,12 @@ import appStyle from  './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { apiConfig } from '../../utils/constants.js';
 import { IngredientsContext } from '../../services/IngredientsContext';
 import { OpenOrderModalContext } from '../../services/OpenOrderModalContext';
 import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext';
 import { ItemContext } from '../../services/ItemContext';
 import { DataOrderContext } from '../../services/DataOrderContext';
+import { request } from "../../utils/api";
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -19,13 +19,7 @@ const App = () => {
   const [dataOrder, setDataOrder] = useState({});
 
   const getData = () =>
-    fetch(`${apiConfig.baseUrl}/ingredients`)
-      .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
+    request('/ingredients', 'GET', null)
 
   useEffect(() => {
     getData()

@@ -5,28 +5,16 @@ import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { apiConfig } from '../../utils/constants.js';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
+import { request } from '../../utils/api';
 
 const FinalPrice = ({ prices, bunPrice, ingredientsOder }) => {
     const {openOrderModal, setOpenOrderModal} = useContext(OpenOrderModalContext);
     const {setDataOrder} = useContext(DataOrderContext);
 
     const postOrder = () =>
-        fetch(`${apiConfig.baseUrl}/orders`, {
-            method: "POST",
-            headers: apiConfig.headers,
-            body: JSON.stringify({
-            ingredients: ingredientsOder,
-            }),
-        })
-        .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        request('/orders', 'POST', JSON.stringify({ ingredients: ingredientsOder }))
         .then((data) => {
             setDataOrder(data);
             setOpenOrderModal(!openOrderModal);
