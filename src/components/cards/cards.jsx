@@ -10,7 +10,7 @@ const Cards = (props) => {
 
     return (
         <div>
-            <h2 className="text text_type_main-medium pb-5 mb-1 mt-5 pt-5" id={props.typesText}>{props.typesText}</h2>
+            <h2 className="text text_type_main-medium pb-5 mb-1 mt-5 pt-5" ref={props.scrollToRef} id={props.typesText}>{props.typesText}</h2>
             <ul className={cardsStyle.cards}>
                 {ingredients?.map(card => {
                     return (card.type === props.typesItem ? <Card item={card} key={card._id} card={card} handleIngredientClick={props.handleIngredientClick} /> : null)
