@@ -3,25 +3,24 @@ import { ingredientType } from '../../utils/types';
 import ingredientCardOuterStyles from './ingredient-card-outer.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCardOuter = (props) => {
+const IngredientCardOuter = ({ position, bun }) => {
 
     return (
-        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`}>
+        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`} key={bun?._id}>
             <ConstructorElement
-                type={props.position}
+                type={position}
                 isLocked={true}
-                text={`${props.data[0]?.name} ${props.positionText}`}
-                price={props.data[0]?.price}
-                thumbnail={props.data[0]?.image}
+                text={`${bun?.name} ${position === "top" ? "(верх)" : "(низ)"}`}
+                price={bun?.price}
+                thumbnail={bun?.image}
             />
         </div>
     )
 }
 
 IngredientCardOuter.propTypes = {
-    data: PropTypes.arrayOf(ingredientType).isRequired,
     position: PropTypes.string.isRequired,
-    positionText: PropTypes.string.isRequired
+    bun: ingredientType,
 }
 
 export default IngredientCardOuter;

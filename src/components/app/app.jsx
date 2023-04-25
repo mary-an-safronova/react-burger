@@ -1,27 +1,25 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import appStyle from  './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { apiConfig } from '../../utils/constants.js';
-import { Modal } from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
-import { OrderDetails } from '../order-details/order-details';
+import { IngredientsContext } from '../../services/IngredientsContext';
+import { OpenOrderModalContext } from '../../services/OpenOrderModalContext';
+import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext';
+import { ItemContext } from '../../services/ItemContext';
+import { DataOrderContext } from '../../services/DataOrderContext';
+import { request } from "../../utils/api";
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [openOrderModal, setOpenOrderModal] = useState(false);
+  const [openIngredientModal, setOpenIngredientModal] = useState(false);
   const [item, setItem] = useState(false);
 
+  const [dataOrder, setDataOrder] = useState({});
+
   const getData = () =>
-    fetch(`${apiConfig.baseUrl}/ingredients`)
-      .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
+    request('/ingredients', 'GET', null)
 
   useEffect(() => {
     getData()
@@ -33,32 +31,27 @@ const App = () => {
     .catch((err) => { console.log(err) })
   }, [])
 
-  const handleIngredientClick = (item) => {
-    setItem(item)
-    setOpenModal(!openModal);
-  }
-
-  const handleOrderButtonClick = () => {
-    setItem(false);
-    setOpenModal(!openModal);
-  }
-
-  const closeModal = () => {
-    setOpenModal(!openModal);
-  }
-
   return (
     <div className={appStyle.app}>
-      <AppHeader />
-      <main className={appStyle.app__main}>
-        <BurgerIngredients data={ingredients} handleIngredientClick={handleIngredientClick} />
-        <BurgerConstructor data={ingredients} handleOrderButtonClick={handleOrderButtonClick} />
-      </main>
-      {
-      openModal && <Modal onClose={closeModal}>
-        { item ? <IngredientDetails card={item} /> : <OrderDetails /> }
-      </Modal>
-      }
+
+      <IngredientsContext.Provider value={ingredients}>
+        <OpenOrderModalContext.Provider value={{ openOrderModal, setOpenOrderModal }}>
+          <OpenIngredientModalContext.Provider value={{ openIngredientModal, setOpenIngredientModal }}>
+            <ItemContext.Provider value={{ item, setItem }}>
+              <DataOrderContext.Provider value={{ dataOrder, setDataOrder }}>
+
+              <AppHeader />
+              <main className={appStyle.app__main}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </main>
+
+              </DataOrderContext.Provider>
+            </ItemContext.Provider>
+          </OpenIngredientModalContext.Provider>
+        </OpenOrderModalContext.Provider>
+      </IngredientsContext.Provider>
+      
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import ingredientDetailsStyles from './ingredient-details.module.css';
 
@@ -34,5 +33,5 @@ export const IngredientDetails = (props) => {
 }
 
 IngredientDetails.propTypes = {
-    card: ingredientType.isRequired,
+    card: ingredientType,
 }
