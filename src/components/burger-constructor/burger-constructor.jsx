@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { IngredientsContext } from '../../services/IngredientsContext';
+import { useSelector } from 'react-redux';
 import { ingredientType } from '../../utils/types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
@@ -7,7 +6,7 @@ import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer'
 import FinalPrice from '../final-price/final-price';
 
 const BurgerConstructor = () => {
-    const ingredients = useContext(IngredientsContext);
+    const ingredients = useSelector(state => state.burgerIngredients.ingredients);
 
     const noBunIngredients = ingredients.filter((ingredient) => {
         return ingredient.type !== "bun";

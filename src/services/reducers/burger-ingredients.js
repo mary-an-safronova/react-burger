@@ -1,7 +1,14 @@
-import { SET_ACTIVE_TAB } from '../actions/burger-ingredients';
+import { SET_ACTIVE_TAB,
+    GET_INGREDIENTS_REQUEST,
+    GET_INGREDIENTS_FAILED,
+    GET_INGREDIENTS_SUCCESS } from '../actions/burger-ingredients';
 
 const initialState = {
     current: 'bun',
+
+    ingredientsRequest: false,
+    ingredientsFailed: false,
+    ingredients: []
   };
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
@@ -12,6 +19,27 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
                 current: action.payload
             }
         }
+        case GET_INGREDIENTS_REQUEST: {
+            return {
+                ...state,
+                ingredientsRequest: true,
+                ingredientsFailed: false,
+            }
+          }
+          case GET_INGREDIENTS_SUCCESS: {
+            return { 
+                ...state, 
+                ingredients: action.ingredients, 
+                ingredientsRequest: false 
+            }
+          }
+          case GET_INGREDIENTS_FAILED: {
+            return { 
+                ...state, 
+                ingredientsFailed: true, 
+                ingredientsRequest: false 
+            }
+          }
         default: {
             return state;
         }
