@@ -10,26 +10,20 @@ const Switch = ({ bunRef, mainRef, sauceRef }) => {
 
   const dispatch = useDispatch()
 
-  const handleBunTabClick = (value) => {
-    bunRef.current.scrollIntoView({behavior: "smooth"});
-    dispatch(setActiveTab(value))
-  }
-
-  const handleMainTabClick = (value) => {
-    mainRef.current.scrollIntoView({behavior: "smooth"});
-    dispatch(setActiveTab(value))
-  }
-
-  const handlesauceTabClick = (value) => {
-    sauceRef.current.scrollIntoView({behavior: "smooth"});
-    dispatch(setActiveTab(value))
+  const handleTabClick = (value) => {
+    dispatch(setActiveTab(value));
+    switch (value) {
+      case 'bun' : return bunRef.current.scrollIntoView({behavior: "smooth"});
+      case 'main' : return mainRef.current.scrollIntoView({behavior: "smooth"});
+      case 'sauce' : return sauceRef.current.scrollIntoView({behavior: "smooth"});
+     };
   }
 
   return (
     <ul className={switchStyle.switch}>
-          <li><Tab value='bun' active={current === 'bun'} onClick={handleBunTabClick}>{'Булки'}</Tab></li>
-          <li><Tab value='main' active={current === 'main'} onClick={handleMainTabClick}>{'Начинки'}</Tab></li>
-          <li><Tab value='sauce' active={current === 'sauce'} onClick={handlesauceTabClick}>{'Соусы'}</Tab></li>
+          <li><Tab value='bun' active={current === 'bun'} onClick={handleTabClick}>{'Булки'}</Tab></li>
+          <li><Tab value='main' active={current === 'main'} onClick={handleTabClick}>{'Начинки'}</Tab></li>
+          <li><Tab value='sauce' active={current === 'sauce'} onClick={handleTabClick}>{'Соусы'}</Tab></li>
     </ul>
   );
 }
