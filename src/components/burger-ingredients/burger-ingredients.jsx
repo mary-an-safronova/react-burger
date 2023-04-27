@@ -1,28 +1,28 @@
-import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRef } from "react";
 import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
-import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext.js';
-import { ItemContext } from '../../services/ItemContext.js';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details.jsx';
+import { addIgredientDetails, deleteIgredientDetails } from '../../services/actions/ingredient-details.js';
 
     const BurgerIngredients = () => {
-        const {openIngredientModal, setOpenIngredientModal} = useContext(OpenIngredientModalContext);
-        const {item, setItem} = useContext(ItemContext);
+        const openIngredientDetailsModal = useSelector(state => !!state.ingredientDetails.openIngredientDetailsModal)
+        const ingredientDetails = useSelector(state => state.ingredientDetails.ingredientDetails)
+
+        const dispatch = useDispatch()
 
         const bunRef = useRef(null);
         const mainRef = useRef(null);
         const sauceRef = useRef(null);
 
-        const handleIngredientClick = (item) => {
-            setItem(item)
-            setOpenIngredientModal(!openIngredientModal);
+        const handleIngredientClick = (ingredient) => {
+            dispatch(addIgredientDetails(ingredient));
           }
     
         const closeModal = () => {
-            setOpenIngredientModal(!openIngredientModal);
+            dispatch(deleteIgredientDetails());
         }
 
     return (
@@ -37,9 +37,9 @@ import { IngredientDetails } from '../ingredient-details/ingredient-details.jsx'
             </div>
         </section>
         {
-            openIngredientModal && 
+            openIngredientDetailsModal && 
             <Modal onClose={closeModal}>
-                <IngredientDetails card={item} />
+                <IngredientDetails card={ingredientDetails} />
             </Modal>
         }
         </>
