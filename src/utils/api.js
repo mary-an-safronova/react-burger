@@ -4,7 +4,10 @@ const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
     }
-      return Promise.reject(`Ошибка: ${res.status}`);
+    return res.json()
+        .then((res) => {
+            return Promise.reject(`Ошибка: ${res.status}`)
+        });
 }
 
 export const request = (endpoint, method, body) => {

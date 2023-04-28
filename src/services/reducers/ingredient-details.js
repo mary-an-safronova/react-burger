@@ -1,4 +1,5 @@
-import { OPEN_INGREDIENT_DETAILS_MODAL, CLOSE_INGREDIENT_DETAILS_MODAL } from "../actions/ingredient-details"
+import { OPEN_INGREDIENT_DETAILS_MODAL, 
+    CLOSE_INGREDIENT_DETAILS_MODAL } from "../actions/ingredient-details"
 
 const initialState = {
     openIngredientDetailsModal: false,

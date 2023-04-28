@@ -8,34 +8,38 @@ import FinalPrice from '../final-price/final-price';
 const BurgerConstructor = () => {
     const ingredients = useSelector(state => state.burgerIngredients.ingredients);
 
-    const noBunIngredients = ingredients.filter((ingredient) => {
+    const noBunIngredients = ingredients?.filter((ingredient) => {
         return ingredient.type !== "bun";
       });
 
-      const buns = ingredients.filter(bun => {
+      const buns = ingredients?.filter(bun => {
         return (bun.type === 'bun')
     })
 
-    const ingredientsOder = [buns[0]?._id];
+    const ingredientsId = [];
 
     const prices = [];
-
-    const topBun = <IngredientCardOuter position={"top"} bun={buns[0]} />;
 
     return (
         <section className={burgerConstructorStyles.burgerConstructor}>
             <div className={`${burgerConstructorStyles.cards} mt-25 mb-10 ml-4`}>
-                { topBun }
+                {buns?.map((bun) => {
+                    ingredientsId.push(bun._id)
+                    return <IngredientCardOuter position={"top"} bun={bun} key={bun._id} />
+                })}
                 <div className={burgerConstructorStyles.scroll}>
-                    {noBunIngredients.map((ingredient) => {
+                    {noBunIngredients?.map((ingredient) => {
                         prices.push(ingredient.price)
-                        ingredientsOder.push(ingredient._id);
+                        ingredientsId.push(ingredient._id);
                         return <IngredientCard ingredient={ingredient} key={ingredient._id} />
                     })}
                 </div>
-                { topBun && <IngredientCardOuter position={"bottom"} bun={buns[0]} /> }
+                {buns?.map((bun) => {
+                    ingredientsId.push(bun._id)
+                    return <IngredientCardOuter position={"bottom"} bun={bun} key={bun._id} />
+                })}
             </div>
-            <FinalPrice prices={prices} bunPrice={buns[0]?.price} ingredientsOder={ingredientsOder} />
+            <FinalPrice prices={prices} bunPrice={buns[0]?.price} ingredientsId={ingredientsId} />
         </section>
     )
 }

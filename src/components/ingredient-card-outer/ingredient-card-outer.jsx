@@ -6,13 +6,13 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 const IngredientCardOuter = ({ position, bun }) => {
 
     return (
-        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`} key={bun?._id}>
+        <div className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`}>
             <ConstructorElement
                 type={position}
                 isLocked={true}
-                text={`${bun?.name} ${position === "top" ? "(верх)" : "(низ)"}`}
-                price={bun?.price}
-                thumbnail={bun?.image}
+                text={`${bun.name} ${position === "top" ? "(верх)" : "(низ)"}`}
+                price={bun.price}
+                thumbnail={bun.image}
             />
         </div>
     )
