@@ -31,8 +31,8 @@ const BurgerConstructor = () => {
         drop: (item => addElement(item.ingredient))
     }))
 
-    const deleteElement = (element) => {
-        dispatch(deleteIngredient(element))
+    const deleteElement = (ingredient) => {
+        dispatch(deleteIngredient(ingredient))
     }
 
     const ingredientsId = [];
@@ -55,7 +55,7 @@ const BurgerConstructor = () => {
                         if (ingredient.type !== 'bun')
                             prices.push(ingredient.price)
                             ingredientsId.push(ingredient._id);
-                            return <IngredientCard ingredient={ingredient} key={index} deleteElement={deleteElement} />
+                            return <IngredientCard ingredient={ingredient} key={index} id={index} deleteElement={deleteElement} />
                     })}
                 </div>
                 {bunsList?.map((bun, index) => {
@@ -67,7 +67,9 @@ const BurgerConstructor = () => {
             </ul>
             { bunsList.length > 0 ?
             <FinalPrice prices={prices} ingredientsId={ingredientsId} />
-            : null }
+            : <p className={`${burgerConstructorStyles.default_text} text text_type_main-default text_color_inactive`}>
+                {ingredientList.length > 0 ? 'Добавьте булку в конструктор бургера' : 'Выберите ингредиенты и перетащите их в конструктор бургера'}
+                </p> }
         </section>
     )
 }

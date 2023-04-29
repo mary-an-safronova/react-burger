@@ -24,6 +24,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
             }
         }
         case DELETE_INGREDIENT: {
+            console.log(action.payload)
             return {
                 ...state,
                 ingredientList: state.ingredientList.filter((item) => item.id !== action.payload.id)
