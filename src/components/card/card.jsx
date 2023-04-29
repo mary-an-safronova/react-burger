@@ -1,3 +1,6 @@
+import { useDrag } from 'react-dnd';
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import { ingredientType } from '../../utils/types';
 import cardStyle from './card.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -5,9 +8,31 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const Card = (props) => {
 
+    const ingredientList = useSelector(state => state.burgerConstructor.ingredientList)
+    const bunsList = useSelector(state => state.burgerConstructor.bunsList)
+
+    const counter = useMemo(() => (
+        ingredientList.filter((item) => item._id === props.card._id).length || bunsList.filter((item) => item._id === props.card._id).length * 2
+    ), [ingredientList, bunsList, props.card._id]);
+
+    const [{ isDragging } , dragIngredient] = useDrag(() => ({
+        type: 'ingredient',
+        collect: monitor => ({
+            isDragging: monitor.isDragging(),
+        }),
+        item: {
+            ingredient: props.card,
+            id: props.card._id,
+            type: props.card.type,
+        },
+    }), [])
+
+    const opacity = isDragging ? "0.8" : "1";
+
+
     return (
-        <li className={cardStyle.card} onClick={() => props.handleIngredientClick(props.card)}>
-            <Counter className={cardStyle.card__counter} count={1} size={'default'} />
+        <li className={cardStyle.card} onClick={() => props.handleIngredientClick(props.card)} ref={dragIngredient}  style={{ opacity: opacity }}>
+            <Counter className={cardStyle.card__counter} count={counter > 0 ? counter : null} size={counter > 0 ? 'default' : 'undefined'} />
             <div className={cardStyle.cardWrap} key={props.card._id}>
                 <img className={cardStyle.card__image} src={props.card.image} alt={props.card.name} />
                 <div className={`${cardStyle.card__price} pb-1 pt-1`}>

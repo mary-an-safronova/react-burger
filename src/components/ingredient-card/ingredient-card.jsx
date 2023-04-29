@@ -3,11 +3,11 @@ import { ingredientType } from '../../utils/types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCard = ({ ingredient }) => {
+const IngredientCard = ({ deleteElement, ingredient }) => {
 
     return (
         <>
-            <div className={`${ingredientCardStyles.card__wrap} mb-4`} id="inner-wrap">
+            <div className={`${ingredientCardStyles.card__wrap} mb-4`} id="inner-wrap" key={ingredient.id}>
                 <div className={`${ingredientCardStyles.card__icon} mr-2`}>
                 <DragIcon type="primary" />
                 </div>
@@ -16,6 +16,7 @@ const IngredientCard = ({ ingredient }) => {
                         text={ingredient.name}
                         price={ingredient.price}
                         thumbnail={ingredient.image}
+                        handleClose={() => deleteElement(ingredient)}
                     />
                 </div>
             </div>

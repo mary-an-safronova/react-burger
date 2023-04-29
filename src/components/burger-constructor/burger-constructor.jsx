@@ -1,45 +1,73 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
 import { ingredientType } from '../../utils/types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
 import FinalPrice from '../final-price/final-price';
+import { setBun, addIngredient, deleteIngredient } from '../../services/actions/burger-constructor';
 
 const BurgerConstructor = () => {
-    const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+    const dispatch = useDispatch();
 
-    const noBunIngredients = ingredients?.filter((ingredient) => {
-        return ingredient.type !== "bun";
-      });
+    const ingredientList = useSelector(state => state.burgerConstructor.ingredientList)
+    const bunsList = useSelector(state => state.burgerConstructor.bunsList)
 
-      const buns = ingredients?.filter(bun => {
-        return (bun.type === 'bun')
-    })
+    const addElement = (element) => {
+        element = { ...element, id: element._id}
+        if (element.type === 'bun') {
+            dispatch(setBun(element))
+        }
+        if (element.type !== 'bun') {
+            dispatch(addIngredient(element))
+        }
+    }
+
+    const [{ isHover } , dropIngredient] = useDrop(() => ({
+        accept: 'ingredient',
+        collect: monitor => ({
+            isHover: monitor.isOver(),
+        }),
+        drop: (item => addElement(item.ingredient))
+    }))
+
+    const deleteElement = (element) => {
+        dispatch(deleteIngredient(element))
+    }
 
     const ingredientsId = [];
 
     const prices = [];
 
+    const opacity = isHover ? "0.8" : "1";
+
     return (
-        <section className={burgerConstructorStyles.burgerConstructor}>
-            <div className={`${burgerConstructorStyles.cards} mt-25 mb-10 ml-4`}>
-                {buns?.map((bun) => {
-                    ingredientsId.push(bun._id)
-                    return <IngredientCardOuter position={"top"} bun={bun} key={bun._id} />
+        <section className={burgerConstructorStyles.burgerConstructor} ref={dropIngredient}>
+            <ul className={`${burgerConstructorStyles.cards}} mt-25 mb-10 ml-4`} style={{ opacity: opacity }}>
+                {bunsList?.map((bun, index) => {
+                    if (bun.type === 'bun')
+                        ingredientsId.push(bun._id)
+                        prices.push(bun.price)
+                        return <IngredientCardOuter position={"top"} bun={bun} key={index} />
                 })}
-                <div className={burgerConstructorStyles.scroll}>
-                    {noBunIngredients?.map((ingredient) => {
-                        prices.push(ingredient.price)
-                        ingredientsId.push(ingredient._id);
-                        return <IngredientCard ingredient={ingredient} key={ingredient._id} />
+                <div className={`${burgerConstructorStyles.scroll} mb-4 mt-4`}>
+                    {ingredientList?.map((ingredient, index) => {
+                        if (ingredient.type !== 'bun')
+                            prices.push(ingredient.price)
+                            ingredientsId.push(ingredient._id);
+                            return <IngredientCard ingredient={ingredient} key={index} deleteElement={deleteElement} />
                     })}
                 </div>
-                {buns?.map((bun) => {
-                    ingredientsId.push(bun._id)
-                    return <IngredientCardOuter position={"bottom"} bun={bun} key={bun._id} />
+                {bunsList?.map((bun, index) => {
+                    if (bun.type === 'bun')
+                        ingredientsId.push(bun._id)
+                        prices.push(bun.price)
+                        return <IngredientCardOuter position={"bottom"} bun={bun} key={index} />
                 })}
-            </div>
-            <FinalPrice prices={prices} bunPrice={buns[0]?.price} ingredientsId={ingredientsId} />
+            </ul>
+            { bunsList.length > 0 ?
+            <FinalPrice prices={prices} ingredientsId={ingredientsId} />
+            : null }
         </section>
     )
 }

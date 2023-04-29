@@ -8,7 +8,7 @@ const initialState = {
 
     ingredientsRequest: false,
     ingredientsFailed: false,
-    ingredients: []
+    ingredients: [],
   };
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
@@ -25,21 +25,21 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
                 ingredientsRequest: true,
                 ingredientsFailed: false,
             }
-          }
-          case GET_INGREDIENTS_SUCCESS: {
+        }
+        case GET_INGREDIENTS_SUCCESS: {
             return { 
                 ...state, 
                 ingredients: action.ingredients, 
                 ingredientsRequest: false 
             }
-          }
-          case GET_INGREDIENTS_FAILED: {
+        }
+        case GET_INGREDIENTS_FAILED: {
             return { 
                 ...state, 
                 ingredientsFailed: true, 
                 ingredientsRequest: false 
             }
-          }
+        }
         default: {
             return state;
         }
