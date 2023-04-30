@@ -2,6 +2,7 @@ import {
     ADD_BUN,
     ADD_INGREDIENT,
     DELETE_INGREDIENT,
+    MOVE_INGREDIENT,
 } from '../actions/burger-constructor';
 
 const initialState = {
@@ -24,12 +25,23 @@ export const burgerConstructorReducer = (state = initialState, action) => {
             }
         }
         case DELETE_INGREDIENT: {
-            console.log(action.payload)
             return {
                 ...state,
                 ingredientList: state.ingredientList.filter((item) => item.id !== action.payload.id)
             }
         }
+        case MOVE_INGREDIENT: {
+			const dragConstructor = [...state.ingredientList];
+			dragConstructor.splice(
+				action.data.dragIndex,
+				0,
+				dragConstructor.splice(action.data.hoverIndex, 1)[0]
+			)
+			return {
+				...state,
+				ingredientList: dragConstructor
+			}
+		}
         default: {
             return state;
         }

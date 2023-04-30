@@ -1,6 +1,7 @@
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import cardStyle from './card.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -15,20 +16,19 @@ const Card = (props) => {
         ingredientList.filter((item) => item._id === props.card._id).length || bunsList.filter((item) => item._id === props.card._id).length * 2
     ), [ingredientList, bunsList, props.card._id]);
 
-    const [{ isDragging } , dragIngredient] = useDrag(() => ({
+    const [{ opacity } , dragIngredient] = useDrag(() => ({
         type: 'ingredient',
-        collect: monitor => ({
-            isDragging: monitor.isDragging(),
-        }),
+        collect: monitor => {
+            return {
+				opacity: monitor.isDragging() ? 0.5 : 1,
+			}
+        },
         item: {
             ingredient: props.card,
             id: props.card._id,
             type: props.card.type,
         },
     }), [])
-
-    const opacity = isDragging ? "0.8" : "1";
-
 
     return (
         <li className={cardStyle.card} onClick={() => props.handleIngredientClick(props.card)} ref={dragIngredient}  style={{ opacity: opacity }}>
@@ -47,6 +47,7 @@ const Card = (props) => {
 
 Card.propTypes = {
     card: ingredientType,
+    handleIngredientClick: PropTypes.func.isRequired,
 }
 
 export default Card;

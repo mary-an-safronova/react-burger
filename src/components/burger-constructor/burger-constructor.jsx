@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { ingredientType } from '../../utils/types';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
@@ -23,11 +22,13 @@ const BurgerConstructor = () => {
         }
     }
 
-    const [{ isHover } , dropIngredient] = useDrop(() => ({
+    const [{ opacity } , dropIngredient] = useDrop(() => ({
         accept: 'ingredient',
-        collect: monitor => ({
-            isHover: monitor.isOver(),
-        }),
+        collect: monitor => {
+            return {
+				opacity: monitor.isOver() ? 0.5 : 1,
+			}
+        },
         drop: (item => addElement(item.ingredient))
     }))
 
@@ -38,8 +39,6 @@ const BurgerConstructor = () => {
     const ingredientsId = [];
 
     const prices = [];
-
-    const opacity = isHover ? "0.8" : "1";
 
     return (
         <section className={burgerConstructorStyles.burgerConstructor} ref={dropIngredient}>
@@ -55,7 +54,7 @@ const BurgerConstructor = () => {
                         if (ingredient.type !== 'bun')
                             prices.push(ingredient.price)
                             ingredientsId.push(ingredient._id);
-                            return <IngredientCard ingredient={ingredient} key={index} id={index} deleteElement={deleteElement} />
+                            return <IngredientCard ingredient={ingredient} key={index} id={index} index={index} deleteElement={deleteElement} />
                     })}
                 </div>
                 {bunsList?.map((bun, index) => {
@@ -72,10 +71,6 @@ const BurgerConstructor = () => {
                 </p> }
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    ingredients: ingredientType,
 }
 
 export default BurgerConstructor;
