@@ -14,6 +14,7 @@ ___________________________
 **Used technology**
 
 ###### HTML
+
 * HTML5
 ###### CSS
 * Flexbox
