@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
@@ -54,7 +55,7 @@ const BurgerConstructor = () => {
                         if (ingredient.type !== 'bun')
                             prices.push(ingredient.price)
                             ingredientsId.push(ingredient._id);
-                            return <IngredientCard ingredient={ingredient} key={index} id={index} index={index} deleteElement={deleteElement} />
+                            return <IngredientCard ingredient={ingredient} key={uuidv4()} id={index} index={index} deleteElement={deleteElement} />
                     })}
                 </div>
                 {bunsList?.map((bun, index) => {
