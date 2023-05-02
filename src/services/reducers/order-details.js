@@ -6,7 +6,7 @@ import { POST_ORDER_REQUEST,
 const initialState = {
     orderRequest: false,
     orderFailed: false,
-    id: {},
+    id: null,
     openOrderDetailsModal: false,
     };
 
@@ -38,6 +38,7 @@ export const orderDetailsReducer = (state = initialState, action) => {
             return {
               ...state,
               openOrderDetailsModal: false,
+              id: null,
             }
           }
         default: {

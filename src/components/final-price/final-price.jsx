@@ -7,6 +7,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
+import { clearConstructor } from '../../services/actions/burger-constructor';
 
 const FinalPrice = ({ prices, ingredientsId }) => {
     const openOrderDetailsModal = useSelector(state => !!state.orderDetails.openOrderDetailsModal)
@@ -20,6 +21,7 @@ const FinalPrice = ({ prices, ingredientsId }) => {
 
     const closeModal = () => {
         dispatch(closeOrderDetailsModal());
+        dispatch(clearConstructor());
     }
 
     const total = useMemo(() =>
