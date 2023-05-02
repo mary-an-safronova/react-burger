@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,7 +8,7 @@ import { OrderDetails } from '../order-details/order-details';
 import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
 import { clearConstructor } from '../../services/actions/burger-constructor';
 
-const FinalPrice = ({ prices, ingredientsId }) => {
+const FinalPrice = ({ total, ingredientsId }) => {
 
     const orderDetails = (state) => state.orderDetails;
     const { openOrderDetailsModal, id } = useSelector(orderDetails);
@@ -24,13 +23,6 @@ const FinalPrice = ({ prices, ingredientsId }) => {
         dispatch(closeOrderDetailsModal());
         dispatch(clearConstructor());
     }
-
-    const total = useMemo(() =>
-        prices.reduce((sum, price) => {
-            return (sum += price);
-        }, 0),
-        [prices]
-    );
 
     return (
         <>
@@ -52,7 +44,7 @@ const FinalPrice = ({ prices, ingredientsId }) => {
 }
 
 FinalPrice.propTypes = {
-    prices: PropTypes.arrayOf(PropTypes.number).isRequired,
+    total: PropTypes.number.isRequired,
     ingredientsId: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 

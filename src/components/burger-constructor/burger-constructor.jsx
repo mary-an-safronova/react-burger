@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import burgerConstructorStyles from './burger-constructor.module.css';
@@ -38,35 +39,48 @@ const BurgerConstructor = () => {
     }
 
     const ingredientsId = [];
-
     const prices = [];
+
+    useMemo(() =>
+        bunsList?.filter((bun) => {
+            ingredientsId?.push(bun._id)
+            prices?.push(bun.price * 2)
+        }),
+        [bunsList, ingredientsId, prices]
+    );
+
+    useMemo(() =>
+        ingredientList?.filter((ingredient) => {
+            ingredientsId?.push(ingredient._id)
+            prices?.push(ingredient.price)
+        }),
+        [ingredientList, ingredientsId, prices]
+    );
+
+    const total = useMemo(() =>
+        prices.reduce((sum, price) => {
+            return (sum += price);
+        }, 0),
+        [prices]
+    );
 
     return (
         <section className={burgerConstructorStyles.burgerConstructor} ref={dropIngredient}>
             <ul className={`${burgerConstructorStyles.cards}} mt-25 mb-10 ml-4`} style={{ opacity: opacity }}>
                 {bunsList?.map((bun, index) => {
-                    if (bun.type === 'bun')
-                        ingredientsId.push(bun._id)
-                        prices.push(bun.price)
-                        return <IngredientCardOuter position={"top"} bun={bun} key={index} />
+                    return <IngredientCardOuter position={"top"} bun={bun} key={index} />
                 })}
                 <div className={`${burgerConstructorStyles.scroll} mb-4 mt-4`}>
                     {ingredientList?.map((ingredient, index) => {
-                        if (ingredient.type !== 'bun')
-                            prices.push(ingredient.price)
-                            ingredientsId.push(ingredient._id);
-                            return <IngredientCard ingredient={ingredient} key={uuidv4()} id={index} index={index} deleteElement={deleteElement} />
+                        return <IngredientCard ingredient={ingredient} key={uuidv4()} id={index} index={index} deleteElement={deleteElement} ingredientsId={ingredientsId} prices={prices} />
                     })}
                 </div>
                 {bunsList?.map((bun, index) => {
-                    if (bun.type === 'bun')
-                        ingredientsId.push(bun._id)
-                        prices.push(bun.price)
-                        return <IngredientCardOuter position={"bottom"} bun={bun} key={index} />
+                    return <IngredientCardOuter position={"bottom"} bun={bun} key={index} />
                 })}
             </ul>
             { bunsList.length > 0 ?
-            <FinalPrice prices={prices} ingredientsId={ingredientsId} />
+            <FinalPrice total={total} ingredientsId={ingredientsId} />
             : <p className={`${burgerConstructorStyles.default_text} text text_type_main-default text_color_inactive`}>
                 {ingredientList.length > 0 ? 'Добавьте булку в конструктор бургера' : 'Выберите ингредиенты и перетащите их в конструктор бургера'}
                 </p> }
