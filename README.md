@@ -13,22 +13,22 @@ ___________________________
 
 **Used technology**
 
-**HTML**
+# HTML
 * HTML5
-**CSS**
+# CSS
 * Flexbox
 * Grig layout
 * CSS modules
-**JSX**
-**JS**
+# JSX
+# JS
 * Взаимодействие с DOM деревом
 * Добавление интерактивности
 * Модули
 * Использован Webpack
-**React**
+# React
 * Функциональные компоненты
 * Hooks
-**Redux**
+# Redux
 * Drad and Drop
 ___________________________
 
