@@ -13,23 +13,23 @@ ___________________________
 
 **Used technology**
 
-* HTML
-HTML5
-* CSS
-Flexbox
-Grig layout
-CSS modules
-* JSX
-* JS
-Взаимодействие с DOM деревом
-Добавление интерактивности
-Модули
-Использован Webpack
-* React
-Функциональные компоненты
-Hooks
-* Redux
-Drad and Drop
+**HTML**
+*HTML5*
+**CSS**
+*Flexbox*
+*Grig layout*
+*CSS modules*
+**JSX**
+**JS**
+*Взаимодействие с DOM деревом*
+*Д*обавление интерактивности*
+*Модули*
+*Использован Webpack*
+**React**
+*Функциональные компоненты*
+*Hooks*
+**Redux**
+*Drad and Drop*
 ___________________________
 
 [Link to the project](https://mary-an-safronova.github.io/react-burger/)
