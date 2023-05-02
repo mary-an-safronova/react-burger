@@ -4,7 +4,9 @@ import cardsStyle from './cards.module.css';
 import Card from '../card/card';
 
 const Cards = ({ scrollToRef, typesItem, typesText, handleIngredientClick }) => {
-    const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+
+    const burgerIngredients = (state) => state.burgerIngredients;
+    const { ingredients } = useSelector(burgerIngredients);
 
     return (
         <div>

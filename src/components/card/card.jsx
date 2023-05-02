@@ -9,8 +9,8 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const Card = (props) => {
 
-    const ingredientList = useSelector(state => state.burgerConstructor.ingredientList)
-    const bunsList = useSelector(state => state.burgerConstructor.bunsList)
+    const burgerConstructor = (state) => state.burgerConstructor;
+    const { ingredientList, bunsList } = useSelector(burgerConstructor);
 
     const counter = useMemo(() => (
         ingredientList.filter((item) => item._id === props.card._id).length || bunsList.filter((item) => item._id === props.card._id).length * 2

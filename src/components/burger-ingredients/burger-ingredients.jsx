@@ -10,9 +10,12 @@ import { addIgredientDetails, deleteIgredientDetails } from '../../services/acti
 import { setActiveTab } from '../../services/actions/burger-ingredients.js';
 
     const BurgerIngredients = () => {
-        const openIngredientDetailsModal = useSelector(state => !!state.ingredientDetails.openIngredientDetailsModal)
-        const ingredientDetails = useSelector(state => state.ingredientDetails.ingredientDetails)
-        const current = useSelector((store) => store.burgerIngredients.current)
+
+        const ingredientDetailsModal = (state) => state.ingredientDetails;
+        const { openIngredientDetailsModal, ingredientDetails } = useSelector(ingredientDetailsModal);
+
+        const burgerIngredients = (state) => state.burgerIngredients;
+        const { current } = useSelector(burgerIngredients);
 
         const dispatch = useDispatch()
 

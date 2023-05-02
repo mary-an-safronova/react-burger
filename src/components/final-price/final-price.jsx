@@ -10,8 +10,9 @@ import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-
 import { clearConstructor } from '../../services/actions/burger-constructor';
 
 const FinalPrice = ({ prices, ingredientsId }) => {
-    const openOrderDetailsModal = useSelector(state => !!state.orderDetails.openOrderDetailsModal)
-    const id = useSelector(state => state.orderDetails.id)
+
+    const orderDetails = (state) => state.orderDetails;
+    const { openOrderDetailsModal, id } = useSelector(orderDetails);
 
     const dispatch = useDispatch();
 

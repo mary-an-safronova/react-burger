@@ -10,8 +10,8 @@ import { setBun, addIngredient, deleteIngredient } from '../../services/actions/
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
 
-    const ingredientList = useSelector(state => state.burgerConstructor.ingredientList)
-    const bunsList = useSelector(state => state.burgerConstructor.bunsList)
+    const constructorIngredients = (state) => state.burgerConstructor;
+    const { ingredientList, bunsList } = useSelector(constructorIngredients);
 
     const addElement = (element) => {
         element = { ...element, id: element._id}
