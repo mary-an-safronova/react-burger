@@ -1,45 +1,57 @@
-import { useContext } from 'react';
-import { useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import Cards from '../cards/cards';
-import { OpenIngredientModalContext } from '../../services/OpenIngredientModalContext.js';
-import { ItemContext } from '../../services/ItemContext.js';
 import { Modal } from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details.jsx';
+import { addIgredientDetails, deleteIgredientDetails } from '../../services/actions/ingredient-details.js';
+import { setActiveTab } from '../../services/actions/burger-ingredients.js';
 
     const BurgerIngredients = () => {
-        const {openIngredientModal, setOpenIngredientModal} = useContext(OpenIngredientModalContext);
-        const {item, setItem} = useContext(ItemContext);
 
-        const bunRef = useRef(null);
-        const mainRef = useRef(null);
-        const sauceRef = useRef(null);
+        const ingredientDetailsModal = (state) => state.ingredientDetails;
+        const { openIngredientDetailsModal, ingredientDetails } = useSelector(ingredientDetailsModal);
 
-        const handleIngredientClick = (item) => {
-            setItem(item)
-            setOpenIngredientModal(!openIngredientModal);
-          }
+        const burgerIngredients = (state) => state.burgerIngredients;
+        const { current } = useSelector(burgerIngredients);
+
+        const dispatch = useDispatch()
+
+        const [bunRef, inViewBuns] = useInView({ threshold: 0 });
+        const [mainRef, inViewMains] = useInView({ threshold: 0 });
+        const [sauceRef, inViewSauces] = useInView({ threshold: 0 });
+    
+        useEffect(() => {
+            inViewBuns ? dispatch(setActiveTab('bun')) :
+            inViewSauces ? dispatch(setActiveTab('sauce')) :
+            dispatch(setActiveTab('main'))
+        }, [current, inViewBuns, inViewMains, inViewSauces, dispatch]);
+
+        const handleIngredientClick = (ingredient) => {
+            dispatch(addIgredientDetails(ingredient));
+        }
     
         const closeModal = () => {
-            setOpenIngredientModal(!openIngredientModal);
+            dispatch(deleteIgredientDetails());
         }
 
     return (
         <>
         <section className={`${burgerIngredientsStyle.ingredients} mt-5 pt-5`}>
             <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
-            <Switch bunRef={bunRef} mainRef={mainRef} sauceRef={sauceRef} />
+            <Switch />
             <div className={burgerIngredientsStyle.scroll}>
-                <Cards scrollToRef={bunRef} typesItem={'bun'} typesText={'Булки'} handleIngredientClick={handleIngredientClick} />
-                <Cards scrollToRef={mainRef} typesItem={'main'} typesText={'Начинки'} handleIngredientClick={handleIngredientClick} />
-                <Cards scrollToRef={sauceRef} typesItem={'sauce'} typesText={'Соусы'} handleIngredientClick={handleIngredientClick} />
+                <Cards scrollToRef={bunRef} typesItem={'bun'} typesText='Булки' handleIngredientClick={handleIngredientClick} />
+                <Cards scrollToRef={mainRef} typesItem={'main'} typesText='Начинки' handleIngredientClick={handleIngredientClick} />
+                <Cards scrollToRef={sauceRef} typesItem={'sauce'} typesText='Соусы' handleIngredientClick={handleIngredientClick} />
             </div>
         </section>
         {
-            openIngredientModal && 
+            openIngredientDetailsModal && 
             <Modal onClose={closeModal}>
-                <IngredientDetails card={item} />
+                <IngredientDetails card={ingredientDetails} />
             </Modal>
         }
         </>

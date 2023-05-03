@@ -1,40 +1,27 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveTab } from '../../services/actions/burger-ingredients'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import switchStyle from  './switch.module.css';
 
-const Switch = ({ bunRef, mainRef, sauceRef }) => {
+const Switch = () => {
 
-  const [current, setCurrent] = useState('bun');
+  const current = useSelector((store) => store.burgerIngredients.current)
 
-  const handleBunTabClick = () => {
-    bunRef.current.scrollIntoView({behavior: "smooth"});
-    setCurrent('bun')
-  }
+  const dispatch = useDispatch()
 
-  const handleMainTabClick = () => {
-    mainRef.current.scrollIntoView({behavior: "smooth"});
-    setCurrent('main')
-  }
-
-  const handlesauceTabClick = () => {
-    sauceRef.current.scrollIntoView({behavior: "smooth"});
-    setCurrent('sauce')
-  }
+  const handleTabClick = (value) => {
+    dispatch(setActiveTab(value))
+    const title = document.getElementById(value);
+    if (title) title.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <ul className={switchStyle.switch}>
-          <li><Tab value={'bun'} active={current === 'bun'} onClick={handleBunTabClick}>{'Булки'}</Tab></li>
-          <li><Tab value={'main'} active={current === 'main'} onClick={handleMainTabClick}>{'Начинки'}</Tab></li>
-          <li><Tab value={'sauce'} active={current === 'sauce'} onClick={handlesauceTabClick}>{'Соусы'}</Tab></li>
+      <li><Tab value='bun' active={current === 'bun'} onClick={() => handleTabClick('bun')}>{'Булки'}</Tab></li>
+      <li><Tab value='main' active={current === 'main'} onClick={() => handleTabClick('main')}>{'Начинки'}</Tab></li>
+      <li><Tab value='sauce' active={current === 'sauce'} onClick={() => handleTabClick('sauce')}>{'Соусы'}</Tab></li>
     </ul>
   );
-}
-
-Switch.propTypes = {
-  bunRef: PropTypes.object.isRequired,
-  mainRef: PropTypes.object.isRequired,
-  sauceRef: PropTypes.object.isRequired,
 }
 
 export default Switch;

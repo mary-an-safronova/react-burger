@@ -1,49 +1,42 @@
-import { useMemo, useContext } from 'react';
-import { OpenOrderModalContext } from '../../services/OpenOrderModalContext';
-import { DataOrderContext } from '../../services/DataOrderContext';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { request } from '../../utils/api';
+import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
+import { clearConstructor } from '../../services/actions/burger-constructor';
 
-const FinalPrice = ({ prices, bunPrice, ingredientsOder }) => {
-    const {openOrderModal, setOpenOrderModal} = useContext(OpenOrderModalContext);
-    const {setDataOrder} = useContext(DataOrderContext);
+const FinalPrice = ({ total, ingredientsId }) => {
 
-    const postOrder = () =>
-        request('/orders', 'POST', JSON.stringify({ ingredients: ingredientsOder }))
-        .then((data) => {
-            setDataOrder(data);
-            setOpenOrderModal(!openOrderModal);
-        })
-        .catch((err) => { console.log(err) })
+    const orderDetails = (state) => state.orderDetails;
+    const { openOrderDetailsModal, id } = useSelector(orderDetails);
 
-    const closeModal = () => {
-        setOpenOrderModal(!openOrderModal);
+    const dispatch = useDispatch();
+
+    const orderHandler = () => {
+        dispatch(postOrder(ingredientsId))
     }
 
-    const total = useMemo(() =>
-        prices.reduce((sum, price) => {
-            return (sum += price);
-        }, bunPrice * 2),
-        [prices, bunPrice]
-    );
+    const closeModal = () => {
+        dispatch(closeOrderDetailsModal());
+        dispatch(clearConstructor());
+    }
 
     return (
         <>
         <div className={`${finalPriceStyles.final__wrap} mr-4`}>
             <div className={`${finalPriceStyles.final__price} mr-10`}>
-                <p className="text text_type_digits-medium mr-2">{bunPrice ? total : 0}</p>
+                <p className="text text_type_digits-medium mr-2">{total}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button onClick={postOrder} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+            <Button onClick={orderHandler} htmlType="button" type="primary" size="large">Оформить заказ</Button>
         </div>
         {
-            openOrderModal && <Modal onClose={closeModal}>
-                <OrderDetails />
+            openOrderDetailsModal && 
+            <Modal onClose={closeModal}>
+                <OrderDetails dataOrder={id} />
             </Modal>
         }
       </>
@@ -51,8 +44,8 @@ const FinalPrice = ({ prices, bunPrice, ingredientsOder }) => {
 }
 
 FinalPrice.propTypes = {
-    prices: PropTypes.arrayOf(PropTypes.number).isRequired,
-    ingredientsOder: PropTypes.arrayOf(PropTypes.string).isRequired,
+    total: PropTypes.number.isRequired,
+    ingredientsId: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default FinalPrice;
