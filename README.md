@@ -21,15 +21,16 @@ ___________________________
 * Grig layout
 * CSS modules
 ###### JSX / JS
-* Взаимодействие с DOM деревом
-* Добавление интерактивности
-* Модули
-* Использован Webpack
+* Interaction with the DOM tree
+* Adding interactivity
+* Modules
 ###### React
-* Функциональные компоненты
+* Functional components
 * Hooks
+* react-dnd
 ###### Redux
-* Drad and Drop
+* Redux-thunk
+
 ___________________________
 
 [Link to the project](https://mary-an-safronova.github.io/react-burger/)
