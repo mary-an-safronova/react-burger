@@ -30,10 +30,10 @@ const Login = () => {
                     />
                     <Button htmlType="submit" type="primary" size="medium" disabled={email && password ? false : true}>Войти</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вы — новый пользователь?
-                    <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/register'}>Зарегистрироваться</Link>
+                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/register'}>Зарегистрироваться</Link>
                     </p>
                     <p className="text text_type_main-default text_color_inactive">Забыли пароль?
-                        <a className={loginStyle.link} href="#"><span className="text text_type_main-small ml-2">Восстановить пароль</span></a>
+                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/forgot-password'}>Восстановить пароль</Link>
                     </p>
                 </fieldset>
             </form>
