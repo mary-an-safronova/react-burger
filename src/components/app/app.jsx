@@ -3,6 +3,7 @@ import appStyle from  './app.module.css';
 import AppHeader from '../app-header/app-header';
 import HomePage from '../../pages/home-page/home-page';
 import Login from '../../pages/login/login';
+import Register from '../../pages/register/register';
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />}/>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
     </div>

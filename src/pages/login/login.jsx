@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -29,7 +30,7 @@ const Login = () => {
                     />
                     <Button htmlType="submit" type="primary" size="medium" disabled={email && password ? false : true}>Войти</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вы — новый пользователь?
-                        <a className={loginStyle.link} href="#"><span className="text text_type_main-small ml-2">Зарегистрироваться</span></a>
+                    <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/register'}>Зарегистрироваться</Link>
                     </p>
                     <p className="text text_type_main-default text_color_inactive">Забыли пароль?
                         <a className={loginStyle.link} href="#"><span className="text text_type_main-small ml-2">Восстановить пароль</span></a>
