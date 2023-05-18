@@ -21,7 +21,9 @@ const ForgotPassword = () => {
                         isIcon={false}
                         extraClass="mb-6"
                     />
-                    <Button htmlType="submit" type="primary" size="medium" disabled={email ? false : true}>Восстановить</Button>
+                    <Link to={'/reset-password'}>
+                        <Button htmlType="submit" type="primary" size="medium" disabled={email ? false : true}>Восстановить</Button>
+                    </Link>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вспомнили пароль?
                         <Link className={`${forgotPasswordStyle.link} text text_type_main-small ml-2`} to={'/login'}>Войти</Link>
                     </p>
