@@ -36,3 +36,7 @@
 .header__item {
     display: flex;
 }
+
+.header__logo {
+    padding-right: 13%;
+}

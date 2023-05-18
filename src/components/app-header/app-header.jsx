@@ -28,7 +28,10 @@ const AppHeader = () => {
                         </li>
                     </ul>
                 </nav>
-                <Logo />
+                <div className={appHeaderStyle.header__logo}>
+                    <Logo />
+                </div>
+                
                 <a href="#" className={appHeaderStyle.header__link}>
                     <div className={`${appHeaderStyle.header__item} pb-4 pt-4 pl-5 pr-5`}>
                         <ProfileIcon type="secondary" />
