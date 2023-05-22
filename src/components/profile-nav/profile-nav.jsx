@@ -2,7 +2,7 @@ import ProfleNavStyle from './profile-nav.module.css';
 import { NavLink } from 'react-router-dom';
 
 const ProfileNav = () => {
-    const pending = `${ProfleNavStyle.link} className="text text_type_main-medium text_color_inactive`;
+    const pending = `${ProfleNavStyle.link} text text_type_main-medium text_color_inactive`;
     const active = `${ProfleNavStyle.link} ${ProfleNavStyle.main_link} text text_type_main-medium`;
 
     return (
