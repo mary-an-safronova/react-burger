@@ -1,34 +1,47 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { postAuthorization } from '../../services/actions/login';
 
 const Login = () => {
+    const dispatch = useDispatch();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [value, setValue] = useState({
+        email: '',
+        password: ''
+    })
+
+    const navigate = useNavigate();
+
+    const handleAuthorization = (evt) => {
+        evt.preventDefault();
+        dispatch(postAuthorization(value.email, value.password));
+        navigate('/', { replace: true });
+    }
 
     return (
         <div className={loginStyle.wrapper}>
-            <form className={loginStyle.form}>
+            <form className={loginStyle.form} onSubmit={handleAuthorization}>
                 <fieldset className={loginStyle.wrap}>
                     <legend className={`${loginStyle.title} text text_type_main-medium mb-6`}>Вход</legend>
                     <EmailInput
                         autoComplete="off"
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
+                        onChange={(e) => setValue({ ...value, email: e.target.value })}
+                        value={value.email}
                         name={'email'}
                         isIcon={false}
                         extraClass="mb-6"
                     />
                     <PasswordInput
                         autoComplete="off"
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
+                        onChange={(e) => setValue({ ...value, password: e.target.value })}
+                        value={value.password}
                         name={'password'}
                         extraClass="mb-6"
                     />
-                    <Button htmlType="submit" type="primary" size="medium" disabled={email && password ? false : true}>Войти</Button>
+                    <Button htmlType="submit" type="primary" size="medium" disabled={value.email && value.password ? false : true}>Войти</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вы — новый пользователь?
                         <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/register'}>Зарегистрироваться</Link>
                     </p>
