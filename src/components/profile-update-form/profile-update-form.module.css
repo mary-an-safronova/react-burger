@@ -1,0 +1,13 @@
+.form {
+    display: flex;
+    align-self: start;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
