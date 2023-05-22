@@ -1,17 +1,35 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import registerStyle from './register.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { request } from '../../utils/api';
 
 const Register = () => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const navigate = useNavigate();
+
+    const postRegister = (evt) => {
+        evt.preventDefault();
+
+        request('/auth/register', 'POST', JSON.stringify({ email: email, password: password, name: name }))
+        .then((data) => {
+            if (data.success) {
+                setEmail(email);
+                setPassword(password);
+                setName(name);
+                navigate('/', { replace: true });
+            }
+        })
+        .catch((err) => { console.log(err) });
+    }
 
     return (
         <div className={registerStyle.wrapper}>
-            <form className={registerStyle.form}>
+            <form className={registerStyle.form} onSubmit={postRegister}>
                 <fieldset className={registerStyle.wrap}>
                     <legend className={`${registerStyle.title} text text_type_main-medium mb-6`}>Регистрация</legend>
                     <Input

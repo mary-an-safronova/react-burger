@@ -1,16 +1,33 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import resetPasswordStyle from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { request } from '../../utils/api';
 
 const ResetPassword = () => {
 
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
+    
+    const navigate = useNavigate();
+
+    const postResetPassword = (evt) => {
+        evt.preventDefault();
+
+        request('/password-reset/reset', 'POST', JSON.stringify({ password: password, token: code }))
+        .then((data) => {
+            if (data.success) {
+                setPassword(password);
+                setCode(code);
+                navigate('/', { replace: true });
+            }
+        })
+        .catch((err) => { console.log(err) });
+    }
 
     return (
         <div className={resetPasswordStyle.wrapper}>
-            <form className={resetPasswordStyle.form}>
+            <form className={resetPasswordStyle.form} onSubmit={postResetPassword}>
                 <fieldset className={resetPasswordStyle.wrap}>
                     <legend className={`${resetPasswordStyle.title} text text_type_main-medium mb-6`}>Восстановление пароля</legend>
                     <PasswordInput
