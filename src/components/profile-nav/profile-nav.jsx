@@ -10,7 +10,6 @@ const ProfileNav = () => {
             <NavLink to="/profile" end className={ ({ isActive }) => isActive ? active : pending }>Профиль</NavLink>
             <NavLink to="/profile/orders" end className={ ({ isActive }) => isActive ? active : pending }>История заказов</NavLink>
             <NavLink to="/profile/orders/:id" end className={ ({ isActive }) => isActive ? active : pending }>Выход</NavLink>
-            <p className="text text_type_main-default text_color_inactive mt-20">В этом разделе вы можете изменить свои персональные данные</p>
         </nav>
     )
 }

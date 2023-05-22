@@ -1,6 +1,5 @@
 .form {
     display: flex;
-    align-self: start;
 }
 
 .wrap {
@@ -10,4 +9,8 @@
     border: none;
     margin: 0;
     padding: 0;
+}
+
+.span {
+    margin-left: calc((-16vw) + (-60px));
 }
