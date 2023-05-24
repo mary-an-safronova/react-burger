@@ -13,7 +13,7 @@ export function getData() {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
     })
-    request('/ingredients', 'GET', null)
+    request('/ingredients', 'GET', '', null)
     .then(({ success, data }) => {
         if (success) {
             dispatch({

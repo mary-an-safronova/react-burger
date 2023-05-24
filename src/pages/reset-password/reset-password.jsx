@@ -8,13 +8,13 @@ const ResetPassword = () => {
 
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
-    
+
     const navigate = useNavigate();
 
     const postResetPassword = (evt) => {
         evt.preventDefault();
 
-        request('/password-reset/reset', 'POST', JSON.stringify({ password: password, token: code }))
+        request('/password-reset/reset', 'POST', '', JSON.stringify({ password: password, token: code }))
         .then((data) => {
             if (data.success) {
                 setPassword(password);

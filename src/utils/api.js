@@ -1,4 +1,6 @@
-import { apiConfig } from "./constants";
+export const apiConfig = {
+    baseUrl: 'https://norma.nomoreparties.space/api',
+}
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -10,10 +12,13 @@ const checkResponse = (res) => {
         });
 }
 
-export const request = (endpoint, method, body) => {
+export const request = (endpoint, method, authorization, body) => {
     return fetch(`${apiConfig.baseUrl}${endpoint}`, {
         method: method,
-        headers: apiConfig.headers,
+        headers: {
+            authorization: authorization,
+            'Content-Type': 'application/json'
+        },
         body: body,
     })
     .then(checkResponse)

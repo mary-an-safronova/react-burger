@@ -9,7 +9,7 @@ export const postRegister = (email, password, name) => {
     dispatch({
       type: POST_REGISTER_REQUEST
     })
-    request('/auth/register', 'POST', JSON.stringify({ email: email, password: password, name: name }))
+    request('/auth/register', 'POST', '', JSON.stringify({ email: email, password: password, name: name }))
     .then((data) => {
       if (data.success) {
         dispatch({ type: POST_REGISTER_SUCCESS, payload: data })

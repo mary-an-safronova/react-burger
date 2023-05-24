@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     const postMail = (evt) => {
         evt.preventDefault();
 
-        request('/password-reset', 'POST', JSON.stringify({ email: email }))
+        request('/password-reset', 'POST', '', JSON.stringify({ email: email }))
         .then((success, data) => {
             if (success) {
                 setEmail(data);
