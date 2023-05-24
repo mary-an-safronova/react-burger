@@ -1,12 +1,15 @@
 import { GET_USER_REQUEST,
     GET_USER_FAILED,
     GET_USER_SUCCESS,
-    UPDATE_USER_SUCCESS } from "../actions/user";
+    UPDATE_USER_SUCCESS,
+    POST_REFRESH_TOKEN_SUCCESS } from "../actions/user";
 
 const initialState = {
     userRequest: false,
     userFailed: false,
     success: false,
+    accessToken: '',
+    refreshToken: '',
     user: {
         email: '',
         name: ''
@@ -39,9 +42,17 @@ export const userReducer = (state = initialState, action) => {
         }
         case UPDATE_USER_SUCCESS: {
             return {
-              ...state,
-              success: action.payload.success,
-              user: action.payload.user,
+                ...state,
+                success: action.payload.success,
+                user: action.payload.user,
+            }
+        }
+        case POST_REFRESH_TOKEN_SUCCESS: {
+            return {
+                ...state,
+                success: action.payload.success,
+                accessToken: action.payload.accessToken,
+                refreshToken: action.payload.refreshToken,
             }
         }
         default: {

@@ -9,6 +9,8 @@ export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED';
 
+export const POST_REFRESH_TOKEN_SUCCESS = 'POST_REFRESH_TOKEN_SUCCESS';
+
 export const getUser = (authorization) => {
   return function(dispatch) {
     dispatch({
@@ -20,7 +22,7 @@ export const getUser = (authorization) => {
         dispatch({ 
             type: GET_USER_SUCCESS, 
             payload: data })
-      } 
+      }
     })
     .catch((error) => {
       dispatch({ type: GET_USER_FAILED, payload: error });
@@ -51,9 +53,11 @@ export const refreshToken = () => {
   return function(dispatch) {
     request('/auth/token', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
     .then((data) => {
-      setCookie("accessToken", data.accessToken.split('Bearer ')[1]);
-      setCookie("refreshToken", data.refreshToken);
-      dispatch(getUser(getCookie("refreshToken")));
+      if (data.success) {
+        setCookie("accessToken", data.accessToken.split('Bearer ')[1]);
+        setCookie("refreshToken", data.refreshToken);
+        dispatch({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data })
+      }
     })
     .catch(error => {
       console.log(error);

@@ -4,17 +4,22 @@ import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getUser } from '../../services/actions/user';
 import { updateUser } from '../../services/actions/user';
+import { getCookie } from '../../utils/cookie';
+import { refreshToken } from '../../services/actions/user';
 
 const ProfleUpdateForm = () => {
 
     const dispatch = useDispatch();
 
-    const authorization = (state) => state.authorization;
-    const { accessToken } = useSelector(authorization);
+    const accessToken = 'Bearer ' + getCookie('accessToken');
 
     useEffect(() => {
         dispatch(getUser(accessToken))
     }, [dispatch, accessToken])
+
+    useEffect(() => {
+        dispatch(refreshToken())
+    }, [dispatch])
 
     const { user } = useSelector((state) => state.user);
 
