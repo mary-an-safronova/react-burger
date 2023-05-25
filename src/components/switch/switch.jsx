@@ -17,9 +17,9 @@ const Switch = () => {
 
   return (
     <ul className={switchStyle.switch}>
-      <li><Tab value='bun' active={current === 'bun'} onClick={() => handleTabClick('bun')}>{'Булки'}</Tab></li>
-      <li><Tab value='main' active={current === 'main'} onClick={() => handleTabClick('main')}>{'Начинки'}</Tab></li>
-      <li><Tab value='sauce' active={current === 'sauce'} onClick={() => handleTabClick('sauce')}>{'Соусы'}</Tab></li>
+      <li className={switchStyle.switch__link}><Tab value='bun' active={current === 'bun'} onClick={() => handleTabClick('bun')}>{'Булки'}</Tab></li>
+      <li className={switchStyle.switch__link}><Tab value='main' active={current === 'main'} onClick={() => handleTabClick('main')}>{'Начинки'}</Tab></li>
+      <li className={switchStyle.switch__link}><Tab value='sauce' active={current === 'sauce'} onClick={() => handleTabClick('sauce')}>{'Соусы'}</Tab></li>
     </ul>
   );
 }

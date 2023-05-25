@@ -1,51 +1,45 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import resetPasswordStyle from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { request } from '../../utils/api';
+import { postResetPassword } from '../../services/actions/auth';
 
 const ResetPassword = () => {
-
-    const [password, setPassword] = useState('');
-    const [code, setCode] = useState('');
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const postResetPassword = (evt) => {
-        evt.preventDefault();
+    const password = useSelector((state) => state.auth.password);
+    const token = useSelector((state) => state.auth.token);
+    const [value, setValue] = useState({ password: password, token: token })
 
-        request('/password-reset/reset', 'POST', '', JSON.stringify({ password: password, token: code }))
-        .then((data) => {
-            if (data.success) {
-                setPassword(password);
-                setCode(code);
-                navigate('/', { replace: true });
-            }
-        })
-        .catch((err) => { console.log(err) });
+    const handleResetPassword = (evt) => {
+        evt.preventDefault();
+        dispatch(postResetPassword(value.password, value.token));
+        navigate('/login', { replace: true });
     }
 
     return (
         <div className={resetPasswordStyle.wrapper}>
-            <form className={resetPasswordStyle.form} onSubmit={postResetPassword}>
+            <form className={resetPasswordStyle.form} onSubmit={handleResetPassword}>
                 <fieldset className={resetPasswordStyle.wrap}>
                     <legend className={`${resetPasswordStyle.title} text text_type_main-medium mb-6`}>Восстановление пароля</legend>
                     <PasswordInput
                         placeholder={'Введите новый пароль'}
                         autoComplete="off"
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
+                        onChange={(e) => setValue({ ...value, password: e.target.value })}
+                        value={value.password}
                         name={'password'}
                         extraClass="mb-6"
                     />
                     <Input
                         placeholder={'Введите код из письма'}
-                        onChange={e => setCode(e.target.value)}
-                        value={code}
+                        onChange={(e) => setValue({ ...value, token: e.target.value })}
+                        value={value.token}
                         name={'name'}
                         extraClass="mb-6"
                     />
-                    <Button htmlType="submit" type="primary" size="medium" disabled={password && code ? false : true}>Сохранить</Button>
+                    <Button htmlType="submit" type="primary" size="medium" disabled={value.password && value.token ? false : true}>Сохранить</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вспомнили пароль?
                         <Link className={`${resetPasswordStyle.link} text text_type_main-small ml-2`} to={'/login'}>Войти</Link>
                     </p>

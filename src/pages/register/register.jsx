@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import registerStyle from './register.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { postRegister } from '../../services/actions/register';
+import { postRegister } from '../../services/actions/auth';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Register = () => {
     const handleRegister = (evt) => {
         evt.preventDefault();
         dispatch(postRegister(value.email, value.password, value.name));
-        navigate('/', { replace: true });
+        navigate('/login', { replace: true });
     }
 
     return (

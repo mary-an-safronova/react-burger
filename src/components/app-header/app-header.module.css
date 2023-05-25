@@ -24,9 +24,10 @@
 }
 
 .header__link:hover {
-    opacity: 0.8;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgb(133, 133, 173);
+    border-radius: 64px;
 }
 
 .header__list {

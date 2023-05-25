@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getUser } from '../../services/actions/user';
-import { updateUser } from '../../services/actions/user';
+import { getUser } from '../../services/actions/auth';
+import { updateUser } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookie';
-import { refreshToken } from '../../services/actions/user';
+import { refreshToken } from '../../services/actions/auth';
 
 const ProfleUpdateForm = () => {
 
@@ -21,7 +21,7 @@ const ProfleUpdateForm = () => {
         dispatch(refreshToken())
     }, [dispatch])
 
-    const { user } = useSelector((state) => state.user);
+    const user = useSelector((state) => state.auth.user);
 
     const [value, setValue] = useState({ name: user.name, email: user.email, password: '' })
 

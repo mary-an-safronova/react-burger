@@ -1,5 +1,5 @@
 import { getCookie } from "./cookie";
-import { refreshToken } from "../services/actions/user";
+import { refreshToken } from "../services/actions/auth";
 
 export const apiConfig = {
     baseUrl: 'https://norma.nomoreparties.space/api',

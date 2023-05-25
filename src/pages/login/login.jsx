@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { postAuthorization } from '../../services/actions/login';
+import { postAuthorization } from '../../services/actions/auth';
 
 const Login = () => {
     const dispatch = useDispatch();

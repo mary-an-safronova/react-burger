@@ -1,16 +1,18 @@
 import { useDispatch } from 'react-redux';
 import ProfleNavStyle from './profile-nav.module.css';
-import { NavLink } from 'react-router-dom';
-import { logoutUser } from '../../services/actions/user';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../services/actions/auth';
 
 const ProfileNav = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const pending = `${ProfleNavStyle.link} text text_type_main-medium text_color_inactive`;
     const active = `${ProfleNavStyle.link} ${ProfleNavStyle.main_link} text text_type_main-medium`;
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        navigate('/login', { replace: true });
     }
 
     return (

@@ -1,42 +1,38 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import forgotPasswordStyle from './forgot-password.module.css';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { request } from '../../utils/api';
+import { postForgotPassword } from '../../services/actions/auth';
 
 const ForgotPassword = () => {
-
-    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const postMail = (evt) => {
-        evt.preventDefault();
+    const email = useSelector((state) => state.auth.email);
+    const [value, setValue] = useState({ email: email })
 
-        request('/password-reset', 'POST', '', JSON.stringify({ email: email }))
-        .then((success, data) => {
-            if (success) {
-                setEmail(data);
-                navigate('/reset-password', { replace: true });
-            }
-        })
-        .catch((err) => { console.log(err) });
+    const handleForgotPassword = (evt) => {
+        evt.preventDefault();
+        dispatch(postForgotPassword(value.email));
+        navigate('/reset-password', { replace: true });
     }
 
     return (
         <div className={forgotPasswordStyle.wrapper}>
-            <form className={forgotPasswordStyle.form} onSubmit={postMail}>
+            <form className={forgotPasswordStyle.form} onSubmit={handleForgotPassword}>
                 <fieldset className={forgotPasswordStyle.wrap}>
                     <legend className={`${forgotPasswordStyle.title} text text_type_main-medium mb-6`}>Восстановление пароля</legend>
                     <EmailInput
                         placeholder={'Укажите e-mail'}
                         autoComplete="off"
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
+                        onChange={(e) => setValue({ ...value, email: e.target.value })}
+                        value={value.email}
                         name={'email'}
                         isIcon={false}
                         extraClass="mb-6"
                     />
-                    <Button htmlType="submit" type="primary" size="medium" disabled={email ? false : true}>Восстановить</Button>
+                    <Button htmlType="submit" type="primary" size="medium" disabled={value.email ? false : true}>Восстановить</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вспомнили пароль?
                         <Link className={`${forgotPasswordStyle.link} text text_type_main-small ml-2`} to={'/login'}>Войти</Link>
                     </p>
