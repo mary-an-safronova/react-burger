@@ -55,7 +55,6 @@ export const postForgotPassword = (email) => {
     dispatch({
       type: POST_FORGOT_PASSWORD_REQUEST
     })
-
     request('/password-reset', 'POST', '', JSON.stringify({ email: email }))
     .then((data) => {
         if (data.success) {
@@ -73,7 +72,6 @@ export const postResetPassword = (password, token) => {
     dispatch({
       type: POST_RESET_PASSWORD_REQUEST
     })
-
     request('/password-reset/reset', 'POST', '', JSON.stringify({ password: password, token: token }))
     .then((data) => {
         if (data.success) {
@@ -81,7 +79,7 @@ export const postResetPassword = (password, token) => {
         }
     })
     .catch(error => {
-      dispatch({ type: POST_FORGOT_PASSWORD_FAILED, payload: error });
+      dispatch({ type: POST_RESET_PASSWORD_FAILED, payload: error });
     });
   }
 }

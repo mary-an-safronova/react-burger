@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import resetPasswordStyle from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postResetPassword } from '../../services/actions/auth';
+import { deleteCookie } from '../../utils/cookie';
+import { getCookie } from '../../utils/cookie';
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
@@ -13,9 +16,18 @@ const ResetPassword = () => {
     const token = useSelector((state) => state.auth.token);
     const [value, setValue] = useState({ password: password, token: token })
 
+    const resetPassword = getCookie('resetPassword');
+
+    useEffect(() => {
+        if (!resetPassword) {
+          navigate("/forgot-password");
+        }
+      }, [resetPassword]);
+
     const handleResetPassword = (evt) => {
         evt.preventDefault();
         dispatch(postResetPassword(value.password, value.token));
+        deleteCookie('resetPassword');
         navigate('/login', { replace: true });
     }
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import forgotPasswordStyle from './forgot-password.module.css';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postForgotPassword } from '../../services/actions/auth';
+import { setCookie } from '../../utils/cookie';
 
 const ForgotPassword = () => {
     const dispatch = useDispatch();
@@ -13,9 +15,11 @@ const ForgotPassword = () => {
     const [value, setValue] = useState({ email: email })
 
     const handleForgotPassword = (evt) => {
+        console.log('handler')
         evt.preventDefault();
         dispatch(postForgotPassword(value.email));
-        navigate('/reset-password', { replace: true });
+        setCookie('resetPassword', value.email);
+        navigate('/reset-password', {replace: true});
     }
 
     return (

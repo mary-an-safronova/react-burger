@@ -22,10 +22,10 @@ const App = () => {
 
           <Routes>
             <Route path="/" element={<HomePage />}/>
-            <Route path="/login" element={ !auth ? <Login /> : <Navigate to={"/"} />} />
-            <Route path="/register" element={ !auth ? <Register /> : <Navigate to={"/"} />} />
-            <Route path="/forgot-password" element={ !auth ? <ForgotPassword /> : <Navigate to={"/"} />} />
-            <Route path="/reset-password" element={ <ResetPassword /> } />
+            <Route path="/login" element={ !auth ? <Login /> : <Navigate to={'/'} /> } />
+            <Route path="/register" element={ !auth ? <Register /> : <Navigate to={'/'} /> } />
+            <Route path="/forgot-password" element={ !auth ? <ForgotPassword /> : <Navigate to={'/'} /> } />
+            <Route path="/reset-password" element={ !auth && <ResetPassword /> } />           
             <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>}>
               <Route path="/profile" element={<ProfleUpdateForm />} />
               <Route path="/profile/orders" element={<NotFound404 />} />
