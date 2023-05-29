@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,10 +8,10 @@ import { getCookie } from '../../utils/cookie';
 import { refreshToken } from '../../services/actions/auth';
 
 const ProfleUpdateForm = () => {
-
     const dispatch = useDispatch();
-
     const accessToken = 'Bearer ' + getCookie('accessToken');
+    const user = useSelector((state) => state.auth.user);
+    const [value, setValue] = useState({ name: user.name, email: user.email, password: '' })
 
     useEffect(() => {
         dispatch(getUser(accessToken))
@@ -20,10 +20,6 @@ const ProfleUpdateForm = () => {
     useEffect(() => {
         dispatch(refreshToken())
     }, [dispatch])
-
-    const user = useSelector((state) => state.auth.user);
-
-    const [value, setValue] = useState({ name: user.name, email: user.email, password: '' })
 
     useEffect(() => {
         setValue({
@@ -59,26 +55,32 @@ const ProfleUpdateForm = () => {
                         icon="EditIcon"
                     />
                     <EmailInput
-                        onChange={(evt) => setValue({ ...value, name: evt.target.value })}
+                        placeholder="Логин"
+                        onChange={(evt) => setValue({ ...value, email: evt.target.value })}
                         value={value.email}
                         name={'email'}
-                        placeholder="Логин"
                         isIcon={true}
                         icon="EditIcon"
                         extraClass="mb-6"
                     />
                     <PasswordInput
+                        placeholder="Пароль"
                         autoComplete="off"
-                        onChange={(evt) => setValue({ ...value, name: evt.target.value })}
+                        onChange={(evt) => setValue({ ...value, password: evt.target.value })}
                         value={value.password}
                         name={'password'}
                         icon="EditIcon"
                         extraClass="mb-6"
                     />
-                    <div className={`${ProfleUpdateFormStyle.buttons} mt-6`}>
-                        <Button type="secondary" size="medium" htmlType="reset" extraClass="pr-7" onClick={handleCancel}>Отмена</Button>
-                        <Button type="primary" size="medium" htmlType="submit">Сохранить</Button>
-                    </div>
+                    {
+                        value.name && value.email && value.password ?
+                        <div className={`${ProfleUpdateFormStyle.buttons} mt-6`}>
+                            <Button type="secondary" size="medium" htmlType="reset" extraClass="pr-7" onClick={handleCancel}>Отмена</Button>
+                            <Button type="primary" size="medium" htmlType="submit">Сохранить</Button>
+                        </div> : null
+                    }
+                    
+                    
                 </fieldset>
             </form>
             <p className={`${ProfleUpdateFormStyle.span} text text_type_main-default text_color_inactive pt-2`}>В этом разделе вы можете</p>
