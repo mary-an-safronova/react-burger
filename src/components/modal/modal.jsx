@@ -21,7 +21,7 @@ export const Modal = (props) => {
         return () => {
             document.removeEventListener('keydown', onKeyDown)
         }
-    }, [])
+    }, [props])
 
     return createPortal(
         (

@@ -1,9 +1,6 @@
 import appHeaderStyle from  './app-header.module.css';
 import { NavLink } from 'react-router-dom';
-import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { BurgerIcon, Logo, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const AppHeader = () => {
     const pendingLink = `${appHeaderStyle.header__item} ${appHeaderStyle.header__link} pb-4 pt-4 pl-5 pr-5`;
@@ -28,7 +25,7 @@ const AppHeader = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'*'} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
+                            <NavLink to={"/ingredients/643d69a5c3f7b9001cfa093d"} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
                                 {({ isActive }) => (
                                     <>
                                     <ListIcon type={isActive ? 'primary' : 'secondary'} />

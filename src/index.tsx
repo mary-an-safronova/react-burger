@@ -7,6 +7,7 @@ import './index.css';
 import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
 import { rootReducer } from './services/reducers/index';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -28,7 +29,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>
 );
