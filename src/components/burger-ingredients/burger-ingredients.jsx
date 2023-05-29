@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import Switch from '../switch/switch.jsx';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
-import Cards from '../cards/cards';
+import { Switch, Cards } from '..';
 import { setActiveTab } from '../../services/actions/burger-ingredients.js';
 
 const BurgerIngredients = () => {

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import ProfleNavStyle from './profile-nav.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../services/actions/auth';
+import { PATH } from '../../utils/api';
 
 const ProfileNav = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const ProfileNav = () => {
 
     const handleLogout = () => {
         dispatch(logoutUser());
-        navigate('/login', { replace: true });
+        navigate(PATH.LOGIN, { replace: true });
     }
 
     return (

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import resetPasswordStyle from './reset-password.module.css';
@@ -7,6 +6,7 @@ import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burg
 import { postResetPassword } from '../../services/actions/auth';
 import { deleteCookie } from '../../utils/cookie';
 import { getCookie } from '../../utils/cookie';
+import { PATH } from '../../utils/api';
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const ResetPassword = () => {
         evt.preventDefault();
         dispatch(postResetPassword(value.password, value.token));
         deleteCookie('resetPassword');
-        navigate('/login', { replace: true });
+        navigate(PATH.LOGIN, { replace: true });
     }
 
     return (
@@ -53,7 +53,7 @@ const ResetPassword = () => {
                     />
                     <Button htmlType="submit" type="primary" size="medium" disabled={value.password && value.token ? false : true}>Сохранить</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вспомнили пароль?
-                        <Link className={`${resetPasswordStyle.link} text text_type_main-small ml-2`} to={'/login'}>Войти</Link>
+                        <Link className={`${resetPasswordStyle.link} text text_type_main-small ml-2`} to={PATH.LOGIN}>Войти</Link>
                     </p>
                 </fieldset>
             </form>

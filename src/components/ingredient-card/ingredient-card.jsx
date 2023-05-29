@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import ingredientCardStyles from './ingredient-card.module.css';
 import { ingredientType } from '../../utils/types';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { moveIngredient } from '../../services/actions/burger-constructor';
 
 const IngredientCard = ({ deleteElement, ingredient, id, index }) => {

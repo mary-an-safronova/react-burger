@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import registerStyle from './register.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postRegister } from '../../services/actions/auth';
+import { PATH } from '../../utils/api';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Register = () => {
     const handleRegister = (evt) => {
         evt.preventDefault();
         dispatch(postRegister(value.email, value.password, value.name));
-        navigate('/login', { replace: true });
+        navigate(PATH.LOGIN, { replace: true });
     }
 
     return (
@@ -51,7 +52,7 @@ const Register = () => {
                     />
                     <Button htmlType="submit" type="primary" size="medium" disabled={value.name && value.email && value.password ? false : true}>Зарегистрироваться</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Уже зарегистрированы?
-                        <Link className={`${registerStyle.link} text text_type_main-small ml-2`} to={'/login'}>Войти</Link>
+                        <Link className={`${registerStyle.link} text text_type_main-small ml-2`} to={PATH.LOGIN}>Войти</Link>
                     </p>
                 </fieldset>
             </form>

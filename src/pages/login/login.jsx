@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postAuthorization } from '../../services/actions/auth';
+import { PATH } from '../../utils/api';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Login = () => {
     const handleAuthorization = (evt) => {
         evt.preventDefault();
         dispatch(postAuthorization(value.email, value.password));
-        navigate('/', { replace: true });
+        navigate(PATH.HOME, { replace: true });
     }
 
     return (
@@ -43,10 +44,10 @@ const Login = () => {
                     />
                     <Button htmlType="submit" type="primary" size="medium" disabled={value.email && value.password ? false : true}>Войти</Button>
                     <p className="text text_type_main-default text_color_inactive mt-20 mb-4">Вы — новый пользователь?
-                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/register'}>Зарегистрироваться</Link>
+                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={PATH.REGISTER}>Зарегистрироваться</Link>
                     </p>
                     <p className="text text_type_main-default text_color_inactive">Забыли пароль?
-                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={'/forgot-password'}>Восстановить пароль</Link>
+                        <Link className={`${loginStyle.link} text text_type_main-small ml-2`} to={PATH.FORGOT_PASSWORD}>Восстановить пароль</Link>
                     </p>
                 </fieldset>
             </form>

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import cardsStyle from './cards.module.css';
-import Card from '../card/card';
+import { Card } from '..';
 
 const Cards = ({ scrollToRef, typesItem, typesText }) => {
 

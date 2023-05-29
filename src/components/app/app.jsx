@@ -1,19 +1,9 @@
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import appStyle from  './app.module.css';
-import AppHeader from '../app-header/app-header';
-import HomePage from '../../pages/home-page/home-page';
-import Login from '../../pages/login/login';
-import Register from '../../pages/register/register';
-import ForgotPassword from '../../pages/forgot-password/forgot-password';
-import ResetPassword from '../../pages/reset-password/reset-password';
-import Profile from '../../pages/profile/profile';
-import NotFound404 from '../../pages/not-found/not-found';
-import ProfleUpdateForm from '../../components/profile-update-form/profile-update-form';
-import ProtectedRouteElement from '../protected-route-element/protected-route-element';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
-import { Modal } from '../modal/modal';
-import IngredientDetailsPage from '../../pages/ingredient-details-page/ingredient-details-page';
+import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage } from '../../pages';
+import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement } from '..';
+import { PATH } from '../../utils/api';
 
 const App = () => {
   const navigate = useNavigate();
@@ -28,7 +18,7 @@ const App = () => {
     if (background) {
       navigate(background, { replace: true });
     } else {
-      navigate('/', { state: { modal: false } });
+      navigate(PATH.HOME, { state: { modal: false } });
     }
   }
 
@@ -37,22 +27,22 @@ const App = () => {
         <AppHeader />
 
           <Routes location={background}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={ !auth ? <Login /> : <Navigate to={'/'} /> } />
-            <Route path="/register" element={ !auth ? <Register /> : <Navigate to={'/'} /> } />
-            <Route path="/forgot-password" element={ !auth ? <ForgotPassword /> : <Navigate to={'/'} /> } />
-            <Route path="/reset-password" element={ !auth && <ResetPassword /> } />           
-            <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>}>
-              <Route path="/profile" element={<ProfleUpdateForm />} />
-              <Route path="/profile/orders" element={<></>} />
-              <Route path="/profile/orders/:id" element={<></>} />
+            <Route path={PATH.HOME} element={<HomePage />} />
+            <Route path={PATH.LOGIN} element={ !auth ? <Login /> : <Navigate to={PATH.HOME} /> } />
+            <Route path={PATH.REGISTER} element={ !auth ? <Register /> : <Navigate to={PATH.HOME} /> } />
+            <Route path={PATH.FORGOT_PASSWORD} element={ !auth ? <ForgotPassword /> : <Navigate to={PATH.HOME} /> } />
+            <Route path={PATH.RESET_PASSWORD} element={ !auth && <ResetPassword /> } />           
+            <Route path={PATH.PROFILE} element={<ProtectedRouteElement element={<Profile />}/>}>
+              <Route path={PATH.PROFILE} element={<ProfleUpdateForm />} />
+              <Route path={PATH.PROFILE_ORDERS} element={<></>} />
+              <Route path={PATH.PROFILE_ORDERS_ID} element={<></>} />
             </Route>
-            <Route path="/ingredients/:id" element={!background && <IngredientDetailsPage />} />
-            <Route path="*" element={<NotFound404 />} />
+            <Route path={PATH.INGREDIENTS_ID} element={!background && <IngredientDetailsPage />} />
+            <Route path={PATH.NOT_FOUND_404} element={<NotFound404 />} />
           </Routes>
           {background &&
             <Routes>
-              <Route path="/ingredients/:id" element={ <Modal onClose={closeModal}><IngredientDetails /></Modal> } />
+              <Route path={PATH.INGREDIENTS_ID} element={ <Modal onClose={closeModal}><IngredientDetails /></Modal> } />
             </Routes>
           }
       </div>

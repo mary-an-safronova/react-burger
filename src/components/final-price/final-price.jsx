@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Modal } from '../modal/modal';
-import { OrderDetails } from '../order-details/order-details';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Modal, OrderDetails } from '..';
 import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
 import { clearConstructor } from '../../services/actions/burger-constructor';
 
