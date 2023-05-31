@@ -1,6 +1,3 @@
-import { getCookie } from "./cookie";
-import { refreshToken } from "../services/actions/auth";
-
 export const apiConfig = {
     baseUrl: 'https://norma.nomoreparties.space/api',
 }
@@ -8,8 +5,6 @@ export const apiConfig = {
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
-    } else if ((res.status === 401 || res.status === 403) && getCookie("refreshToken") !== undefined) {
-        refreshToken()
     }
     return res.json()
         .then((res) => {
@@ -27,7 +22,7 @@ export const request = (endpoint, method, authorization, body) => {
         body: body,
     })
     .then(checkResponse)
-  }
+}
 
 export const PATH = {
     HOME: '/',

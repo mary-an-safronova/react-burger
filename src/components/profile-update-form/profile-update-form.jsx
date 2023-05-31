@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getUser } from '../../services/actions/auth';
 import { updateUser } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookie';
-import { refreshToken } from '../../services/actions/auth';
 
 const ProfleUpdateForm = () => {
     const dispatch = useDispatch();
@@ -16,10 +15,6 @@ const ProfleUpdateForm = () => {
     useEffect(() => {
         dispatch(getUser(accessToken))
     }, [dispatch, accessToken])
-
-    useEffect(() => {
-        dispatch(refreshToken())
-    }, [dispatch])
 
     useEffect(() => {
         setValue({

@@ -113,6 +113,9 @@ export const getUser = (authorization) => {
       }
     })
     .catch((error) => {
+      if (error.message === "jwt expired" || "jwt malformed") {
+        dispatch(refreshToken());
+      }
       dispatch({ type: GET_USER_FAILED, payload: error });
     });
   }
@@ -146,7 +149,7 @@ export const refreshToken = () => {
     })
     .catch(error => {
       dispatch({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
-    });
+    })
   }
 }
 
