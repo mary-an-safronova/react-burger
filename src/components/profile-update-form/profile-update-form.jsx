@@ -68,7 +68,7 @@ const ProfleUpdateForm = () => {
                         extraClass="mb-6"
                     />
                     {
-                        value.name && value.email && value.password ?
+                        value.name !== user.name || value.email !== user.email || value.password !== '' ?
                         <div className={`${ProfleUpdateFormStyle.buttons} mt-6`}>
                             <Button type="secondary" size="medium" htmlType="reset" extraClass="pr-7" onClick={handleCancel}>Отмена</Button>
                             <Button type="primary" size="medium" htmlType="submit">Сохранить</Button>

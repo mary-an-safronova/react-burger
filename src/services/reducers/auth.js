@@ -206,6 +206,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 success: action.payload.success,
                 user: action.payload.user,
+                updateUserRequest: false,
             }
         }
         case UPDATE_USER_FAILED: {
@@ -229,6 +230,7 @@ export const authReducer = (state = initialState, action) => {
                 success: action.payload.success,
                 accessToken: action.payload.accessToken,
                 refreshToken: action.payload.refreshToken,
+                refreshTokenRequest: false,
             }
         }
         case POST_REFRESH_TOKEN_FAILED: {
@@ -254,6 +256,7 @@ export const authReducer = (state = initialState, action) => {
                 user: {},
                 accessToken: '',
                 refreshToken: '',
+                logoutUserRequest: false,
             }
         }
         case POST_LOGOUT_USER_FAILED: {
