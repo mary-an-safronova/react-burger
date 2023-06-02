@@ -5,9 +5,12 @@ import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postAuthorization } from '../../services/actions/auth';
 import { PATH } from '../../utils/api';
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
+    const from = location?.state?.from || PATH.HOME;
 
     const [value, setValue] = useState({
         email: '',
@@ -19,7 +22,7 @@ const Login = () => {
     const handleAuthorization = (evt) => {
         evt.preventDefault();
         dispatch(postAuthorization(value.email, value.password));
-        navigate(PATH.HOME, { replace: true });
+        navigate(from, { replace: true });
     }
 
     return (

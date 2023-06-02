@@ -7,11 +7,10 @@ import { PATH } from '../../utils/api';
 
 const App = () => {
   const navigate = useNavigate();
-
   const auth = useSelector((state) => state.auth.auth);
-
   const location = useLocation();
   const background = location.state && location.state.modal;
+  const from = location?.state?.from || PATH.HOME;
 
   const closeModal = () => {
     const background = location.state && location.state.background;
@@ -28,10 +27,10 @@ const App = () => {
 
           <Routes location={background}>
             <Route path={PATH.HOME} element={<HomePage />} />
-            <Route path={PATH.LOGIN} element={ !auth ? <Login /> : <Navigate to={PATH.HOME} /> } />
-            <Route path={PATH.REGISTER} element={ !auth ? <Register /> : <Navigate to={PATH.HOME} /> } />
-            <Route path={PATH.FORGOT_PASSWORD} element={ !auth ? <ForgotPassword /> : <Navigate to={PATH.HOME} /> } />
-            <Route path={PATH.RESET_PASSWORD} element={ !auth && <ResetPassword /> } />           
+            <Route path={PATH.LOGIN} element={ !auth ? <Login /> : <Navigate to={from} /> } />
+            <Route path={PATH.REGISTER} element={ !auth ? <Register /> : <Navigate to={from} /> } />
+            <Route path={PATH.FORGOT_PASSWORD} element={ !auth ? <ForgotPassword /> : <Navigate to={from} /> } />
+            <Route path={PATH.RESET_PASSWORD} element={ !auth ? <ResetPassword /> : <Navigate to={from} /> } />           
             <Route path={PATH.PROFILE} element={<ProtectedRouteElement element={<Profile />}/>}>
               <Route path={PATH.PROFILE} element={<ProfleUpdateForm />} />
               <Route path={PATH.PROFILE_ORDERS} element={<></>} />
