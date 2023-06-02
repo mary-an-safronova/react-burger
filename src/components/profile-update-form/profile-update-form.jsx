@@ -4,17 +4,15 @@ import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getUser } from '../../services/actions/auth';
 import { updateUser } from '../../services/actions/auth';
-import { getCookie } from '../../utils/cookie';
 
 const ProfleUpdateForm = () => {
     const dispatch = useDispatch();
-    const accessToken = 'Bearer ' + getCookie('accessToken');
     const user = useSelector((state) => state.auth.user);
     const [value, setValue] = useState({ name: user.name, email: user.email, password: '' })
 
     useEffect(() => {
-        dispatch(getUser(accessToken))
-    }, [dispatch, accessToken])
+        dispatch(getUser())
+    }, [dispatch])
 
     useEffect(() => {
         setValue({
@@ -26,7 +24,7 @@ const ProfleUpdateForm = () => {
 
     const updateProfile = (evt) => {
         evt.preventDefault();
-        dispatch(updateUser(accessToken, value.name, value.email, value.password));
+        dispatch(updateUser(value.name, value.email, value.password));
     }
 
     const handleCancel = () => {

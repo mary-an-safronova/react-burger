@@ -103,10 +103,10 @@ export const postAuthorization = (email, password) => {
   }
 }
 
-export const getUser = (authorization) => {
+export const getUser = () => {
   return function(dispatch) {
     dispatch({ type: GET_USER_REQUEST })
-    request('/auth/user', 'GET', authorization, null)
+    request('/auth/user', 'GET', 'Bearer ' + getCookie('accessToken'), null)
     .then((data) => {
       if (data.success) {
         dispatch({ type: GET_USER_SUCCESS, payload: data })
@@ -114,23 +114,28 @@ export const getUser = (authorization) => {
     })
     .catch((error) => {
       if (error.message === "jwt expired" || "jwt malformed") {
-        dispatch(refreshToken());
+        dispatch(refreshToken())
+        dispatch(getUser());
       }
       dispatch({ type: GET_USER_FAILED, payload: error });
     });
   }
 }
 
-export const updateUser = (authorization, name, email, password) => {
+export const updateUser = (name, email, password) => {
   return function(dispatch) {
     dispatch({ type: UPDATE_USER_REQUEST })
-    request('/auth/user', 'PATCH', authorization, JSON.stringify({ name: name, email: email, password: password }))
+    request('/auth/user', 'PATCH', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ name: name, email: email, password: password }))
     .then((data) => {
       if (data.success) {
         dispatch({ type: UPDATE_USER_SUCCESS, payload: data })
       } 
     })
     .catch(error => {
+      if (error.message === "jwt expired" || "jwt malformed") {
+        dispatch(refreshToken());
+        dispatch(updateUser(name, email, password));
+      }
       dispatch({ type: UPDATE_USER_FAILED, payload: error });
     });
   }
