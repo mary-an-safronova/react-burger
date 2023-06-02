@@ -27,7 +27,7 @@ const ResetPassword = () => {
     const handleResetPassword = (evt) => {
         evt.preventDefault();
         dispatch(postResetPassword(value.password, value.token));
-        deleteCookie('resetPassword');
+        deleteCookie('resetPassword', { path: '/' });
         navigate(PATH.LOGIN, { replace: true });
     }
 

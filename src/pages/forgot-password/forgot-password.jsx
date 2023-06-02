@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     const handleForgotPassword = (evt) => {
         evt.preventDefault();
         dispatch(postForgotPassword(value.email));
-        setCookie('resetPassword', value.email);
+        setCookie('resetPassword', value.email, { path: '/' });
         navigate(PATH.RESET_PASSWORD, {replace: true});
     }
 

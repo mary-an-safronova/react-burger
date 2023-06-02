@@ -92,8 +92,8 @@ export const postAuthorization = (email, password) => {
     request('/auth/login', 'POST', '', JSON.stringify({ email: email, password: password }))
     .then((data) => {
       if (data.success) {
-        setCookie('accessToken', data.accessToken.split('Bearer ')[1]);
-        setCookie('refreshToken', data.refreshToken);
+        setCookie('accessToken', data.accessToken.split('Bearer ')[1], { path: '/' });
+        setCookie('refreshToken', data.refreshToken, { path: '/' });
         dispatch({ type: POST_AUTHORIZATION_SUCCESS, payload: data })
       } 
     })
@@ -142,8 +142,8 @@ export const refreshToken = () => {
     request('/auth/token', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
     .then((data) => {
       if (data.success) {
-        setCookie("accessToken", data.accessToken.split('Bearer ')[1]);
-        setCookie("refreshToken", data.refreshToken);
+        setCookie("accessToken", data.accessToken.split('Bearer ')[1], { path: '/' });
+        setCookie("refreshToken", data.refreshToken, { path: '/' });
         dispatch({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data })
       }
     })
@@ -159,8 +159,8 @@ export const logoutUser = () => {
     request('/auth/logout', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
     .then((data) => {
       if (data.success) {
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
+        deleteCookie("accessToken", { path: '/' });
+        deleteCookie("refreshToken", { path: '/' });
         dispatch({ type: POST_LOGOUT_USER_SUCCESS, payload: data })
       }
     })
