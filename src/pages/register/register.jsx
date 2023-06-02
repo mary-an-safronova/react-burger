@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import registerStyle from './register.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postRegister } from '../../services/actions/auth';
@@ -8,6 +8,8 @@ import { PATH } from '../../utils/api';
 
 const Register = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
+    const from = location?.state?.from || PATH.HOME;
 
     const [value, setValue] = useState({
         name: '',
@@ -20,7 +22,7 @@ const Register = () => {
     const handleRegister = (evt) => {
         evt.preventDefault();
         dispatch(postRegister(value.email, value.password, value.name));
-        navigate(PATH.LOGIN, { replace: true });
+        navigate(from, { replace: true });
     }
 
     return (

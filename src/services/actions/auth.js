@@ -42,6 +42,7 @@ export const postRegister = (email, password, name) => {
     .then((data) => {
       if (data.success) {
         dispatch({ type: POST_REGISTER_SUCCESS, payload: data })
+        dispatch(postAuthorization(email, password))
       } 
     })
     .catch(error => {
