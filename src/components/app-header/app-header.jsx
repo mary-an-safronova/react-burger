@@ -26,7 +26,7 @@ const AppHeader = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={"/ingredients/643d69a5c3f7b9001cfa093d"} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
+                            <NavLink to={"*"} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
                                 {({ isActive }) => (
                                     <>
                                     <ListIcon type={isActive ? 'primary' : 'secondary'} />
