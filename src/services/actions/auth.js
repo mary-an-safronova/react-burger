@@ -115,8 +115,20 @@ export const getUser = () => {
     })
     .catch((error) => {
       if (error.message === "jwt expired" || "jwt malformed") {
-        dispatch(refreshToken())
-        dispatch(getUser());
+        dispatch({ type: POST_REFRESH_TOKEN_REQUEST })
+        request('/auth/token', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
+          .then((data) => {
+            if (data.success) {
+              setCookie("accessToken", data.accessToken.split('Bearer ')[1], { path: '/' });
+              setCookie("refreshToken", data.refreshToken, { path: '/' });
+              dispatch({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data })
+            }
+          })
+          .then(() => dispatch(getUser()))
+          .catch(error => {
+            dispatch({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
+            return Promise.reject(error);
+          })
       }
       dispatch({ type: GET_USER_FAILED, payload: error });
     });
@@ -134,28 +146,23 @@ export const updateUser = (name, email, password) => {
     })
     .catch(error => {
       if (error.message === "jwt expired" || "jwt malformed") {
-        dispatch(refreshToken());
-        dispatch(updateUser(name, email, password));
+        dispatch({ type: POST_REFRESH_TOKEN_REQUEST })
+        request('/auth/token', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
+          .then((data) => {
+            if (data.success) {
+              setCookie("accessToken", data.accessToken.split('Bearer ')[1], { path: '/' });
+              setCookie("refreshToken", data.refreshToken, { path: '/' });
+              dispatch({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data })
+            }
+          })
+          .then(() => dispatch(updateUser(name, email, password)))
+          .catch(error => {
+            dispatch({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
+            return Promise.reject(error);
+          })
       }
       dispatch({ type: UPDATE_USER_FAILED, payload: error });
     });
-  }
-}
-
-export const refreshToken = () => {
-  return function(dispatch) {
-    dispatch({ type: POST_REFRESH_TOKEN_REQUEST })
-    request('/auth/token', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
-    .then((data) => {
-      if (data.success) {
-        setCookie("accessToken", data.accessToken.split('Bearer ')[1], { path: '/' });
-        setCookie("refreshToken", data.refreshToken, { path: '/' });
-        dispatch({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data })
-      }
-    })
-    .catch(error => {
-      dispatch({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
-    })
   }
 }
 
