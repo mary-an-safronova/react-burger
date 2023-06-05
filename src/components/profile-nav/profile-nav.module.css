@@ -1,0 +1,16 @@
+.link {
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.main_link {
+    color: #F2F2F3;;
+}
+
+.nav {
+    min-width: 16vw;
+    max-width: 16vw;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+}

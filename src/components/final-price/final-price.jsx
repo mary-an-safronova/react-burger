@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Modal } from '../modal/modal';
-import { OrderDetails } from '../order-details/order-details';
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Modal, OrderDetails } from '..';
 import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
 import { clearConstructor } from '../../services/actions/burger-constructor';
+import { PATH } from '../../utils/api';
 
 const FinalPrice = ({ total, ingredientsId }) => {
+    const navigate = useNavigate();
+    const auth = useSelector((state) => state.auth.auth);
 
     const orderDetails = (state) => state.orderDetails;
     const { openOrderDetailsModal, id } = useSelector(orderDetails);
@@ -16,7 +18,8 @@ const FinalPrice = ({ total, ingredientsId }) => {
     const dispatch = useDispatch();
 
     const orderHandler = () => {
-        dispatch(postOrder(ingredientsId))
+        auth ? dispatch(postOrder(ingredientsId))
+        : navigate(PATH.LOGIN, { replace: true });
     }
 
     const closeModal = () => {

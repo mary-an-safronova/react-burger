@@ -3,9 +3,7 @@ import { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import burgerConstructorStyles from './burger-constructor.module.css';
-import IngredientCard from '../ingredient-card/ingredient-card';
-import IngredientCardOuter from '../ingredient-card-outer/ingredient-card-outer';
-import FinalPrice from '../final-price/final-price';
+import { IngredientCard, IngredientCardOuter, FinalPrice } from '..';
 import { setBun, addIngredient, deleteIngredient } from '../../services/actions/burger-constructor';
 
 const BurgerConstructor = () => {
@@ -68,7 +66,7 @@ const BurgerConstructor = () => {
         <section className={burgerConstructorStyles.burgerConstructor} ref={dropIngredient}>
             <ul className={`${burgerConstructorStyles.cards}} mt-25 mb-10 ml-4`} style={{ opacity: opacity }}>
                 {bunsList?.map((bun, index) => {
-                    return <IngredientCardOuter position={"top"} bun={bun} key={index} />
+                    return <IngredientCardOuter position={"top"} bun={bun} key={index} /> 
                 })}
                 <div className={`${burgerConstructorStyles.scroll} mb-4 mt-4`}>
                     {ingredientList?.map((ingredient, index) => {

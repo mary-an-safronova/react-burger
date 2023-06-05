@@ -13,7 +13,7 @@ export const postOrder = (ingredients) => {
     dispatch({
       type: POST_ORDER_REQUEST
     })
-    request('/orders', 'POST', JSON.stringify({ ingredients: ingredients}))
+    request('/orders', 'POST', '', JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {
       if (success) {
         dispatch({ type: POST_ORDER_SUCCESS, payload: number })

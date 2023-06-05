@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import modalStyles from './modal.module.css';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ModalOverlay } from '../modal-overlay/modal-overlay.jsx';
+import { ModalOverlay } from '..';
 
 const modalRoot = document.getElementById("modals");
 
@@ -21,7 +21,7 @@ export const Modal = (props) => {
         return () => {
             document.removeEventListener('keydown', onKeyDown)
         }
-    }, [])
+    }, [props])
 
     return createPortal(
         (

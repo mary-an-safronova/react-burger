@@ -1,13 +1,15 @@
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
+import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 import cardStyle from './card.module.css';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const Card = (props) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { id } = useParams();
 
     const burgerConstructor = (state) => state.burgerConstructor;
     const { ingredientList, bunsList } = useSelector(burgerConstructor);
@@ -31,23 +33,30 @@ const Card = (props) => {
     }), [])
 
     return (
-        <li className={cardStyle.card} onClick={() => props.handleIngredientClick(props.card)} ref={dragIngredient}  style={{ opacity: opacity }}>
-            <Counter className={cardStyle.card__counter} count={counter > 0 ? counter : null} size={counter > 0 ? 'default' : 'undefined'} />
-            <div className={cardStyle.cardWrap} key={props.card._id}>
-                <img className={cardStyle.card__image} src={props.card.image} alt={props.card.name} />
-                <div className={`${cardStyle.card__price} pb-1 pt-1`}>
-                    <p className="text text_type_digits-default mr-2">{props.card.price}</p>
-                    <CurrencyIcon type="primary" />
+        <li className={cardStyle.card} ref={dragIngredient} onClick={() => {
+            if (id !== props.card._id) {
+              navigate(`/ingredients/${props.card._id}`, {
+                state: { modal: true },
+              });
+            }
+          }} style={{ opacity: opacity }}>
+            <Link to={{ pathname: `/ingredients/${props.card._id}`, state: { background: location } }} className={cardStyle.card__link}>
+                <Counter className={cardStyle.card__counter} count={counter > 0 ? counter : null} size={counter > 0 ? 'default' : 'undefined'} />
+                <div className={cardStyle.cardWrap} key={props.card._id}>
+                    <img className={cardStyle.card__image} src={props.card.image} alt={props.card.name} />
+                    <div className={`${cardStyle.card__price} pb-1 pt-1`}>
+                        <p className="text text_type_digits-default mr-2">{props.card.price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <h3 className={`${cardStyle.card__title} text text_type_main-default ml-2`}>{props.card.name}</h3>
                 </div>
-                <h3 className={`${cardStyle.card__title} text text_type_main-default ml-2`}>{props.card.name}</h3>
-            </div>
+            </Link>
         </li>
     )
 }
 
 Card.propTypes = {
     card: ingredientType,
-    handleIngredientClick: PropTypes.func.isRequired,
 }
 
 export default Card;
