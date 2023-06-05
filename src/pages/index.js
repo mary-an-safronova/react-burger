@@ -6,5 +6,6 @@ import NotFound404 from './not-found/not-found';
 import Profile from './profile/profile';
 import Register from './register/register';
 import ResetPassword from './reset-password/reset-password';
+import FeedPage from './feed-page/feed-page';
 
-export { ForgotPassword, HomePage, IngredientDetailsPage, Login, NotFound404, Profile, Register, ResetPassword }
+export { ForgotPassword, HomePage, IngredientDetailsPage, Login, NotFound404, Profile, Register, ResetPassword, FeedPage }

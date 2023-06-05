@@ -1,0 +1,61 @@
+.cardWrap {
+    width: 536px;
+    padding: 24px;
+    background: #1C1C21;
+    border-radius: 40px;
+}
+
+.infoWrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgWrap {
+    display: flex;
+    position: relative;
+}
+
+.img {
+    margin-right: -16px;
+}
+
+.lastImgWrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+}
+
+.lastImg {
+    position: relative;
+    z-index: 0;
+}
+
+.lastImgCover {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    z-index: 1;
+    background: black;
+    opacity: 0.6;
+    border-radius: 50%;
+}
+
+.lastImgText {
+    position: absolute;
+    z-index: 2;
+    top: 30%;
+    left: 35%;
+}
+
+.priceWrap {
+    display: flex;
+    align-items: center;
+}

@@ -35,4 +35,6 @@ export const PATH = {
     PROFILE_ORDERS_ID: '/profile/orders/:id',
     INGREDIENTS_ID: '/ingredients/:id',
     NOT_FOUND_404: '*',
+    FEED: '/feed',
+    FEED_ID: '/feed/:id',
 }

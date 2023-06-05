@@ -30,7 +30,7 @@ const AppHeader = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={"*"} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
+                            <NavLink to={PATH.FEED} className={ ({ isActive }) => isActive ? activeLink : pendingLink }>
                                 {({ isActive }) => (
                                     <>
                                     <ListIcon type={isActive ? 'primary' : 'secondary'} />
