@@ -1,35 +1,64 @@
+import { memo } from 'react';
+import { useSelector } from 'react-redux';
 import orderCardStyle from './order-card.module.css';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import bunImg from '../../images/bun-01.png';
+import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
+import OrderFeedTotalPrice from '../order-feed-total-price/order-feed-total-price';
 
-const OrderCard = () => {
+export default memo(function OrderCard({ order }) {
+    const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
+
+    const imageMobileByID = {}
+    const nameByID = {}
+    const priceByID = {}
+
+    ingredients.forEach((ingredient) => {
+        imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
+        nameByID[ingredient['_id']] = ingredient['name'];
+        priceByID[ingredient['_id']] = ingredient['price'];
+    })
+
+    const zIndex = (index) => {
+        return index === 0 ? 10 : index === 1 ? 9 : index === 2 ? 8 : index === 3 ? 7 : index === 4 ? 6 : index === 5 ? 5 : null;
+    }
+
+    const prices = []
+
     return (
         <div className={`${orderCardStyle.cardWrap} mb-4 mr-2`}>
             <div  className={`${orderCardStyle.infoWrap} mb-6`}>
-                <h2 className="text text_type_digits-default">#034535</h2>
-                <p className="text text_type_main-default text_color_inactive">Сегодня, 16:20 i-GMT+3</p>
+                <h2 className="text text_type_digits-default">{`#${order.number}`}</h2>
+                <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
             </div>
-            <h1 className="text text_type_main-medium mb-6">Death Star Starship Main бургер</h1>
+            <h1 className="text text_type_main-medium mb-6">{order.name}</h1>
             <div className={orderCardStyle.wrap}>
                 <div className={orderCardStyle.imgWrap}>
-                    <img className={orderCardStyle.img} src={bunImg} alt="" style={{zIndex: 7}} />
-                    <img className={orderCardStyle.img} src={bunImg} alt="" style={{zIndex: 6}} />
-                    <img className={orderCardStyle.img} src={bunImg} alt="" style={{zIndex: 5}} />
-                    <img className={orderCardStyle.img} src={bunImg} alt="" style={{zIndex: 4}} />
-                    <img className={orderCardStyle.img} src={bunImg} alt="" style={{zIndex: 3}} />
-                    <div className={orderCardStyle.lastImgWrap}>
-                        <img className={`${orderCardStyle.img} ${orderCardStyle.lastImg}`} src={bunImg} alt="" />
-                        <div className={orderCardStyle.lastImgCover}></div>
-                        <p className={`${orderCardStyle.lastImgText} text text_type_main-default`}>+3</p>
-                    </div>
+                    {
+                        order?.ingredients?.map((ingredient, index) => {
+                            prices.push(priceByID[ingredient])
+                            if(index < 5 || (order?.ingredients?.length === 6 && index === 5)) {
+                                return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
+                                            <div className={orderCardStyle.backgroundCircle}>
+                                                <img className={orderCardStyle.img} src={imageMobileByID[ingredient]} alt={nameByID[ingredient]} />
+                                            </div>
+                                        </div>
+                            } else if (order?.ingredients?.length > 6 && index === 5) {
+                                return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
+                                            <div className={orderCardStyle.imgCircle}>
+                                                <div className={orderCardStyle.backgroundCircle}>
+                                                    <img className={orderCardStyle.img} src={imageMobileByID[ingredient]} alt={nameByID[ingredient]} />
+                                                </div>
+                                            </div>
+                                            <div className={orderCardStyle.lastImgCover}></div>
+                                            <p className={`${orderCardStyle.lastImgText} text text_type_main-default`}>{`+${order?.ingredients?.length - 6}`}</p>
+                                        </div>
+                            } else {
+                                return null
+                            }
+                        })
+                    }
                 </div>
-                <div className={`${orderCardStyle.priceWrap} ml-6`}>
-                    <p className="text text_type_digits-default mr-2">480</p>
-                    <CurrencyIcon type="primary" />
-                </div>
+                <OrderFeedTotalPrice prices={prices} />
             </div>
         </div>
     )
-}
-
-export default OrderCard;
+})
