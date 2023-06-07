@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import appStyle from  './app.module.css';
-import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage } from '../../pages';
+import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage, OrderPage } from '../../pages';
 import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement } from '..';
 import { PATH } from '../../utils/api';
 
@@ -38,7 +38,7 @@ const App = () => {
             </Route>
             <Route path={PATH.INGREDIENTS_ID} element={!background && <IngredientDetailsPage />} />
             <Route path={PATH.FEED} element={<FeedPage />} />
-            <Route path={PATH.FEED_ID} element={<></>} />
+            <Route path={PATH.FEED_ID} element={<OrderPage />} />
             <Route path={PATH.NOT_FOUND_404} element={<NotFound404 />} />
           </Routes>
           {background &&

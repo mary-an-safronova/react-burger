@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import orderFeedStyle from './order-feed.module.css';
-import OrderCard from '../order-card/order-card';
+import { OrderCard } from '..';
 import { getData } from '../../services/actions/burger-ingredients';
 import { v4 as uuidv4 } from 'uuid';
 

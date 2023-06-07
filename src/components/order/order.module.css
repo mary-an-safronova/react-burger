@@ -1,0 +1,94 @@
+.status {
+    color: #00CCCC;
+}
+
+.orderIngredientsWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imgNameWrap {
+    display: flex;
+    align-items: center;
+}
+
+.imgCircle {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    margin: 0
+}
+
+.imgCircle:before {
+    content: "";
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(to right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+}
+
+.backgroundCircle {
+    width: 60px;
+    height: 60px;
+    background-color: #131316;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 75px 0;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 1;
+    margin: 0;
+}
+
+.img {
+    margin-left: -24px;
+    width: 112px;
+    height: 56px;
+    position: absolute;
+    top: 3px;
+    z-index: 2;
+}
+
+.priceWrap {
+    display: flex;
+}
+
+.datePriceWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+}
+
+.scroll {
+    overflow-y: auto;
+    max-height: 304px;
+    width: 100%;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: var(--background-alt);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    height: 194px;
+    width: 8px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
+.scroll::-webkit-scrollbar-track-piece:end {
+    background: #2F2F37;
+}
+
+.scroll::-webkit-scrollbar-track-piece:start {
+    background: #2F2F37;
+}

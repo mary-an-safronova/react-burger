@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import feedPageStyle from './feed-page.module.css';
-import { OrderFeedStatus, OrderFeed } from '../../components';
+import { getData } from '../../services/actions/burger-ingredients';
 import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsActionTypes';
+import orderPageStyle from './order-page.module.css';
+import { Order } from '../../components';
 
-const FeedPage = () => {
+const OrderPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,12 +15,16 @@ const FeedPage = () => {
           }
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getData())
+    }, [dispatch])
+
+
     return (
-        <main className={feedPageStyle.mainWrap}>
-            <OrderFeed />
-            <OrderFeedStatus />
-        </main>
+        <div className={`${orderPageStyle.wrap} pt-30`}>
+            <Order orderNumber={orderPageStyle.orderNumber} />
+        </div>
     )
 }
 
-export default FeedPage;
+export default OrderPage;
