@@ -9,14 +9,16 @@ import { PATH } from '../../utils/api';
 export default memo(function OrderCard({ order, cardWidthStyle, children, ProfileOrders }) {
     const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
 
-    const imageMobileByID = {}
-    const nameByID = {}
-    const priceByID = {}
+    const imageMobileByID = {};
+    const nameByID = {};
+    const priceByID = {};
+    const ingredientTypeById = {};
 
     ingredients.forEach((ingredient) => {
         imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
         nameByID[ingredient['_id']] = ingredient['name'];
         priceByID[ingredient['_id']] = ingredient['price'];
+        ingredientTypeById[ingredient['_id']] = ingredient['type'];
     })
 
     const zIndex = (index) => {
@@ -40,7 +42,7 @@ export default memo(function OrderCard({ order, cardWidthStyle, children, Profil
                     <div className={orderCardStyle.imgWrap}>
                         {
                             order?.ingredients?.map((ingredient, index) => {
-                                prices.push(priceByID[ingredient])
+                                ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient] * 2) : ingredientTypeById[ingredient] === 'bun' === 2 ? prices.push(priceByID[ingredient]) : prices.push(priceByID[ingredient]);
                                 if(index < 5 || (order?.ingredients?.length === 6 && index === 5)) {
                                     return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
                                                 <div className={orderCardStyle.backgroundCircle}>

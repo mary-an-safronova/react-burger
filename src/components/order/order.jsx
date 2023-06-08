@@ -12,17 +12,21 @@ const Order = ({ orderNumber }) => {
     const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
     const order = orders?.find((item) => item._id === id);
 
-    const imageMobileByID = {}
-    const nameByID = {}
-    const priceByID = {}
+    const imageMobileByID = {};
+    const nameByID = {};
+    const priceByID = {};
+    const ingredientTypeById = {};
 
     ingredients.forEach((ingredient) => {
         imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
         nameByID[ingredient['_id']] = ingredient['name'];
         priceByID[ingredient['_id']] = ingredient['price'];
+        ingredientTypeById[ingredient['_id']] = ingredient['type'];
     })
 
     const prices = []
+
+    const count = {}
 
     return(
         <div className='mb-10 mt-10 mr-10'>
@@ -33,7 +37,7 @@ const Order = ({ orderNumber }) => {
             <div className={`${orderStyle.scroll} pt-6`}>
                 {
                     order?.ingredients?.map((ingredient, index) => {
-                        prices.push(priceByID[ingredient])
+                        ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient] * 2) : ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient]) : prices.push(priceByID[ingredient]);
                         return <Link to={{ pathname: `/ingredients/${ingredient}`, state: { background: location } }} className={orderStyle.link} key={index}>
                                     <div className={`${orderStyle.orderIngredientsWrap} mb-4`}>
                                         <div className={orderStyle.imgNameWrap}>
@@ -45,7 +49,7 @@ const Order = ({ orderNumber }) => {
                                             <h3 className="text text_type_main-default ml-4">{nameByID[ingredient]}</h3>
                                         </div>
                                         <div className={`${orderStyle.priceWrap} mr-6`}>
-                                            <p className="text text_type_digits-default mr-2">1&nbsp;x&nbsp;{priceByID[ingredient]}</p>
+                                            <p className="text text_type_digits-default mr-2">{`${ingredientTypeById[ingredient] === 'bun' ? '2' : '1'} x ${priceByID[ingredient]}`}</p>
                                             <CurrencyIcon type="primary" />
                                         </div>
                                     </div>

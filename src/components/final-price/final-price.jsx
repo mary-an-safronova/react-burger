@@ -18,8 +18,11 @@ const FinalPrice = ({ total, ingredientsId }) => {
     const dispatch = useDispatch();
 
     const orderHandler = () => {
-        auth ? dispatch(postOrder(ingredientsId))
-        : navigate(PATH.LOGIN, { replace: true });
+        if(auth) {
+            dispatch(postOrder(ingredientsId));
+        } else {
+            navigate(PATH.LOGIN, { replace: true });
+        }
     }
 
     const closeModal = () => {
