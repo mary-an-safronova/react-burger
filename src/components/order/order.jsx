@@ -26,8 +26,6 @@ const Order = ({ orderNumber }) => {
 
     const prices = []
 
-    const count = {}
-
     return(
         <div className='mb-10 mt-10 mr-10'>
             <h1 className={`${orderNumber} text text_type_digits-medium mb-5 ml-10`}>{`#${order?.number}`}</h1>

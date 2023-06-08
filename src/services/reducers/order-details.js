@@ -8,6 +8,7 @@ const initialState = {
     orderFailed: false,
     id: null,
     openOrderDetailsModal: false,
+    isLoading: false,
     };
 
 export const orderDetailsReducer = (state = initialState, action) => {
@@ -17,6 +18,7 @@ export const orderDetailsReducer = (state = initialState, action) => {
                 ...state,
                 orderRequest: true,
                 orderFailed: false,
+                isLoading: true,
             }
         }
         case POST_ORDER_SUCCESS: {
@@ -25,6 +27,7 @@ export const orderDetailsReducer = (state = initialState, action) => {
                 id: action.payload, 
                 orderRequest: false,
                 openOrderDetailsModal: !state.openOrderDetailsModal,
+                isLoading: false,
             }
         }
         case POST_ORDER_FAILED: {

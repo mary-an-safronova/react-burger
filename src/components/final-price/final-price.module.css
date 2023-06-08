@@ -1,3 +1,8 @@
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .final__wrap {
     display: flex;
     align-items: center;
@@ -8,3 +13,33 @@
     display: flex;
     align-items: center;
 }
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: visibility .5s, opacity .5s ease-in;
+    background-color: rgba(0, 0, 0, .6);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+.span {
+    position: fixed;
+    z-index: 15;
+}
+
+.loader {
+    margin: auto;
+    border: 10px solid rgb(0, 200, 255);
+    border-radius: 50%;
+    border-top: 10px solid rgb(0, 119, 255);
+    width: 200px;
+    height: 200px;
+    animation: spinner 4s linear infinite;
+    box-shadow: 0 0 30px rgb(0, 200, 255);
+  }
