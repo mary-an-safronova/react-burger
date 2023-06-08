@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import orderCardStyle from './order-card.module.css';
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
+import { PATH } from '../../utils/api';
 
 export default memo(function OrderCard({ order }) {
-    const location = useLocation();
     const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
 
     const imageMobileByID = {}
@@ -26,13 +26,13 @@ export default memo(function OrderCard({ order }) {
     const prices = []
 
     return (
-        <Link className={orderCardStyle.link} to={{ pathname: `/feed/${order._id}`, state: { background: location } }}>
-            <div className={`${orderCardStyle.cardWrap} mb-4 mr-2`}>
+        <Link className={orderCardStyle.link} to={`/feed/${order._id}`} state={{ modalFromFeedPage: true, background: PATH.FEED }}>
+            <div className={`${orderCardStyle.cardWrap} mb-4 mr-2 ml-1 mt-5`} >
                 <div  className={`${orderCardStyle.infoWrap} mb-6`}>
-                    <h2 className="text text_type_digits-default">{`#${order.number}`}</h2>
-                    <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
+                    <h2 className="text text_type_digits-default">{`#${order?.number}`}</h2>
+                    <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order?.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
                 </div>
-                <h1 className="text text_type_main-medium mb-6">{order.name}</h1>
+                <h1 className="text text_type_main-medium mb-6">{order?.name}</h1>
                 <div className={orderCardStyle.wrap}>
                     <div className={orderCardStyle.imgWrap}>
                         {

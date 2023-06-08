@@ -2,10 +2,23 @@
     color: #00CCCC;
 }
 
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
 .orderIngredientsWrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 40px;
+}
+
+.orderIngredientsWrap:hover {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgb(133, 133, 173);
+    border-radius: 40px;
 }
 
 .imgNameWrap {

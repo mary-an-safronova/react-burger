@@ -15,7 +15,7 @@ const OrderFeed = () => {
 
     return (
         <section className={`${orderFeedStyle.wrap} mt-5 pt-5`}>
-            <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
+            <h1 className={`${orderFeedStyle.title} text text_type_main-large`}>Лента заказов</h1>
             <div className={orderFeedStyle.scroll}>
                 {
                     orders?.map((order) => 

@@ -3,11 +3,20 @@
     color: #F2F2F3;
 }
 
+.cardWrap:hover {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgb(133, 133, 173);
+    border-radius: 40px;
+}
+
 .cardWrap {
     width: 536px;
     padding: 24px;
     background: #1C1C21;
     border-radius: 40px;
+    position: relative;
+    z-index: 1;
 }
 
 .infoWrap {
