@@ -1,6 +1,7 @@
 import { request } from "../../utils/api";
 import { getCookie, setCookie } from "../../utils/cookie";
 import { POST_REFRESH_TOKEN_FAILED, POST_REFRESH_TOKEN_REQUEST, POST_REFRESH_TOKEN_SUCCESS } from "./auth";
+import { orderNumberArr } from "../../components/profile-orders/profile-orders";
 
 export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
 export const POST_ORDER_FAILED = 'POST_ORDER_FAILED';
@@ -18,6 +19,9 @@ export const postOrder = (ingredients) => {
     request('/orders', 'POST', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {
       if (success) {
+        // setCookie("orderNumber", number);
+        // orderNumberArr.push(number)
+        setCookie(number.toString(), number);
         dispatch({ type: POST_ORDER_SUCCESS, payload: number })
       } else {
         dispatch({

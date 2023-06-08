@@ -19,9 +19,9 @@ const ProfileNav = () => {
 
     return (
         <nav className={`${profleNavStyle.nav} mr-15 mt-30`}>
-            <NavLink to="/profile" end className={ ({ isActive }) => isActive ? active : pending }>Профиль</NavLink>
-            <NavLink to="/profile/orders" end className={ ({ isActive }) => isActive ? active : pending }>История заказов</NavLink>
-            <NavLink to="/profile/orders/:id" end className={ ({ isActive }) => isActive ? active : pending } onClick={handleLogout}>Выход</NavLink>
+            <NavLink to={PATH.PROFILE} end className={ ({ isActive }) => isActive ? active : pending }>Профиль</NavLink>
+            <NavLink to={PATH.PROFILE_ORDERS} end className={ ({ isActive }) => isActive ? active : pending }>История заказов</NavLink>
+            <button className={`${profleNavStyle.button} text text_type_main-medium text_color_inactive`} onClick={handleLogout}>Выход</button>
             {
                 location.pathname === '/profile' 
                     ? <p className={`${profleNavStyle.span} text text_type_main-default text_color_inactive pt-15`}>В этом разделе вы можете изменить свои персональные данные</p>

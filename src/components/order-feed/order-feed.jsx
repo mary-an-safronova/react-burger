@@ -19,7 +19,7 @@ const OrderFeed = () => {
             <div className={orderFeedStyle.scroll}>
                 {
                     orders?.map((order) => 
-                        <OrderCard order={order} ProfileOrders={false} key={uuidv4()}/>
+                        <OrderCard order={order} profileOrders={false} number={order?.number} key={uuidv4()}/>
                     )
                 }
             </div>

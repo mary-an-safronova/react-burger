@@ -31,8 +31,10 @@ const ProfileOrders = () => {
             <div className={profileOrdersStyle.scroll}>
                 {
                     orders?.map((order) => {
-                        const status = <p className={`${order?.status === 'done' ? profileOrdersStyle.status : profileOrdersStyle.statusNoDone} text text_type_main-small mt-2`}>{order?.status === 'done' ? 'Выполнен' : 'Готовится'}</p>
-                        return <OrderCard order={order} cardWidthStyle={profileOrdersStyle.cardWidth} children={status} ProfileOrders={true} key={uuidv4()}/>
+                        if(order?.number.toString() === getCookie(order?.number.toString())) {
+                            const status = <p className={`${order?.status === 'done' ? profileOrdersStyle.status : profileOrdersStyle.statusNoDone} text text_type_main-small mt-2`}>{order?.status === 'done' ? 'Выполнен' : 'Готовится'}</p>
+                            return <OrderCard order={order} cardWidthStyle={profileOrdersStyle.cardWidth} children={status} profileOrders={true} number={order?.number} key={uuidv4()}/>
+                        }
                     })
                 }
             </div>
