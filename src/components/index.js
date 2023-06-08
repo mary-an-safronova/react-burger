@@ -20,9 +20,10 @@ import ProfileNav from './profile-nav/profile-nav';
 import ProfleUpdateForm from './profile-update-form/profile-update-form';
 import ProtectedRouteElement from './protected-route-element/protected-route-element';
 import Switch from './switch/switch';
+import ProfileOrders from './profile-orders/profile-orders';
 
 export { App, AppHeader, BurgerConstructor, BurgerIngredients, 
     Card, Cards, FinalPrice, IngredientCard, IngredientCardOuter, 
     IngredientDetails, Modal, ModalOverlay, Order, OrderCard, OrderDetails, 
     OrderFeed, OrderFeedStatus, OrderFeedTotalPrice,
-    ProfileNav, ProfleUpdateForm, ProtectedRouteElement, Switch }
+    ProfileNav, ProfleUpdateForm, ProtectedRouteElement, Switch, ProfileOrders }

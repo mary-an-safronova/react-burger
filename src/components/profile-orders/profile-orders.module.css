@@ -1,0 +1,57 @@
+.mainWrap {
+    max-width: 860px;
+    width: 100%;
+}
+
+.cardWidth {
+    max-width: 38.2vw;
+    width: 100%;
+}
+
+.title {
+    position: relative;
+    z-index: 0;
+}
+
+.status {
+    color: #00CCCC;
+}
+
+.statusNoDone {
+    color: #F2F2F3;
+}
+
+.span {
+    margin-left: calc((-16vw) + (-60px));
+}
+
+.scroll {
+    overflow-y: auto;
+    max-height: 932px;
+    width: 100%;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: var(--background-alt);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    height: 696px;
+    width: 8px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
+.scroll::-webkit-scrollbar-track-piece:end {
+    background: #2F2F37;
+    margin-bottom: 64px; 
+}
+
+.scroll::-webkit-scrollbar-track-piece:start {
+    background: #2F2F37;
+    margin-top: 20px;
+}

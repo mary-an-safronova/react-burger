@@ -8,7 +8,7 @@ const OrderFeedStatus = () => {
     const orders = useSelector((state) => state.ws.orders);
 
     const doneList = orders.map((item) => item.status === 'done' && item.number)
-    const inProgressList = orders.map((item) => item.status === 'pending' && item.number)
+    const inProgressList = orders.map((item) => item.status !== 'done' && item.number)
 
     return (
         <section className={`${orderFeedStatusStyle.mainWrap} mt-25`}>

@@ -6,7 +6,7 @@ import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-component
 import { OrderFeedTotalPrice } from '..';
 import { PATH } from '../../utils/api';
 
-export default memo(function OrderCard({ order }) {
+export default memo(function OrderCard({ order, cardWidthStyle, children, ProfileOrders }) {
     const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
 
     const imageMobileByID = {}
@@ -26,14 +26,17 @@ export default memo(function OrderCard({ order }) {
     const prices = []
 
     return (
-        <Link className={orderCardStyle.link} to={`/feed/${order._id}`} state={{ modalFromFeedPage: true, background: PATH.FEED }}>
-            <div className={`${orderCardStyle.cardWrap} mb-4 mr-2 ml-1 mt-5`} >
+        <Link className={orderCardStyle.link} 
+        to={ ProfileOrders ? `/profile/orders/${order._id}` : `/feed/${order._id}`} 
+        state={ ProfileOrders ? { modalFromProfilePage: true, background: PATH.PROFILE_ORDERS } : { modalFromFeedPage: true, background: PATH.FEED }}>
+            <div className={`${orderCardStyle.cardWrap} ${cardWidthStyle} mb-4 mr-2 ml-1 mt-5`} >
                 <div  className={`${orderCardStyle.infoWrap} mb-6`}>
                     <h2 className="text text_type_digits-default">{`#${order?.number}`}</h2>
                     <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order?.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
                 </div>
-                <h1 className="text text_type_main-medium mb-6">{order?.name}</h1>
-                <div className={orderCardStyle.wrap}>
+                <h1 className="text text_type_main-medium">{order?.name}</h1>
+                { children }
+                <div className={`${orderCardStyle.wrap} mt-6`}>
                     <div className={orderCardStyle.imgWrap}>
                         {
                             order?.ingredients?.map((ingredient, index) => {

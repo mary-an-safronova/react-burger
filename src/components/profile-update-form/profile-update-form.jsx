@@ -37,7 +37,7 @@ const ProfleUpdateForm = () => {
 
     return (
         <section>
-            <form className={ProfleUpdateFormStyle.form} onSubmit={updateProfile}>
+            <form className={`${ProfleUpdateFormStyle.form} mt-30`} onSubmit={updateProfile}>
                 <fieldset className={ProfleUpdateFormStyle.wrap}>
                     <Input
                         placeholder={'Имя'}
@@ -72,12 +72,8 @@ const ProfleUpdateForm = () => {
                             <Button type="primary" size="medium" htmlType="submit">Сохранить</Button>
                         </div> : null
                     }
-                    
-                    
                 </fieldset>
             </form>
-            <p className={`${ProfleUpdateFormStyle.span} text text_type_main-default text_color_inactive pt-2`}>В этом разделе вы можете</p>
-            <p className={`${ProfleUpdateFormStyle.span} text text_type_main-default text_color_inactive`}>изменить свои персональные данные</p>
         </section>
 )
 }
