@@ -65,6 +65,14 @@ const BurgerConstructor = () => {
     return (
         <section className={burgerConstructorStyles.burgerConstructor} ref={dropIngredient}>
             <ul className={`${burgerConstructorStyles.cards}} mt-25 mb-10 ml-4`} style={{ opacity: opacity }}>
+                { bunsList?.length <= 0 && ingredientList?.length <= 0 ?
+                    <div className={burgerConstructorStyles.wrapForEmptyIngtredients}>
+                        <div className={burgerConstructorStyles.emptyBun}><p className={`${burgerConstructorStyles.emptyText} text text_type_main-default text_color_inactive`}>Перетащите булку в конструктор бургера</p></div>
+                        <div className={`${burgerConstructorStyles.emptyIngredient} mt-4 mb-4`}><p className={`${burgerConstructorStyles.emptyText} text text_type_main-default text_color_inactive`}>Перетащите ингредиенты в конструктор бургера</p></div>
+                        <div className={burgerConstructorStyles.emptyBun}><p className={`${burgerConstructorStyles.emptyText} text text_type_main-default text_color_inactive`}>Перетащите булку в конструктор бургера</p></div>
+                    </div> 
+                    : null 
+                }
                 {bunsList?.map((bun, index) => {
                     return <IngredientCardOuter position={"top"} bun={bun} key={index} /> 
                 })}
@@ -77,11 +85,7 @@ const BurgerConstructor = () => {
                     return <IngredientCardOuter position={"bottom"} bun={bun} key={index} />
                 })}
             </ul>
-            { bunsList.length > 0 ?
-            <FinalPrice total={total} ingredientsId={ingredientsId} />
-            : <p className={`${burgerConstructorStyles.default_text} text text_type_main-default text_color_inactive`}>
-                {ingredientList.length > 0 ? 'Добавьте булку в конструктор бургера' : 'Выберите ингредиенты и перетащите их в конструктор бургера'}
-                </p> }
+            <FinalPrice total={total} ingredientsId={ingredientsId} disabled={bunsList.length > 0 ? false : true} />
         </section>
     )
 }

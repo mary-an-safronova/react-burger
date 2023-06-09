@@ -8,7 +8,7 @@ import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-
 import { clearConstructor } from '../../services/actions/burger-constructor';
 import { PATH } from '../../utils/api';
 
-const FinalPrice = ({ total, ingredientsId }) => {
+const FinalPrice = ({ total, ingredientsId, disabled }) => {
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth.auth);
 
@@ -37,7 +37,7 @@ const FinalPrice = ({ total, ingredientsId }) => {
                 <p className="text text_type_digits-medium mr-2">{total}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button onClick={orderHandler} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+            <Button onClick={orderHandler} htmlType="button" type="primary" size="large" disabled={disabled}>Оформить заказ</Button>
         </div>
         {
             isLoading && 

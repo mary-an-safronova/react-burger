@@ -37,7 +37,7 @@
     margin: auto;
     border: 10px solid rgb(0, 200, 255);
     border-radius: 50%;
-    border-top: 10px solid rgb(0, 119, 255);
+    border-top: 10px solid #8585AD;
     width: 200px;
     height: 200px;
     animation: spinner 4s linear infinite;
