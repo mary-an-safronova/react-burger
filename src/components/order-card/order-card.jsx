@@ -29,7 +29,7 @@ export default memo(function OrderCard({ order, cardWidthStyle, children, profil
 
     return (
         <Link className={orderCardStyle.link} 
-        to={ profileOrders ? `/profile/orders/${order._id}` : `/feed/${order._id}`} 
+        to={ profileOrders ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
         state={ profileOrders ? { modalFromProfilePage: true, background: PATH.PROFILE_ORDERS } : { modalFromFeedPage: true, background: PATH.FEED }}>
             <div className={`${orderCardStyle.cardWrap} ${cardWidthStyle} mb-4 mr-2 ml-1 mt-5`} >
                 <div  className={`${orderCardStyle.infoWrap} mb-6`}>
@@ -45,10 +45,11 @@ export default memo(function OrderCard({ order, cardWidthStyle, children, profil
                                 ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient] * 2) : ingredientTypeById[ingredient] === 'bun' === 2 ? prices.push(priceByID[ingredient]) : prices.push(priceByID[ingredient]);
                                 if(index < 5 || (order?.ingredients?.length === 6 && index === 5)) {
                                     return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
-                                                <div className={orderCardStyle.backgroundCircle}>
-                                                    <img className={orderCardStyle.img} src={imageMobileByID[ingredient]} alt={nameByID[ingredient]} />
+                                                    <div className={orderCardStyle.backgroundCircle}>
+                                                        <img className={orderCardStyle.img} src={imageMobileByID[ingredient]} alt={nameByID[ingredient]} />
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            
                                 } else if (order?.ingredients?.length > 6 && index === 5) {
                                     return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
                                                 <div className={orderCardStyle.imgCircle}>

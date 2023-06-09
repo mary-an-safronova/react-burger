@@ -24,8 +24,6 @@ const ProfileOrders = () => {
         dispatch(getData())
     }, [dispatch])
 
-    
-
     return (
         <section className={`${profileOrdersStyle.mainWrap} pt-5`}>
             <div className={profileOrdersStyle.scroll}>
