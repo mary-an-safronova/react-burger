@@ -53,8 +53,8 @@ const App = () => {
             <Route path={PATH.PROFILE} element={<ProtectedRouteElement element={<Profile />}/>}>
               <Route path={PATH.PROFILE} element={<ProfleUpdateForm />} />
               <Route path={PATH.PROFILE_ORDERS} element={<ProfileOrders />} />
-              <Route path={PATH.PROFILE_ORDERS_ID} element={<OrderPage />} />
             </Route>
+            <Route path={PATH.PROFILE_ORDERS_ID} element={ auth ? <OrderPage /> : <Navigate to={from} /> } />   
             <Route path={PATH.INGREDIENTS_ID} element={<IngredientDetailsPage />} />
             <Route path={PATH.FEED} element={<FeedPage />} />
             <Route path={PATH.FEED_ID} element={<OrderPage />} />
