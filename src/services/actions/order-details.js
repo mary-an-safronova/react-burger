@@ -18,7 +18,6 @@ export const postOrder = (ingredients) => {
     request('/orders', 'POST', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {
       if (success) {
-        setCookie(number.toString(), number);
         dispatch({ type: POST_ORDER_SUCCESS, payload: number })
       } else {
         dispatch({

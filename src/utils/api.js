@@ -2,6 +2,9 @@ export const apiConfig = {
     baseUrl: 'https://norma.nomoreparties.space/api',
 }
 
+export const wsUrl = 'wss://norma.nomoreparties.space';
+export const wsUrlOrders = `${wsUrl}/orders`
+
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json();

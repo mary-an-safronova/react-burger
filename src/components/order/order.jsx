@@ -30,7 +30,7 @@ const Order = ({ orderNumber }) => {
         <div className='mb-10 mt-10 mr-10'>
             <h1 className={`${orderNumber} text text_type_digits-medium mb-5 ml-10`}>{`#${order?.number}`}</h1>
             <h2 className="text text_type_main-medium mb-2 ml-10">{order?.name}</h2>
-            <p className={`${order?.status === 'done' ? orderStyle.status : orderStyle.statusNoDone} text text_type_main-small mb-15 ml-10`}>{order?.status === 'done' ? 'Выполнен' : 'Готовится'}</p>
+            <p className={`${order?.status === 'done' ? orderStyle.status : orderStyle.statusNoDone} text text_type_main-small mb-15 ml-10`}>{order?.status === 'done' ? 'Выполнен' :  order?.status === 'pending' ? 'Готовится' : 'Создан'}</p>
             <p className="text text_type_main-medium ml-10">Состав:</p>
             <div className={`${orderStyle.scroll} pt-6`}>
                 {

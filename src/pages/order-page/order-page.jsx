@@ -4,12 +4,13 @@ import { getData } from '../../services/actions/burger-ingredients';
 import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsActionTypes';
 import orderPageStyle from './order-page.module.css';
 import { Order } from '../../components';
+import { wsUrlOrders } from '../../utils/api';
 
 const OrderPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(wsConnectionStart('wss://norma.nomoreparties.space/orders/all'))
+        dispatch(wsConnectionStart(`${wsUrlOrders}/all`))
         return () => {
             dispatch(wsConnectionClosed())
           }

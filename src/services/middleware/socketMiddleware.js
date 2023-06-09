@@ -1,4 +1,4 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
+export const socketMiddleware = (wsActions) => {
     return store => {
         let socket = null;
 
@@ -8,7 +8,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
       const { wsStart, onOpen, onError, onClose, onMessage, wsSend } = wsActions;
  
       if (type === wsStart) {
-        socket = new WebSocket(wsUrl);
+        socket = new WebSocket(action.payload);
       }
       if (socket) {
         socket.onopen = event => {
@@ -19,7 +19,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         };
         socket.onmessage = event => {
           const { data } = event;
-        dispatch({ type: onMessage, payload: JSON.parse(data) });
+          dispatch({ type: onMessage, payload: JSON.parse(data) });
         };
         socket.onclose = event => {
           dispatch({ type: onClose, payload: event });
