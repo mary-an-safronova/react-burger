@@ -18,7 +18,27 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
         ingredientTypeById[ingredient['_id']] = ingredient['type'];
     })
 
-    const prices = []
+    const ingredientCounts = order?.ingredients?.reduce((acc, ingredient) => {
+        if (acc[ingredient]) {
+            acc[ingredient].count += 1;
+        } else {
+            acc[ingredient] = {
+                name: nameByID[ingredient],
+                price: priceByID[ingredient],
+                count: 1,
+                type: ingredientTypeById[ingredient],
+                image: imageMobileByID[ingredient]
+            };
+        }
+        return acc;
+    }, {});
+
+    const ingredientsToDisplay = [];
+    for (const key in ingredientCounts) {
+        ingredientsToDisplay.push(ingredientCounts[key]);
+    }
+
+    const prices = [];
 
     return(
         <div className='mb-10 mt-10 mr-10'>
@@ -28,20 +48,20 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
             <p className="text text_type_main-medium ml-10">Состав:</p>
             <div className={`${orderStyle.scroll} pt-6`}>
                 {
-                    order?.ingredients?.map((ingredient, index) => {
-                        ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient] * 2) : ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient]) : prices.push(priceByID[ingredient]);
+                    ingredientsToDisplay.map((ingredient, index) => {
+                        prices.push(ingredient.count * ingredient.price)
                         return <Link to={{ pathname: `/ingredients/${ingredient}`, state: { background: location } }} className={orderStyle.link} key={index}>
                                     <div className={`${orderStyle.orderIngredientsWrap} mb-4`}>
                                         <div className={orderStyle.imgNameWrap}>
                                             <div className={orderStyle.imgCircle}>
                                                 <div className={orderStyle.backgroundCircle}>
-                                                    <img className={orderStyle.img} src={imageMobileByID[ingredient]} alt={nameByID[ingredient]} />
+                                                    <img className={orderStyle.img} src={ingredient.image} alt={ingredient.name} />
                                                 </div>
                                             </div>
-                                            <h3 className="text text_type_main-default ml-4">{nameByID[ingredient]}</h3>
+                                            <h3 className="text text_type_main-default ml-4">{ingredient.name}</h3>
                                         </div>
                                         <div className={`${orderStyle.priceWrap} mr-6`}>
-                                            <p className="text text_type_digits-default mr-2">{`${ingredientTypeById[ingredient] === 'bun' ? '2' : '1'} x ${priceByID[ingredient]}`}</p>
+                                            <p className="text text_type_digits-default mr-2">{`${ingredient.count} x ${ingredient.price}`}</p>
                                             <CurrencyIcon type="primary" />
                                         </div>
                                     </div>
