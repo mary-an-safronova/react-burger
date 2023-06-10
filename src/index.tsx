@@ -18,6 +18,15 @@ import {
   WS_SEND_MESSAGE
 } from '../src/services/actions/wsActionTypes';
 
+import {
+  WS_AUTH_CONNECTION_START,
+  WS_AUTH_CONNECTION_SUCCESS,
+  WS_AUTH_CONNECTION_ERROR,
+  WS_AUTH_CONNECTION_CLOSED,
+  WS_AUTH_GET_MESSAGE,
+  WS_AUTH_SEND_MESSAGE
+} from './services/actions/wsAuthActionTypes';
+
 const wsActions = {
   wsStart: WS_CONNECTION_START,
   onOpen: WS_CONNECTION_SUCCESS,
@@ -25,6 +34,15 @@ const wsActions = {
   onClose: WS_CONNECTION_CLOSED,
   onMessage: WS_GET_MESSAGE,
   wsSend: WS_SEND_MESSAGE
+}
+
+const wsAuthActions = {
+  wsStart: WS_AUTH_CONNECTION_START,
+  onOpen: WS_AUTH_CONNECTION_SUCCESS,
+  onError: WS_AUTH_CONNECTION_ERROR,
+  onClose: WS_AUTH_CONNECTION_CLOSED,
+  onMessage: WS_AUTH_GET_MESSAGE,
+  wsSend: WS_AUTH_SEND_MESSAGE
 }
 
 declare global {
@@ -35,7 +53,7 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsActions)));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsActions), socketMiddleware(wsAuthActions)));
 
 const store = createStore(rootReducer, enhancer);
 

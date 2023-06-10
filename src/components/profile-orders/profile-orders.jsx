@@ -4,21 +4,19 @@ import profileOrdersStyle from './profile-orders.module.css';
 import { OrderCard } from '..';
 import { getData } from '../../services/actions/burger-ingredients';
 import { v4 as uuidv4 } from 'uuid';
-import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsActionTypes';
+import { wsAuthConnectionStart, wsAuthConnectionClosed } from '../../services/actions/wsAuthActionTypes';
 import { getCookie } from '../../utils/cookie';
 import { wsUrlOrders } from '../../utils/api';
 
 const ProfileOrders = () => {
     const dispatch = useDispatch();
-    const orders = useSelector((state) => state.ws.orders);
+    const orders = useSelector((state) => state.wsAuth.orders);
 
     const accessToken = getCookie("accessToken").replace('Bearer ', '');
 
     useEffect(() => {
-        dispatch(wsConnectionStart(`${wsUrlOrders}?token=${accessToken}`))
-        return () => {
-            dispatch(wsConnectionClosed())
-          }
+        dispatch(wsAuthConnectionStart(`${wsUrlOrders}?token=${accessToken}`))
+        return dispatch(wsAuthConnectionClosed())
     }, [dispatch, accessToken])
 
     useEffect(() => {

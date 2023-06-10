@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import appStyle from  './app.module.css';
-import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage, OrderPage } from '../../pages';
+import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage, OrderFeedPage, OrderProfilePage } from '../../pages';
 import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement, ProfileOrders, OrderModal } from '..';
 import { PATH } from '../../utils/api';
 
@@ -54,10 +54,10 @@ const App = () => {
               <Route path={PATH.PROFILE} element={<ProfleUpdateForm />} />
               <Route path={PATH.PROFILE_ORDERS} element={<ProfileOrders />} />
             </Route>
-            <Route path={PATH.PROFILE_ORDERS_ID} element={ auth ? <OrderPage /> : <Navigate to={from} /> } />   
+            <Route path={PATH.PROFILE_ORDERS_ID} element={<ProtectedRouteElement element={<OrderProfilePage />}/>} />   
             <Route path={PATH.INGREDIENTS_ID} element={<IngredientDetailsPage />} />
             <Route path={PATH.FEED} element={<FeedPage />} />
-            <Route path={PATH.FEED_ID} element={<OrderPage />} />
+            <Route path={PATH.FEED_ID} element={<OrderFeedPage />} />
             <Route path={PATH.NOT_FOUND_404} element={<NotFound404 />} />
           </Routes>
           {modalFromHomePage &&

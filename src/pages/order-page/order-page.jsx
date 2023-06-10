@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { getData } from '../../services/actions/burger-ingredients';
 import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsActionTypes';
-import orderPageStyle from './order-page.module.css';
+import orderFeedPageStyle from './order-page.module.css';
 import { Order } from '../../components';
 import { wsUrlOrders } from '../../utils/api';
-import { getCookie } from '../../utils/cookie';
 
-const OrderPage = () => {
+const OrderFeedPage = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const { id } = useParams();
@@ -16,18 +15,12 @@ const OrderPage = () => {
     const orders = useSelector((state) => state.ws.orders);
     const order = orders?.find((item) => item._id === id);
 
-    const accessToken = getCookie("accessToken").replace('Bearer ', '');
-
     useEffect(() => {
-        if(location.pathname === `/feed/${id}`) {
-            dispatch(wsConnectionStart(`${wsUrlOrders}/all`))
-        } else {
-            dispatch(wsConnectionStart(`${wsUrlOrders}?token=${accessToken}`))
-        }
+        dispatch(wsConnectionStart(`${wsUrlOrders}/all`))
         return () => {
-            dispatch(wsConnectionClosed())
+            return dispatch(wsConnectionClosed())
           }
-    }, [dispatch, accessToken, id, location.pathname])
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getData())
@@ -35,10 +28,10 @@ const OrderPage = () => {
 
 
     return (
-        <div className={`${orderPageStyle.wrap} pt-30`}>
-            <Order orderNumber={orderPageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+        <div className={`${orderFeedPageStyle.wrap} pt-30`}>
+            <Order orderNumber={orderFeedPageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
         </div>
     )
 }
 
-export default OrderPage;
+export default OrderFeedPage;
