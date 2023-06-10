@@ -1,16 +1,10 @@
 import PropTypes from 'prop-types';
 import orderStyle from './order.module.css';
-import { useSelector } from 'react-redux';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
 
-const Order = ({ orderNumber }) => {
-    const location = useLocation();
-    const { id } = useParams();
-    const orders = useSelector((state) => state.ws.orders);
-    const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
-    const order = orders?.find((item) => item._id === id);
+const Order = ({ orderNumber, location, order, ingredients }) => {
 
     const imageMobileByID = {};
     const nameByID = {};
@@ -56,7 +50,7 @@ const Order = ({ orderNumber }) => {
                 }
             </div>
             <div className={`${orderStyle.datePriceWrap} ml-10`}>
-                <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
+                <span className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order?.createdAt)} className="text text_type_main-default text_color_inactive" /> i-GMT+3</span>
                 <OrderFeedTotalPrice prices={prices} />
             </div>
         </div>

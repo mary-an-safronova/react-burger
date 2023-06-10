@@ -16,6 +16,7 @@ import {OrderDetails} from './order-details/order-details';
 import OrderFeed from './order-feed/order-feed';
 import OrderFeedStatus from './order-feed-status/order-feed-status';
 import OrderFeedTotalPrice from './order-feed-total-price/order-feed-total-price';
+import OrderModal from './order-modal/order-modal';
 import ProfileNav from './profile-nav/profile-nav';
 import ProfleUpdateForm from './profile-update-form/profile-update-form';
 import ProtectedRouteElement from './protected-route-element/protected-route-element';
@@ -25,5 +26,5 @@ import ProfileOrders from './profile-orders/profile-orders';
 export { App, AppHeader, BurgerConstructor, BurgerIngredients, 
     Card, Cards, FinalPrice, IngredientCard, IngredientCardOuter, 
     IngredientDetails, Modal, ModalOverlay, Order, OrderCard, OrderDetails, 
-    OrderFeed, OrderFeedStatus, OrderFeedTotalPrice,
+    OrderFeed, OrderFeedStatus, OrderFeedTotalPrice, OrderModal,
     ProfileNav, ProfleUpdateForm, ProtectedRouteElement, Switch, ProfileOrders }

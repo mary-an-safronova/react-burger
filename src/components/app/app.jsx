@@ -2,7 +2,7 @@ import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-
 import { useSelector } from 'react-redux';
 import appStyle from  './app.module.css';
 import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage, OrderPage } from '../../pages';
-import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement, Order, ProfileOrders } from '..';
+import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement, ProfileOrders, OrderModal } from '..';
 import { PATH } from '../../utils/api';
 
 const App = () => {
@@ -67,13 +67,13 @@ const App = () => {
           }
           {modalFromFeedPage &&
             <Routes>
-              <Route path={PATH.FEED_ID} element={ <Modal onClose={closeFeedModal}><Order /></Modal> } />
+              <Route path={PATH.FEED_ID} element={ <Modal onClose={closeFeedModal}><OrderModal /></Modal> } />
             </Routes>
           }
 
           {modalFromProfilePage &&
             <Routes>
-              <Route path={PATH.PROFILE_ORDERS_ID} element={ <Modal onClose={closeProfileModal}><Order /></Modal> } />
+              <Route path={PATH.PROFILE_ORDERS_ID} element={ <Modal onClose={closeProfileModal}><OrderModal /></Modal> } />
             </Routes>
           }
       </div>
