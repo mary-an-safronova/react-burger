@@ -9,13 +9,15 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
     const imageMobileByID = {};
     const nameByID = {};
     const priceByID = {};
-    const ingredientTypeById = {};
+    const ingredientTypeByID = {};
+    const ingredientIdByID = {};
 
     ingredients.forEach((ingredient) => {
         imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
         nameByID[ingredient['_id']] = ingredient['name'];
         priceByID[ingredient['_id']] = ingredient['price'];
-        ingredientTypeById[ingredient['_id']] = ingredient['type'];
+        ingredientTypeByID[ingredient['_id']] = ingredient['type'];
+        ingredientIdByID[ingredient['_id']] = ingredient['_id'];
     })
 
     const ingredientCounts = order?.ingredients?.reduce((acc, ingredient) => {
@@ -26,8 +28,9 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
                 name: nameByID[ingredient],
                 price: priceByID[ingredient],
                 count: 1,
-                type: ingredientTypeById[ingredient],
-                image: imageMobileByID[ingredient]
+                type: ingredientTypeByID[ingredient],
+                image: imageMobileByID[ingredient],
+                id: ingredientIdByID[ingredient]
             };
         }
         return acc;
@@ -50,7 +53,7 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
                 {
                     ingredientsToDisplay.map((ingredient, index) => {
                         prices.push(ingredient.count * ingredient.price)
-                        return <Link to={{ pathname: `/ingredients/${ingredient}`, state: { background: location } }} className={orderStyle.link} key={index}>
+                        return <Link to={{ pathname: `/ingredients/${ingredient.id}`, state: { background: location } }} className={orderStyle.link} key={index}>
                                     <div className={`${orderStyle.orderIngredientsWrap} mb-4`}>
                                         <div className={orderStyle.imgNameWrap}>
                                             <div className={orderStyle.imgCircle}>

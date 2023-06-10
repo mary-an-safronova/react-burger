@@ -16,6 +16,8 @@ const BurgerConstructor = () => {
         element = { ...element, id: element._id}
         if (element.type === 'bun') {
             dispatch(setBun(element))
+            ingredientsId.push(element._id);
+            ingredientsId.push(element._id);
         }
         if (element.type !== 'bun') {
             dispatch(addIngredient(element))
@@ -41,7 +43,7 @@ const BurgerConstructor = () => {
 
     useMemo(() =>
         bunsList?.filter((bun) => {
-            ingredientsId?.push(bun._id)
+            ingredientsId?.push(bun._id, bun._id)
             prices?.push(bun.price * 2)
         }),
         [bunsList, ingredientsId, prices]
