@@ -8,18 +8,21 @@ import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-
 import { clearConstructor } from '../../services/actions/burger-constructor';
 import { PATH } from '../../utils/api';
 
-const FinalPrice = ({ total, ingredientsId }) => {
+const FinalPrice = ({ total, ingredientsId, disabled }) => {
     const navigate = useNavigate();
     const auth = useSelector((state) => state.auth.auth);
 
     const orderDetails = (state) => state.orderDetails;
-    const { openOrderDetailsModal, id } = useSelector(orderDetails);
+    const { openOrderDetailsModal, id, isLoading } = useSelector(orderDetails);
 
     const dispatch = useDispatch();
 
     const orderHandler = () => {
-        auth ? dispatch(postOrder(ingredientsId))
-        : navigate(PATH.LOGIN, { replace: true });
+        if(auth) {
+            dispatch(postOrder(ingredientsId));
+        } else {
+            navigate(PATH.LOGIN, { replace: true });
+        }
     }
 
     const closeModal = () => {
@@ -34,8 +37,15 @@ const FinalPrice = ({ total, ingredientsId }) => {
                 <p className="text text_type_digits-medium mr-2">{total}</p>
                 <CurrencyIcon type="primary" />
             </div>
-            <Button onClick={orderHandler} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+            <Button onClick={orderHandler} htmlType="button" type="primary" size="large" disabled={disabled}>Оформить заказ</Button>
         </div>
+        {
+            isLoading && 
+            <div className={finalPriceStyles.overlay}>
+                <p className={`${finalPriceStyles.span} className="text text_type_main-medium`}>Ваш заказ обрабатывается...</p>
+                <div className={finalPriceStyles.loader}></div>
+            </div>
+        }
         {
             openOrderDetailsModal && 
             <Modal onClose={closeModal}>

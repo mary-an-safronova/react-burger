@@ -1,0 +1,100 @@
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.cardWrap:hover {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgb(133, 133, 173);
+    border-radius: 40px;
+}
+
+.cardWrap {
+    width: 536px;
+    padding: 24px;
+    background: #1C1C21;
+    border-radius: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.infoWrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgWrap {
+    display: flex;
+    position: relative;
+}
+
+.imgCircle {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    margin: 0 0 0 -16px;
+}
+
+.imgCircle:first-child {
+    margin: 0 0 0 0;
+}
+
+.imgCircle:before {
+    content: "";
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(to right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+}
+
+.backgroundCircle {
+    width: 60px;
+    height: 60px;
+    background-color: #131316;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 75px 0;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 1;
+    margin: 0;
+}
+
+.img {
+    margin-right: -64px;
+    width: 112px;
+    height: 56px;
+    position: absolute;
+    left: -26px;
+    top: 3px;
+    z-index: 2;
+}
+
+.lastImgCover {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    z-index: 3;
+    background: black;
+    opacity: 0.6;
+    border-radius: 50%;
+}
+
+.lastImgText {
+    position: absolute;
+    z-index: 4;
+    top: 30%;
+    left: 35%;
+}

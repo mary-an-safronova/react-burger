@@ -1,0 +1,62 @@
+.mainWrap {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.statusWrap {
+    display: flex;
+}
+
+.orders {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat( auto-fill, 32px );
+    grid-auto-flow: column;
+    column-gap: 8px;
+}
+
+.doneOrder {
+    color: #00CCCC;
+}
+
+.inProgressOrder {
+    color: #F2F2F3;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: 0.6;
+}
+
+.scroll {
+    overflow-x: auto;
+    max-height: 330px;
+    width: 272px;
+}
+
+.scroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: var(--background-alt);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    height: 4px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
+.scroll::-webkit-scrollbar-track-piece:end {
+    background: #2F2F37;
+}
+
+.scroll::-webkit-scrollbar-track-piece:start {
+    background: #2F2F37;
+}

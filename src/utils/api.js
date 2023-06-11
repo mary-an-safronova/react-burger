@@ -2,6 +2,9 @@ export const apiConfig = {
     baseUrl: 'https://norma.nomoreparties.space/api',
 }
 
+export const wsUrl = 'wss://norma.nomoreparties.space';
+export const wsUrlOrders = `${wsUrl}/orders`
+
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
@@ -35,4 +38,6 @@ export const PATH = {
     PROFILE_ORDERS_ID: '/profile/orders/:id',
     INGREDIENTS_ID: '/ingredients/:id',
     NOT_FOUND_404: '*',
+    FEED: '/feed',
+    FEED_ID: '/feed/:id',
 }

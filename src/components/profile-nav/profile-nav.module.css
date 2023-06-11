@@ -7,6 +7,26 @@
     color: #F2F2F3;;
 }
 
+.button {
+    margin: 20px 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    text-align: start;
+}
+
+.button:hover {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    opacity: 0.6;
+}
+
+.link:hover {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    opacity: 0.6;
+}
+
 .nav {
     min-width: 16vw;
     max-width: 16vw;

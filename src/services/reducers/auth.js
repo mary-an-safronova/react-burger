@@ -60,8 +60,8 @@ const initialState = {
 
     auth: getCookie('accessToken') ? true : false,
 
-    accessToken: '',
-    refreshToken: '',
+    accessToken: null,
+    refreshToken: null,
 
     email: '',
     password: '',
@@ -254,8 +254,8 @@ export const authReducer = (state = initialState, action) => {
                 success: action.payload.success,
                 auth: false,
                 user: {},
-                accessToken: '',
-                refreshToken: '',
+                accessToken: null,
+                refreshToken: null,
                 logoutUserRequest: false,
             }
         }
