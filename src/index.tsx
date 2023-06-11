@@ -7,7 +7,7 @@ import './index.css';
 import { App } from './components';
 import reportWebVitals from './reportWebVitals';
 import { rootReducer } from './services/reducers/index';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { socketMiddleware } from './services/middleware/socketMiddleware';
 import {
   WS_CONNECTION_START,
@@ -64,9 +64,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
+      <HashRouter>
         <App />
-      </Router>
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 );
