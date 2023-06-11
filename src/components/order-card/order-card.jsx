@@ -42,7 +42,7 @@ export default memo(function OrderCard({ order, cardWidthStyle, children, profil
                     <div className={orderCardStyle.imgWrap}>
                         {
                             order?.ingredients?.map((ingredient, index) => {
-                                ingredientTypeById[ingredient] === 'bun' === 1 ? prices.push(priceByID[ingredient] * 2) : ingredientTypeById[ingredient] === 'bun' === 2 ? prices.push(priceByID[ingredient]) : prices.push(priceByID[ingredient]);
+                                prices.push(priceByID[ingredient])
                                 if(index < 5 || (order?.ingredients?.length === 6 && index === 5)) {
                                     return  <div className={orderCardStyle.imgCircle} key={index} style={{ zIndex: zIndex(index) }}>
                                                     <div className={orderCardStyle.backgroundCircle}>

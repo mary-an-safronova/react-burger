@@ -2,14 +2,15 @@ import { useSelector } from 'react-redux';
 import orderFeedStatusStyle from './order-feed-status.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const OrderFeedStatus = () => {
     const total = useSelector((state) => state.ws.total);
     const totalToday = useSelector((state) => state.ws.totalToday);
     const orders = useSelector((state) => state.ws.orders);
 
-    const doneList = orders.map((item) => item.status === 'done' && item)
-    const inProgressList = orders.map((item) => item.status !== 'done' && item)
+    const doneList = useMemo(() => orders.map((item) => item.status === 'done' && item), [orders]);
+    const inProgressList = useMemo(() => orders.map((item) => item.status !== 'done' && item), [orders]);
 
     return (
         <section className={`${orderFeedStatusStyle.mainWrap} mt-25`}>
