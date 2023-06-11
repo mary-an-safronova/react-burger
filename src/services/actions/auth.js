@@ -172,9 +172,10 @@ export const logoutUser = () => {
     request('/auth/logout', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
     .then((data) => {
       if (data.success) {
+        console.log(data.success)
         deleteCookie("accessToken", { path: '/' });
         deleteCookie("refreshToken", { path: '/' });
-        dispatch({ type: POST_LOGOUT_USER_SUCCESS, payload: data })
+        dispatch({ type: POST_LOGOUT_USER_SUCCESS, payload: data.success })
       }
     })
     .catch(error => {
