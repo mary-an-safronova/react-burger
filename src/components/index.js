@@ -22,9 +22,11 @@ import ProfleUpdateForm from './profile-update-form/profile-update-form';
 import ProtectedRouteElement from './protected-route-element/protected-route-element';
 import Switch from './switch/switch';
 import ProfileOrders from './profile-orders/profile-orders';
+import Loading from './loading/loading';
+import AnimationFollowingMouse from './animation-following-mouse/animation-following-mouse';
 
 export { App, AppHeader, BurgerConstructor, BurgerIngredients, 
     Card, Cards, FinalPrice, IngredientCard, IngredientCardOuter, 
     IngredientDetails, Modal, ModalOverlay, Order, OrderCard, OrderDetails, 
     OrderFeed, OrderFeedStatus, OrderFeedTotalPrice, OrderModal,
-    ProfileNav, ProfleUpdateForm, ProtectedRouteElement, Switch, ProfileOrders }
+    ProfileNav, ProfleUpdateForm, ProtectedRouteElement, Switch, ProfileOrders, Loading, AnimationFollowingMouse }

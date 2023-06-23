@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 import notFoundStyle from './not-found.module.css';
 import { PATH } from '../../utils/api';
 import astronaut from '../../images/space-astronaut.png';
+import { AnimationFollowingMouse } from '../../components';
 
 const NotFound404 = () => {
+
   return (
-    <div className={notFoundStyle.wrapper}>
+    <div className={notFoundStyle.wrapper} id='wrap'>
+      <AnimationFollowingMouse />
       <div className={notFoundStyle.text}>
         <h1 className={`${notFoundStyle.title} text text_type_main-default`}>404</h1>
         <div className="text text_type_main-default">Страница не найдена</div>
