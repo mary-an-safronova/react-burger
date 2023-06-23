@@ -13,7 +13,7 @@ const FinalPrice = ({ total, ingredientsId, disabled }) => {
     const auth = useSelector((state) => state.auth.auth);
 
     const orderDetails = (state) => state.orderDetails;
-    const { openOrderDetailsModal, id, isLoading } = useSelector(orderDetails);
+    const { openOrderDetailsModal, id } = useSelector(orderDetails);
 
     const dispatch = useDispatch();
 
@@ -39,13 +39,6 @@ const FinalPrice = ({ total, ingredientsId, disabled }) => {
             </div>
             <Button onClick={orderHandler} htmlType="button" type="primary" size="large" disabled={disabled}>Оформить заказ</Button>
         </div>
-        {
-            isLoading && 
-            <div className={finalPriceStyles.overlay}>
-                <p className={`${finalPriceStyles.span} className="text text_type_main-medium`}>Ваш заказ обрабатывается...</p>
-                <div className={finalPriceStyles.loader}></div>
-            </div>
-        }
         {
             openOrderDetailsModal && 
             <Modal onClose={closeModal}>

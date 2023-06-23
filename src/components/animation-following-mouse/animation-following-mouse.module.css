@@ -1,0 +1,59 @@
+@keyframes animateColor {
+    0%{
+      filter: hue-rotate(0deg);
+    }
+    100%{
+      filter: hue-rotate(360deg);
+    }
+}
+
+.animateWrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    overflow: hidden;
+    flex-wrap: wrap;
+    animation: animateColor 5s linear infinite;
+    z-index: 4;
+  }
+  
+  .animateWrapper span {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 30px;
+    opacity: 0.5;
+    z-index: 5;
+  }
+  
+  .animateWrapper span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: #00ff0a;
+    box-shadow: 0 0 10px #00ff0a,
+                0 0 20px #00ff0a,
+                0 0 30px #00ff0a,
+                0 0 40px #00ff0a,
+                0 0 50px #00ff0a,
+                0 0 60px #00ff0a,
+                0 0 70px #00ff0a,
+                0 0 80px #00ff0a,
+                0 0 90px #00ff0a,
+                0 0 100px #00ff0a;
+    border-radius: 50%;
+    transition: 2s;
+    transform: scale(0);
+    z-index: 5;
+  }
+  
+  .animateWrapper span:hover::before {
+    transition: 0s;
+    transform: scale(1);
+  }
