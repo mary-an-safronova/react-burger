@@ -7,3 +7,12 @@ export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
 
 export const wsConnectionStart = (url) => ({ type: WS_CONNECTION_START, payload: url });
 export const wsConnectionClosed = () => ({ type: WS_CONNECTION_CLOSED });
+
+export const wsActions = {
+    wsStart: WS_CONNECTION_START,
+    onOpen: WS_CONNECTION_SUCCESS,
+    onError: WS_CONNECTION_ERROR,
+    onClose: WS_CONNECTION_CLOSED,
+    onMessage: WS_GET_MESSAGE,
+    wsSend: WS_SEND_MESSAGE
+  }
