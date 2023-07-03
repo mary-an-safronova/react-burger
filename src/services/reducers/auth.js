@@ -28,7 +28,7 @@ import { POST_REGISTER_REQUEST,
 
     POST_LOGOUT_USER_REQUEST,
     POST_LOGOUT_USER_SUCCESS,
-    POST_LOGOUT_USER_FAILED } from "../actions/auth";
+    POST_LOGOUT_USER_FAILED } from "../action-types/auth-action-types";
 import { getCookie } from "../../utils/cookie";
 
 const initialState = {

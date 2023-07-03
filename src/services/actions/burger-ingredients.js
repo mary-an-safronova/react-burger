@@ -1,10 +1,9 @@
 import { request } from "../../utils/api";
-
-export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB';
-
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
+import { SET_ACTIVE_TAB,
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+} from '../action-types/burger-ingredients-action-types';
 
 export const setActiveTab = (value) => ({ type: SET_ACTIVE_TAB, payload: value});
 

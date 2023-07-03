@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { getData } from '../../services/actions/burger-ingredients';
-import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/wsActionTypes';
+import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws';
 import orderFeedPageStyle from './order-page.module.css';
 import { Order } from '../../components';
 import { wsUrlOrders } from '../../utils/api';

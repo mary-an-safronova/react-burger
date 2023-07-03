@@ -2,8 +2,8 @@ import { compose, legacy_createStore as createStore, applyMiddleware } from 'red
 import thunk from 'redux-thunk';
 import { rootReducer } from './reducers';
 import { socketMiddleware } from './middleware/socketMiddleware';
-import { wsActions } from './actions/wsActionTypes';
-import { wsAuthActions } from './actions/wsAuthActionTypes';
+import { wsActions } from './actions/ws';
+import { wsAuthActions } from './actions/ws-auth';
 
 
 declare global {

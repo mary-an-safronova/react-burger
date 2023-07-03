@@ -2,7 +2,7 @@ import { request } from "../../utils/api";
 import { getCookie, setCookie } from "../../utils/cookie";
 import { POST_REFRESH_TOKEN_REQUEST,
 POST_REFRESH_TOKEN_SUCCESS,
-POST_REFRESH_TOKEN_FAILED } from "../actions/auth";
+POST_REFRESH_TOKEN_FAILED } from "../action-types/auth-action-types";
 
 export const socketMiddleware = (wsActions) => {
     return store => {

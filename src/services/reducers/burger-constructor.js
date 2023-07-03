@@ -4,7 +4,7 @@ import {
     DELETE_INGREDIENT,
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR,
-} from '../actions/burger-constructor';
+} from '../action-types/burger-constructor-action-types';
 
 const initialState = {
     ingredientList: [],

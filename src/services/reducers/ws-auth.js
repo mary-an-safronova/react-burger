@@ -3,7 +3,7 @@ import {
     WS_AUTH_CONNECTION_ERROR,
     WS_AUTH_CONNECTION_CLOSED,
     WS_AUTH_GET_MESSAGE
-  } from '../actions/wsAuthActionTypes';
+  } from '../action-types/ws-auth-action-types';
   
   const initialState = {
     wsConnected: false,

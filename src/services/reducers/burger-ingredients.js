@@ -2,7 +2,7 @@ import { SET_ACTIVE_TAB,
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_FAILED,
     GET_INGREDIENTS_SUCCESS,
-} from '../actions/burger-ingredients';
+} from '../action-types/burger-ingredients-action-types';
 
 const initialState = {
     current: 'bun',

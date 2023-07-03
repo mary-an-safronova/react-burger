@@ -1,12 +1,7 @@
 import { request } from "../../utils/api";
 import { getCookie, setCookie } from "../../utils/cookie";
-import { POST_REFRESH_TOKEN_FAILED, POST_REFRESH_TOKEN_REQUEST, POST_REFRESH_TOKEN_SUCCESS } from "./auth";
-
-export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
-export const POST_ORDER_FAILED = 'POST_ORDER_FAILED';
-export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
-
-export const CLOSE_ORDER_DETAILS_MODAL = 'CLOSE_ORDER_DETAILS_MODAL';
+import { POST_REFRESH_TOKEN_FAILED, POST_REFRESH_TOKEN_REQUEST, POST_REFRESH_TOKEN_SUCCESS } from "../action-types/auth-action-types";
+import { POST_ORDER_REQUEST, POST_ORDER_FAILED, POST_ORDER_SUCCESS, CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
 
 export const closeOrderDetailsModal = () => ({ type: CLOSE_ORDER_DETAILS_MODAL })
 

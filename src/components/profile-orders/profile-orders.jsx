@@ -4,7 +4,7 @@ import profileOrdersStyle from './profile-orders.module.css';
 import { OrderCard } from '..';
 import { getData } from '../../services/actions/burger-ingredients';
 import { v4 as uuidv4 } from 'uuid';
-import { wsAuthConnectionStart, wsAuthConnectionClosed } from '../../services/actions/wsAuthActionTypes';
+import { wsAuthConnectionStart, wsAuthConnectionClosed } from '../../services/actions/ws-auth';
 import { getCookie } from '../../utils/cookie';
 import { wsUrlOrders } from '../../utils/api';
 

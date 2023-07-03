@@ -1,8 +1,8 @@
-export const ADD_BUN = 'ADD_BUN';
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
-export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
-export const CLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR';
+import { ADD_BUN,
+    ADD_INGREDIENT,
+    DELETE_INGREDIENT,
+    MOVE_INGREDIENT,
+    CLEAR_CONSTRUCTOR } from "../action-types/burger-constructor-action-types";
 
 export const setBun = (bun) => ({ type: ADD_BUN, payload: bun });
 export const addIngredient = (ingredient) => ({ type: ADD_INGREDIENT, payload: ingredient });

@@ -1,7 +1,7 @@
 import { POST_ORDER_REQUEST,
     POST_ORDER_FAILED,
     POST_ORDER_SUCCESS,
-    CLOSE_ORDER_DETAILS_MODAL } from "../actions/order-details";
+    CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
 
 const initialState = {
     orderRequest: false,
