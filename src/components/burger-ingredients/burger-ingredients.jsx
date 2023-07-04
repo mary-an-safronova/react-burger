@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import { Switch, Cards } from '..';
-import { setActiveTab } from '../../services/actions/burger-ingredients.js';
+import { setActiveTab } from '../../services/actions/burger-ingredients';
 
 const BurgerIngredients = () => {
     const burgerIngredients = (state) => state.burgerIngredients;

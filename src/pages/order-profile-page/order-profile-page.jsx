@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { getData } from '../../services/actions/burger-ingredients';
-import { wsAuthConnectionStart, wsAuthConnectionClosed } from '../../services/actions/ws-auth';
+import { wsAuthConnectionStartAction, wsAuthConnectionClosedAction } from '../../services/actions/ws-auth';
 import orderProfilePageStyle from './order-profile-page.module.css';
 import { Order } from '../../components';
 import { wsUrlOrders } from '../../utils/api';
@@ -19,8 +19,8 @@ const OrderProfilePage = () => {
     const accessToken = getCookie("accessToken").replace('Bearer ', '');
 
     useEffect(() => {
-        dispatch(wsAuthConnectionStart(`${wsUrlOrders}?token=${accessToken}`))
-        return dispatch(wsAuthConnectionClosed())
+        dispatch(wsAuthConnectionStartAction(`${wsUrlOrders}?token=${accessToken}`))
+        return dispatch(wsAuthConnectionClosedAction())
     }, [dispatch, accessToken])
 
     useEffect(() => {

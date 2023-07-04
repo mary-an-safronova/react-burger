@@ -17,7 +17,7 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         case SET_ACTIVE_TAB: {
             return {
                 ...state,
-                current: action.payload
+                current: action.current
             }
         }
         case GET_INGREDIENTS_REQUEST: {

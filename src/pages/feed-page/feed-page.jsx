@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import feedPageStyle from './feed-page.module.css';
 import { OrderFeedStatus, OrderFeed } from '../../components';
-import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws';
+import { wsConnectionStartAction, wsConnectionClosedAction } from '../../services/actions/ws';
 import { wsUrlOrders } from '../../utils/api';
 
 const FeedPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(wsConnectionStart(`${wsUrlOrders}/all`))
+        dispatch(wsConnectionStartAction(`${wsUrlOrders}/all`))
         return () => {
-            dispatch(wsConnectionClosed())
+            dispatch(wsConnectionClosedAction())
           }
     }, [dispatch])
 
