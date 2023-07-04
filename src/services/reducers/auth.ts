@@ -30,8 +30,51 @@ import { POST_REGISTER_REQUEST,
     POST_LOGOUT_USER_SUCCESS,
     POST_LOGOUT_USER_FAILED } from "../action-types/auth-action-types";
 import { getCookie } from "../../utils/cookie";
+import { TAuthActions } from "../actions/auth";
 
-const initialState = {
+export type TInitialState = {
+    readonly registerRequest: boolean;
+    readonly registerFailed: boolean;
+
+    readonly forgotPasswordRequest: boolean;
+    readonly forgotPasswordFailed: boolean;
+
+    readonly resetPasswordRequest: boolean;
+    readonly resetPasswordFailed: boolean;
+
+    readonly authorizationRequest: boolean;
+    readonly authorizationFailed: boolean;
+
+    readonly getUserRequest: boolean;
+    readonly getUserFailed: boolean;
+
+    readonly updateUserRequest: boolean;
+    readonly updateUserFailed: boolean;
+
+    readonly refreshTokenRequest: boolean;
+    readonly refreshTokenFailed: boolean;
+
+    readonly logoutUserRequest: boolean;
+    readonly logoutUserFailed: boolean;
+
+    readonly success: boolean;
+
+    readonly auth: boolean;
+
+    readonly accessToken: null | string | undefined;
+    readonly refreshToken: null | string | undefined;
+
+    readonly email: string;
+    readonly password: string;
+    readonly token: string;
+
+    readonly user: {
+        readonly email: string;
+        readonly name: string;
+    },
+}
+
+const initialState: TInitialState = {
     registerRequest: false,
     registerFailed: false,
 
@@ -73,7 +116,7 @@ const initialState = {
     },
 }
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): TInitialState => {
     switch (action.type) {
         case POST_REGISTER_REQUEST: {
             return {
@@ -85,7 +128,6 @@ export const authReducer = (state = initialState, action) => {
         case POST_REGISTER_SUCCESS: {
             return { 
                 ...state,
-                success: action.success,
                 user: action.user,
                 registerRequest: false,
             }
@@ -253,7 +295,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 success: action.payload.success,
                 auth: false,
-                user: {},
+                user: { email: '', name: '' },
                 accessToken: null,
                 refreshToken: null,
                 logoutUserRequest: false,

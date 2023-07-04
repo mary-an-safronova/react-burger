@@ -24,8 +24,8 @@ import { POST_REGISTER_REQUEST,
   POST_LOGOUT_USER_REQUEST,
   POST_LOGOUT_USER_SUCCESS,
   POST_LOGOUT_USER_FAILED } from '../action-types/auth-action-types';
-import { TUser, TServerMessage } from '../types/data';
 import { AppDispatch, AppThunk } from '../types/index';
+import { TServerMessage, TTokens } from '../types/data';
 
 // Типизация экшенов
 export interface IPostRegisterRequestAction {
@@ -33,11 +33,11 @@ export interface IPostRegisterRequestAction {
 }
 export interface IPostRegisterFailedAction {
   readonly type: typeof POST_REGISTER_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>
 }
 export interface IPostRegisterSuccessAction {
   readonly type: typeof POST_REGISTER_SUCCESS;
-  readonly user: TUser;
+  readonly user: { readonly email: string; readonly name: string; };
 }
 
 export interface IPostForgotPasswordRequestAction {
@@ -45,11 +45,11 @@ export interface IPostForgotPasswordRequestAction {
 }
 export interface IPostForgotPasswordFailedAction {
   readonly type: typeof POST_FORGOT_PASSWORD_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IPostForgotPasswordSuccessAction {
   readonly type: typeof POST_FORGOT_PASSWORD_SUCCESS;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage> & { readonly email: string };
 }
 
 export interface IPostResetPasswordRequestAction {
@@ -57,11 +57,11 @@ export interface IPostResetPasswordRequestAction {
 }
 export interface IPostResetPasswordFailedAction {
   readonly type: typeof POST_RESET_PASSWORD_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IPostResetPasswordSuccessAction {
   readonly type: typeof POST_RESET_PASSWORD_SUCCESS;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage> & { readonly password: string; readonly token: string };
 }
 
 export interface IPostAuthorizationRequestAction {
@@ -69,11 +69,11 @@ export interface IPostAuthorizationRequestAction {
 }
 export interface IPostAuthorizationFailedAction {
   readonly type: typeof POST_AUTHORIZATION_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IPostAuthorizationSuccessAction {
   readonly type: typeof POST_AUTHORIZATION_SUCCESS;
-  readonly payload: TUser;
+  readonly payload: Readonly<TTokens> & { readonly user: { readonly email: string; readonly name: string; } };
 }
 
 export interface IGetUserRequestAction {
@@ -81,11 +81,11 @@ export interface IGetUserRequestAction {
 }
 export interface IGetUserFailedAction {
   readonly type: typeof GET_USER_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IGetUserSuccessAction {
   readonly type: typeof GET_USER_SUCCESS;
-  readonly payload: TUser;
+  readonly payload: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } };
 }
 
 export interface IUpdateUserRequestAction {
@@ -93,11 +93,11 @@ export interface IUpdateUserRequestAction {
 }
 export interface IUpdateUserFailedAction {
   readonly type: typeof UPDATE_USER_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IUpdateUserSuccessAction {
   readonly type: typeof UPDATE_USER_SUCCESS;
-  readonly payload: TUser;
+  readonly payload: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } };
 }
 
 export interface IPostRefreshTokenRequestAction {
@@ -105,11 +105,11 @@ export interface IPostRefreshTokenRequestAction {
 }
 export interface IPostRefreshTokenFailedAction {
   readonly type: typeof POST_REFRESH_TOKEN_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IPostRefreshTokenSuccessAction {
   readonly type: typeof POST_REFRESH_TOKEN_SUCCESS;
-  readonly payload: TUser;
+  readonly payload: Readonly<TTokens>;
 }
 
 export interface IPostLogoutUserRequestAction {
@@ -117,11 +117,11 @@ export interface IPostLogoutUserRequestAction {
 }
 export interface IPostLogoutUserFailedAction {
   readonly type: typeof POST_LOGOUT_USER_FAILED;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 export interface IPostLogoutUserSuccessAction {
   readonly type: typeof POST_LOGOUT_USER_SUCCESS;
-  readonly payload: TServerMessage;
+  readonly payload: Readonly<TServerMessage>;
 }
 
 // Объединяем в Union
@@ -159,36 +159,36 @@ export type TAuthActions =
   | IPostLogoutUserSuccessAction;
 
 export const postRegisterRequestAction = (): IPostRegisterRequestAction => ({ type: POST_REGISTER_REQUEST });
-export const postRegisterFailedAction = (error: TServerMessage): IPostRegisterFailedAction => ({ type: POST_REGISTER_FAILED, payload: error });
-export const postRegisterSuccessAction = (data: TUser): IPostRegisterSuccessAction => ({ type: POST_REGISTER_SUCCESS, user: data });
+export const postRegisterFailedAction = (error: Readonly<TServerMessage>): IPostRegisterFailedAction => ({ type: POST_REGISTER_FAILED, payload: error });
+export const postRegisterSuccessAction = (data: { readonly email: string; readonly name: string; } ): IPostRegisterSuccessAction => ({ type: POST_REGISTER_SUCCESS, user: data });
 
 export const postForgotPasswordRequestAction = (): IPostForgotPasswordRequestAction => ({ type: POST_FORGOT_PASSWORD_REQUEST });
-export const postForgotPasswordFailedAction = (error: TServerMessage): IPostForgotPasswordFailedAction => ({ type: POST_FORGOT_PASSWORD_FAILED, payload: error });
-export const postForgotPasswordSuccessAction = (data: TServerMessage): IPostForgotPasswordSuccessAction => ({ type: POST_FORGOT_PASSWORD_SUCCESS, payload: data });
+export const postForgotPasswordFailedAction = (error: Readonly<TServerMessage>): IPostForgotPasswordFailedAction => ({ type: POST_FORGOT_PASSWORD_FAILED, payload: error });
+export const postForgotPasswordSuccessAction = (data: Readonly<TServerMessage> & { readonly email: string }): IPostForgotPasswordSuccessAction => ({ type: POST_FORGOT_PASSWORD_SUCCESS, payload: data });
 
 export const postResetPasswordRequestAction = (): IPostResetPasswordRequestAction => ({ type: POST_RESET_PASSWORD_REQUEST });
-export const postResetPasswordFailedAction = (error: TServerMessage): IPostResetPasswordFailedAction => ({ type: POST_RESET_PASSWORD_FAILED, payload: error });
-export const postResetPasswordSuccessAction = (data: TServerMessage): IPostResetPasswordSuccessAction => ({ type: POST_RESET_PASSWORD_SUCCESS, payload: data });
+export const postResetPasswordFailedAction = (error: Readonly<TServerMessage>): IPostResetPasswordFailedAction => ({ type: POST_RESET_PASSWORD_FAILED, payload: error });
+export const postResetPasswordSuccessAction = (data: Readonly<TServerMessage> & { readonly password: string; readonly token: string }): IPostResetPasswordSuccessAction => ({ type: POST_RESET_PASSWORD_SUCCESS, payload: data });
 
 export const postAuthorizationRequestAction = (): IPostAuthorizationRequestAction => ({ type: POST_AUTHORIZATION_REQUEST });
-export const postAuthorizationFailedAction = (error: TServerMessage): IPostAuthorizationFailedAction => ({ type: POST_AUTHORIZATION_FAILED, payload: error });
-export const postAuthorizationSuccessAction = (data: TUser): IPostAuthorizationSuccessAction => ({ type: POST_AUTHORIZATION_SUCCESS, payload: data });
+export const postAuthorizationFailedAction = (error: Readonly<TServerMessage>): IPostAuthorizationFailedAction => ({ type: POST_AUTHORIZATION_FAILED, payload: error });
+export const postAuthorizationSuccessAction = (data: Readonly<TTokens> & { readonly user: { readonly email: string; readonly name: string; }}): IPostAuthorizationSuccessAction => ({ type: POST_AUTHORIZATION_SUCCESS, payload: data });
 
 export const getUserRequestAction = (): IGetUserRequestAction => ({ type: GET_USER_REQUEST });
-export const getUserFailedAction = (error: TServerMessage): IGetUserFailedAction => ({ type: GET_USER_FAILED, payload: error });
-export const getUserSuccessAction = (data: TUser): IGetUserSuccessAction => ({ type: GET_USER_SUCCESS, payload: data });
+export const getUserFailedAction = (error: Readonly<TServerMessage>): IGetUserFailedAction => ({ type: GET_USER_FAILED, payload: error });
+export const getUserSuccessAction = (data: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } }): IGetUserSuccessAction => ({ type: GET_USER_SUCCESS, payload: data });
 
 export const updateUserRequestAction = (): IUpdateUserRequestAction => ({ type: UPDATE_USER_REQUEST });
-export const updateUserFailedAction = (error: TServerMessage): IUpdateUserFailedAction => ({ type: UPDATE_USER_FAILED, payload: error });
-export const updateUserSuccessAction = (data: TUser): IUpdateUserSuccessAction => ({ type: UPDATE_USER_SUCCESS, payload: data });
+export const updateUserFailedAction = (error: Readonly<TServerMessage>): IUpdateUserFailedAction => ({ type: UPDATE_USER_FAILED, payload: error });
+export const updateUserSuccessAction = (data: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } }): IUpdateUserSuccessAction => ({ type: UPDATE_USER_SUCCESS, payload: data });
 
 export const postRefreshTokenRequestAction = (): IPostRefreshTokenRequestAction => ({ type: POST_REFRESH_TOKEN_REQUEST });
-export const postRefreshTokenFailedAction = (error: TServerMessage): IPostRefreshTokenFailedAction => ({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
-export const postRefreshTokenSuccessAction = (data: TUser): IPostRefreshTokenSuccessAction => ({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data });
+export const postRefreshTokenFailedAction = (error: Readonly<TServerMessage>): IPostRefreshTokenFailedAction => ({ type: POST_REFRESH_TOKEN_FAILED, payload: error });
+export const postRefreshTokenSuccessAction = (data: Readonly<TTokens>): IPostRefreshTokenSuccessAction => ({ type: POST_REFRESH_TOKEN_SUCCESS, payload: data });
 
 export const postLogoutUserRequestAction = (): IPostLogoutUserRequestAction => ({ type: POST_LOGOUT_USER_REQUEST });
-export const postLogoutUserFailedAction = (error: TServerMessage): IPostLogoutUserFailedAction => ({ type: POST_LOGOUT_USER_FAILED, payload: error });
-export const postLogoutUserSuccessAction = (data: TServerMessage): IPostLogoutUserSuccessAction => ({ type: POST_LOGOUT_USER_SUCCESS, payload: data });
+export const postLogoutUserFailedAction = (error: Readonly<TServerMessage>): IPostLogoutUserFailedAction => ({ type: POST_LOGOUT_USER_FAILED, payload: error });
+export const postLogoutUserSuccessAction = (data: Readonly<TServerMessage>): IPostLogoutUserSuccessAction => ({ type: POST_LOGOUT_USER_SUCCESS, payload: data });
 
 export const postRegister: AppThunk = (email: string, password: string, name: string) => {
   return function(dispatch: AppDispatch) {
