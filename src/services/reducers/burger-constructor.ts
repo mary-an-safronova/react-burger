@@ -5,7 +5,7 @@ import {
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR,
 } from '../action-types/burger-constructor-action-types';
-import { TBurgerConstructorActions } from '../actions/burger-constructor';
+import { TBurgerConstructorActions } from '../action-types/union-types';
 import { TIngredientWithId } from '../types/data';
 
 type TBurgerConstructorInitialState = {

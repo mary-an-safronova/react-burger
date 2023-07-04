@@ -30,7 +30,7 @@ import { POST_REGISTER_REQUEST,
     POST_LOGOUT_USER_SUCCESS,
     POST_LOGOUT_USER_FAILED } from "../action-types/auth-action-types";
 import { getCookie } from "../../utils/cookie";
-import { TAuthActions } from "../actions/auth";
+import { TAuthActions } from "../action-types/union-types";
 
 export type TAuthInitialState = {
     readonly registerRequest: boolean;

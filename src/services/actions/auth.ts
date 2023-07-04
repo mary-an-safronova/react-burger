@@ -1,5 +1,6 @@
 import { request } from '../../utils/api';
 import { setCookie, getCookie, deleteCookie } from '../../utils/cookie';
+
 import { POST_REGISTER_REQUEST,
   POST_REGISTER_FAILED,
   POST_REGISTER_SUCCESS,
@@ -24,139 +25,42 @@ import { POST_REGISTER_REQUEST,
   POST_LOGOUT_USER_REQUEST,
   POST_LOGOUT_USER_SUCCESS,
   POST_LOGOUT_USER_FAILED } from '../action-types/auth-action-types';
+
+import { IPostRegisterRequestAction,
+  IPostRegisterFailedAction,
+  IPostRegisterSuccessAction,
+  
+  IPostForgotPasswordRequestAction,
+  IPostForgotPasswordFailedAction,
+  IPostForgotPasswordSuccessAction,
+  
+  IPostResetPasswordRequestAction,
+  IPostResetPasswordFailedAction,
+  IPostResetPasswordSuccessAction,
+  
+  IPostAuthorizationRequestAction,
+  IPostAuthorizationFailedAction,
+  IPostAuthorizationSuccessAction,
+  
+  IGetUserRequestAction,
+  IGetUserFailedAction,
+  IGetUserSuccessAction,
+  
+  IUpdateUserRequestAction,
+  IUpdateUserFailedAction,
+  IUpdateUserSuccessAction,
+  
+  IPostRefreshTokenRequestAction,
+  IPostRefreshTokenFailedAction,
+  IPostRefreshTokenSuccessAction,
+  
+  IPostLogoutUserRequestAction,
+  IPostLogoutUserFailedAction,
+  IPostLogoutUserSuccessAction,
+} from '../interfaces/auth-action-interfaces';
+
 import { AppDispatch, AppThunk } from '../types/index';
 import { TServerMessage, TTokens } from '../types/data';
-
-// Типизация экшенов
-export interface IPostRegisterRequestAction {
-  readonly type: typeof POST_REGISTER_REQUEST;
-}
-export interface IPostRegisterFailedAction {
-  readonly type: typeof POST_REGISTER_FAILED;
-  readonly payload: Readonly<TServerMessage>
-}
-export interface IPostRegisterSuccessAction {
-  readonly type: typeof POST_REGISTER_SUCCESS;
-  readonly user: { readonly email: string; readonly name: string; };
-}
-
-export interface IPostForgotPasswordRequestAction {
-  readonly type: typeof POST_FORGOT_PASSWORD_REQUEST;
-}
-export interface IPostForgotPasswordFailedAction {
-  readonly type: typeof POST_FORGOT_PASSWORD_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IPostForgotPasswordSuccessAction {
-  readonly type: typeof POST_FORGOT_PASSWORD_SUCCESS;
-  readonly payload: Readonly<TServerMessage> & { readonly email: string };
-}
-
-export interface IPostResetPasswordRequestAction {
-  readonly type: typeof POST_RESET_PASSWORD_REQUEST;
-}
-export interface IPostResetPasswordFailedAction {
-  readonly type: typeof POST_RESET_PASSWORD_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IPostResetPasswordSuccessAction {
-  readonly type: typeof POST_RESET_PASSWORD_SUCCESS;
-  readonly payload: Readonly<TServerMessage> & { readonly password: string; readonly token: string };
-}
-
-export interface IPostAuthorizationRequestAction {
-  readonly type: typeof POST_AUTHORIZATION_REQUEST;
-}
-export interface IPostAuthorizationFailedAction {
-  readonly type: typeof POST_AUTHORIZATION_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IPostAuthorizationSuccessAction {
-  readonly type: typeof POST_AUTHORIZATION_SUCCESS;
-  readonly payload: Readonly<TTokens> & { readonly user: { readonly email: string; readonly name: string; } };
-}
-
-export interface IGetUserRequestAction {
-  readonly type: typeof GET_USER_REQUEST;
-}
-export interface IGetUserFailedAction {
-  readonly type: typeof GET_USER_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IGetUserSuccessAction {
-  readonly type: typeof GET_USER_SUCCESS;
-  readonly payload: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } };
-}
-
-export interface IUpdateUserRequestAction {
-  readonly type: typeof UPDATE_USER_REQUEST;
-}
-export interface IUpdateUserFailedAction {
-  readonly type: typeof UPDATE_USER_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IUpdateUserSuccessAction {
-  readonly type: typeof UPDATE_USER_SUCCESS;
-  readonly payload: { readonly success: boolean; } & { readonly user: { readonly email: string; readonly name: string; } };
-}
-
-export interface IPostRefreshTokenRequestAction {
-  readonly type: typeof POST_REFRESH_TOKEN_REQUEST;
-}
-export interface IPostRefreshTokenFailedAction {
-  readonly type: typeof POST_REFRESH_TOKEN_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IPostRefreshTokenSuccessAction {
-  readonly type: typeof POST_REFRESH_TOKEN_SUCCESS;
-  readonly payload: Readonly<TTokens>;
-}
-
-export interface IPostLogoutUserRequestAction {
-  readonly type: typeof POST_LOGOUT_USER_REQUEST;
-}
-export interface IPostLogoutUserFailedAction {
-  readonly type: typeof POST_LOGOUT_USER_FAILED;
-  readonly payload: Readonly<TServerMessage>;
-}
-export interface IPostLogoutUserSuccessAction {
-  readonly type: typeof POST_LOGOUT_USER_SUCCESS;
-  readonly payload: Readonly<TServerMessage>;
-}
-
-// Объединяем в Union
-export type TAuthActions =
-  | IPostRegisterRequestAction
-  | IPostRegisterFailedAction
-  | IPostRegisterSuccessAction
-
-  | IPostForgotPasswordRequestAction
-  | IPostForgotPasswordFailedAction
-  | IPostForgotPasswordSuccessAction
-  
-  | IPostResetPasswordRequestAction
-  | IPostResetPasswordFailedAction
-  | IPostResetPasswordSuccessAction
-  
-  | IPostAuthorizationRequestAction
-  | IPostAuthorizationFailedAction
-  | IPostAuthorizationSuccessAction
-  
-  | IGetUserRequestAction
-  | IGetUserFailedAction
-  | IGetUserSuccessAction
-  
-  | IUpdateUserRequestAction
-  | IUpdateUserFailedAction
-  | IUpdateUserSuccessAction
-  
-  | IPostRefreshTokenRequestAction
-  | IPostRefreshTokenFailedAction
-  | IPostRefreshTokenSuccessAction
-  
-  | IPostLogoutUserRequestAction
-  | IPostLogoutUserFailedAction
-  | IPostLogoutUserSuccessAction;
 
 export const postRegisterRequestAction = (): IPostRegisterRequestAction => ({ type: POST_REGISTER_REQUEST });
 export const postRegisterFailedAction = (error: Readonly<TServerMessage>): IPostRegisterFailedAction => ({ type: POST_REGISTER_FAILED, payload: error });

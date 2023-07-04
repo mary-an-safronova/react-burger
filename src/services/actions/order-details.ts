@@ -3,28 +3,11 @@ import { getCookie, setCookie } from "../../utils/cookie";
 import { postRefreshTokenFailedAction, postRefreshTokenRequestAction, postRefreshTokenSuccessAction } from "../actions/auth";
 import { POST_ORDER_REQUEST, POST_ORDER_FAILED, POST_ORDER_SUCCESS, CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
 import { AppThunk } from "../types";
-
-// Типизация экшенов
-export interface IPostOrderRequestAction {
-  readonly type: typeof POST_ORDER_REQUEST;
-}
-export interface IPostOrderFailedAction {
-  readonly type: typeof POST_ORDER_FAILED;
-}
-export interface IPostOrderSuccessAction {
-  readonly type: typeof POST_ORDER_SUCCESS;
-  readonly payload: number;
-}
-export interface ICloseOrderDetailsModalAction {
-  readonly type: typeof CLOSE_ORDER_DETAILS_MODAL;
-}
-
-// Объединяем в Union
-export type TOrderDetailsActions =
-| IPostOrderRequestAction
-| IPostOrderFailedAction
-| IPostOrderSuccessAction
-| ICloseOrderDetailsModalAction;
+import { IPostOrderRequestAction,
+  IPostOrderFailedAction,
+  IPostOrderSuccessAction,
+  ICloseOrderDetailsModalAction
+} from '../interfaces/order-details-interfaces';
 
 export const postOrderRequestAction = (): IPostOrderRequestAction => ({ type: POST_ORDER_REQUEST });
 export const postOrderFailedAction = (): IPostOrderFailedAction => ({ type: POST_ORDER_FAILED });

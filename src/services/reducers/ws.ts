@@ -4,7 +4,7 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE
 } from '../action-types/ws-action-types';
-import { TWsActions } from '../actions/ws';
+import { TWsActions } from '../action-types/union-types';
 import { TOrder } from '../types/data';
 
 type TWsInitialState = {
