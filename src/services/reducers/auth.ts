@@ -32,7 +32,7 @@ import { POST_REGISTER_REQUEST,
 import { getCookie } from "../../utils/cookie";
 import { TAuthActions } from "../actions/auth";
 
-export type TInitialState = {
+export type TAuthInitialState = {
     readonly registerRequest: boolean;
     readonly registerFailed: boolean;
 
@@ -74,7 +74,7 @@ export type TInitialState = {
     },
 }
 
-const initialState: TInitialState = {
+const initialState: TAuthInitialState = {
     registerRequest: false,
     registerFailed: false,
 
@@ -116,7 +116,7 @@ const initialState: TInitialState = {
     },
 }
 
-export const authReducer = (state = initialState, action: TAuthActions): TInitialState => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthInitialState => {
     switch (action.type) {
         case POST_REGISTER_REQUEST: {
             return {

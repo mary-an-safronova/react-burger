@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type TServerMessage = {
     readonly success: boolean;
     readonly message: string;
@@ -27,3 +25,19 @@ export type TIngredient = {
 }
 
 export type TIngredientWithId = TIngredient & { readonly id?: number };
+
+export type TOrder = {
+  readonly success : boolean;
+  readonly orders: [
+    {
+      readonly ingredients: ReadonlyArray<string>;
+      readonly _id: string;
+      readonly status: string;
+      readonly number: number;
+      readonly createdAt: string;
+      readonly updatedAt: string;
+    }
+  ],
+  readonly total: number;
+  readonly totalToday: number;
+} 

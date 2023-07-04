@@ -2,7 +2,7 @@ import { request } from "../../utils/api";
 import { getCookie, setCookie } from "../../utils/cookie";
 import { postRefreshTokenFailedAction, postRefreshTokenRequestAction, postRefreshTokenSuccessAction } from "../actions/auth";
 import { POST_ORDER_REQUEST, POST_ORDER_FAILED, POST_ORDER_SUCCESS, CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
-import { AppThunk, AppDispatch } from "../types";
+import { AppThunk } from "../types";
 
 // Типизация экшенов
 export interface IPostOrderRequestAction {
@@ -34,7 +34,7 @@ export const closeOrderDetailsModal = (): ICloseOrderDetailsModalAction => ({ ty
 
 
 export const postOrder: AppThunk = (ingredients: ReadonlyArray<string>) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postOrderRequestAction())
     request('/orders', 'POST', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {

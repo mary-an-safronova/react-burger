@@ -4,7 +4,7 @@ import { POST_ORDER_REQUEST,
     CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
 import { TOrderDetailsActions } from "../actions/order-details";
 
-type TInitialState = {
+type TOrderDetailsInitialState = {
     orderRequest: boolean;
     orderFailed: boolean;
     id: null | number;
@@ -12,7 +12,7 @@ type TInitialState = {
     isLoading: boolean;
 };
 
-const initialState: TInitialState = {
+const initialState: TOrderDetailsInitialState = {
     orderRequest: false,
     orderFailed: false,
     id: null,
@@ -20,7 +20,7 @@ const initialState: TInitialState = {
     isLoading: false,
 };
 
-export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions): TInitialState => {
+export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions): TOrderDetailsInitialState => {
     switch (action.type) {
         case POST_ORDER_REQUEST: {
             return {

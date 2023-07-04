@@ -191,7 +191,7 @@ export const postLogoutUserFailedAction = (error: Readonly<TServerMessage>): IPo
 export const postLogoutUserSuccessAction = (data: Readonly<TServerMessage>): IPostLogoutUserSuccessAction => ({ type: POST_LOGOUT_USER_SUCCESS, payload: data });
 
 export const postRegister: AppThunk = (email: string, password: string, name: string) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postRegisterRequestAction())
     request('/auth/register', 'POST', '', JSON.stringify({ email: email, password: password, name: name }))
     .then((data) => {
@@ -254,7 +254,7 @@ export const postAuthorization: AppThunk = (email: string, password: string) => 
 }
 
 export const getUser: AppThunk = () => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(getUserRequestAction())
     request('/auth/user', 'GET', 'Bearer ' + getCookie('accessToken'), null)
     .then((data) => {
@@ -285,7 +285,7 @@ export const getUser: AppThunk = () => {
 }
 
 export const updateUser: AppThunk = (name: string, email: string, password: string) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(updateUserRequestAction())
     request('/auth/user', 'PATCH', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ name: name, email: email, password: password }))
     .then((data) => {

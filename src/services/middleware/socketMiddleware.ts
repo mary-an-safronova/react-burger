@@ -3,10 +3,20 @@ import { getCookie, setCookie } from "../../utils/cookie";
 import { postRefreshTokenRequestAction,
   postRefreshTokenFailedAction,
   postRefreshTokenSuccessAction } from "../actions/auth";
+import { Middleware } from "redux";
 
-export const socketMiddleware = (wsActions) => {
+export interface IWsActions {
+  readonly wsStart: string;
+  readonly onOpen: string;
+  readonly onError: string;
+  readonly onClose: string;
+  readonly onMessage: string;
+  readonly wsSend: string;
+}
+
+export const socketMiddleware = (wsActions: IWsActions): Middleware => {
     return store => {
-        let socket = null;
+      let socket: WebSocket | null = null;
 
     return next => action => {
       const { dispatch } = store;

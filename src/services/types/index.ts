@@ -1,5 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
+import { Dispatch } from 'redux';
 import { store } from '../store';
 import { TAuthActions } from '../actions/auth';
 import { TBurgerConstructorActions } from '../actions/burger-constructor';
@@ -8,7 +9,7 @@ import { TOrderDetailsActions } from '../actions/order-details';
 import { TWsAuthActions } from '../actions/ws-auth';
 import { TWsActions } from '../actions/ws';
 
-type TApplicationActions = TAuthActions 
+export type TApplicationActions = TAuthActions 
 | TBurgerConstructorActions 
 | TBurgerIngredientsActions
 | TOrderDetailsActions
@@ -17,4 +18,5 @@ type TApplicationActions = TAuthActions
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = Dispatch<TApplicationActions>; 
 export type AppThunk<ReturnType = void> = ActionCreator<ThunkAction<ReturnType, Action, RootState, TApplicationActions>>;

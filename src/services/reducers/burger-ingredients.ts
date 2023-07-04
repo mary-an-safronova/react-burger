@@ -6,7 +6,7 @@ import { SET_ACTIVE_TAB,
 import { TBurgerIngredientsActions } from '../actions/burger-ingredients';
 import { TIngredient } from '../types/data';
 
-type TInitialState = {
+type TBurgerIngredientsInitialState = {
     current: string;
 
     ingredientsRequest: boolean;
@@ -14,7 +14,7 @@ type TInitialState = {
     ingredients: ReadonlyArray<TIngredient>;
   };
 
-const initialState: TInitialState = {
+const initialState: TBurgerIngredientsInitialState = {
     current: 'bun',
 
     ingredientsRequest: false,
@@ -22,7 +22,7 @@ const initialState: TInitialState = {
     ingredients: [],
   };
 
-export const burgerIngredientsReducer = (state = initialState, action: TBurgerIngredientsActions): TInitialState => {
+export const burgerIngredientsReducer = (state = initialState, action: TBurgerIngredientsActions): TBurgerIngredientsInitialState => {
     switch (action.type) {
         case SET_ACTIVE_TAB: {
             return {

@@ -8,17 +8,17 @@ import {
 import { TBurgerConstructorActions } from '../actions/burger-constructor';
 import { TIngredientWithId } from '../types/data';
 
-type TInitialState = {
+type TBurgerConstructorInitialState = {
     readonly ingredientList: ReadonlyArray<TIngredientWithId>;
     readonly bunsList: ReadonlyArray<TIngredientWithId>;
 }
 
-const initialState: TInitialState = {
+const initialState: TBurgerConstructorInitialState = {
     ingredientList: [],
     bunsList: [],
 }
 
-export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TInitialState => {
+export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorInitialState => {
     switch (action.type) {
         case ADD_BUN: {
             return {
