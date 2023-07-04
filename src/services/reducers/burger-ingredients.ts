@@ -3,8 +3,18 @@ import { SET_ACTIVE_TAB,
     GET_INGREDIENTS_FAILED,
     GET_INGREDIENTS_SUCCESS,
 } from '../action-types/burger-ingredients-action-types';
+import { TBurgerIngredientsActions } from '../actions/burger-ingredients';
+import { TIngredient } from '../types/data';
 
-const initialState = {
+type TInitialState = {
+    current: string;
+
+    ingredientsRequest: boolean;
+    ingredientsFailed: boolean;
+    ingredients: ReadonlyArray<TIngredient>;
+  };
+
+const initialState: TInitialState = {
     current: 'bun',
 
     ingredientsRequest: false,
@@ -12,7 +22,7 @@ const initialState = {
     ingredients: [],
   };
 
-export const burgerIngredientsReducer = (state = initialState, action) => {
+export const burgerIngredientsReducer = (state = initialState, action: TBurgerIngredientsActions): TInitialState => {
     switch (action.type) {
         case SET_ACTIVE_TAB: {
             return {
