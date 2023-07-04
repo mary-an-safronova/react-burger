@@ -2,16 +2,25 @@ import { POST_ORDER_REQUEST,
     POST_ORDER_FAILED,
     POST_ORDER_SUCCESS,
     CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
+import { TOrderDetailsActions } from "../actions/order-details";
 
-const initialState = {
+type TInitialState = {
+    orderRequest: boolean;
+    orderFailed: boolean;
+    id: null | number;
+    openOrderDetailsModal: boolean;
+    isLoading: boolean;
+};
+
+const initialState: TInitialState = {
     orderRequest: false,
     orderFailed: false,
     id: null,
     openOrderDetailsModal: false,
     isLoading: false,
-    };
+};
 
-export const orderDetailsReducer = (state = initialState, action) => {
+export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions): TInitialState => {
     switch (action.type) {
         case POST_ORDER_REQUEST: {
             return {
