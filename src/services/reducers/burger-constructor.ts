@@ -5,13 +5,20 @@ import {
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR,
 } from '../action-types/burger-constructor-action-types';
+import { TBurgerConstructorActions } from '../actions/burger-constructor';
+import { TIngredientWithId } from '../types/data';
 
-const initialState = {
+type TInitialState = {
+    readonly ingredientList: ReadonlyArray<TIngredientWithId>;
+    readonly bunsList: ReadonlyArray<TIngredientWithId>;
+}
+
+const initialState: TInitialState = {
     ingredientList: [],
     bunsList: [],
 }
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TInitialState => {
     switch (action.type) {
         case ADD_BUN: {
             return {

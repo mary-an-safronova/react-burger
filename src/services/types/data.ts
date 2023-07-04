@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type TServerMessage = {
     readonly success: boolean;
     readonly message: string;
@@ -23,3 +25,5 @@ export type TIngredient = {
   readonly image_large: string;
   readonly __v: number;
 }
+
+export type TIngredientWithId = TIngredient & { readonly id?: number };

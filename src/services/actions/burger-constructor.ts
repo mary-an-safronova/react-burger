@@ -3,20 +3,20 @@ import { ADD_BUN,
     DELETE_INGREDIENT,
     MOVE_INGREDIENT,
     CLEAR_CONSTRUCTOR } from "../action-types/burger-constructor-action-types";
-import { TIngredient } from "../types/data";
+import { TIngredient, TIngredientWithId } from "../types/data";
 
 // Типизация экшенов
 export interface IAddBunAction {
     readonly type: typeof ADD_BUN;
-    readonly payload: TIngredient;
+    readonly payload: TIngredientWithId;
 }
 export interface IAddIngredientAction {
     readonly type: typeof ADD_INGREDIENT;
-    readonly payload: TIngredient;
+    readonly payload: TIngredientWithId;
 }
 export interface IDeleteIngredientAction {
     readonly type: typeof DELETE_INGREDIENT;
-    readonly payload: TIngredient;
+    readonly payload: TIngredientWithId;
 }
 export interface IMoveIngredientAction {
     readonly type: typeof MOVE_INGREDIENT;
@@ -38,6 +38,7 @@ export type TBurgerConstructorActions =
   | IClearConstructorAction;
 
 export const setBun = (bun: TIngredient): IAddBunAction => ({ type: ADD_BUN, payload: bun });
+
 export const addIngredient = (ingredient: TIngredient): IAddIngredientAction => ({ type: ADD_INGREDIENT, payload: ingredient });
 export const deleteIngredient = (ingredient: TIngredient): IDeleteIngredientAction => ({ type: DELETE_INGREDIENT, payload: ingredient });
 export const moveIngredient = (dragIndex: number, hoverIndex: number): IMoveIngredientAction => ({ type: MOVE_INGREDIENT, data: { dragIndex, hoverIndex } })
