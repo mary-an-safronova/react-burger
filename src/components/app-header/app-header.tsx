@@ -4,10 +4,11 @@ import appHeaderStyle from  './app-header.module.css';
 import { NavLink } from 'react-router-dom';
 import { BurgerIcon, Logo, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PATH } from '../../utils/api';
+import { RootState } from '../../services/types';
 
 const AppHeader: FC = () => {
-    const auth = useSelector((state: any) => state.auth.auth);
-    const name = useSelector((state: any) => state.auth.user.name);
+    const auth = useSelector((state: RootState) => state.auth.auth);
+    const name = useSelector((state: RootState) => state.auth.user.name);
 
     const pendingLink = `${appHeaderStyle.header__item} ${appHeaderStyle.header__link} pb-4 pt-4 pl-5 pr-5`;
     const activeLink = `${appHeaderStyle.header__link_active} ${appHeaderStyle.header__item} ${appHeaderStyle.header__link} pb-4 pt-4 pl-5 pr-5`;

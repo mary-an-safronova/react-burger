@@ -4,7 +4,7 @@ import { WS_AUTH_CONNECTION_START,
     WS_AUTH_CONNECTION_CLOSED,
     WS_AUTH_GET_MESSAGE,
     WS_AUTH_SEND_MESSAGE } from "../action-types/ws-auth-action-types";
-  import { TOrder } from "../types/data";
+  import { TOrder, TOneOrder } from "../types/data";
 
 export interface IWsAuthConnectionStartAction {
     readonly type: typeof WS_AUTH_CONNECTION_START;
@@ -20,7 +20,6 @@ export interface IWsAuthConnectionStartAction {
   }
   export interface IWsAuthConnectionClosedAction {
     readonly type: typeof WS_AUTH_CONNECTION_CLOSED;
-    readonly payload: string | undefined;
   }
   export interface IWsAuthGetMessageAction {
     readonly type: typeof WS_AUTH_GET_MESSAGE;

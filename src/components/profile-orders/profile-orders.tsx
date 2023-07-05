@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import profileOrdersStyle from './profile-orders.module.css';
 import { OrderCard } from '..';
 import { getData } from '../../services/actions/burger-ingredients';
@@ -7,16 +7,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { wsAuthConnectionStartAction, wsAuthConnectionClosedAction } from '../../services/actions/ws-auth';
 import { getCookie } from '../../utils/cookie';
 import { wsUrlOrders } from '../../utils/api';
+import { RootState } from '../../services/types';
 
 const ProfileOrders = () => {
     const dispatch = useDispatch();
-    const orders = useSelector((state) => state.wsAuth.orders);
+    const orders = useSelector((state: RootState) => state.wsAuth.orders);
 
     const accessToken = getCookie("accessToken").replace('Bearer ', '');
 
     useEffect(() => {
-        dispatch(wsAuthConnectionStartAction(`${wsUrlOrders}?token=${accessToken}`))
-        return dispatch(wsAuthConnectionClosedAction())
+        dispatch(wsAuthConnectionStartAction(`${wsUrlOrders}?token=${accessToken}`));
+        return () => {
+            dispatch(wsAuthConnectionClosedAction());
+        }
     }, [dispatch, accessToken])
 
     useEffect(() => {

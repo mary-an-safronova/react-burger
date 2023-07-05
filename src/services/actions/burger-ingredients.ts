@@ -17,7 +17,7 @@ export const setActiveTab = (value: string): ISetActiveTabAction => ({ type: SET
 
 export const getIngredientsRequestAction = (): IGetIngredientsRequestAction => ({ type: GET_INGREDIENTS_REQUEST });
 export const getIngredientsFailedAction = (): IGetIngredientsFailedAction => ({ type: GET_INGREDIENTS_FAILED });
-export const getIngredientsSuccessAction = (data: ReadonlyArray<TIngredient>): IGetIngredientsSuccessAction => ({ type: GET_INGREDIENTS_SUCCESS, ingredients: data});
+export const getIngredientsSuccessAction = (data: Array<TIngredient>): IGetIngredientsSuccessAction => ({ type: GET_INGREDIENTS_SUCCESS, ingredients: data});
 
 export const getData: AppThunk = () => {
   return function(dispatch: AppDispatch) {

@@ -1,18 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import finalPriceStyles from './final-price.module.css'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal, OrderDetails } from '..';
 import { postOrder, closeOrderDetailsModal } from "../../services/actions/order-details";
 import { clearConstructor } from '../../services/actions/burger-constructor';
 import { PATH } from '../../utils/api';
+import { FC } from 'react';
+import { RootState } from '../../services/types';
 
-const FinalPrice = ({ total, ingredientsId, disabled }) => {
+type TFinalPrice = {
+    readonly total: number;
+    readonly ingredientsId: Array<string>;
+    readonly disabled: boolean;
+}
+
+const FinalPrice: FC<TFinalPrice> = ({ total, ingredientsId, disabled }) => {
     const navigate = useNavigate();
-    const auth = useSelector((state) => state.auth.auth);
+    const auth = useSelector((state: RootState) => state.auth.auth);
 
-    const orderDetails = (state) => state.orderDetails;
+    const orderDetails = (state: RootState) => state.orderDetails;
     const { openOrderDetailsModal, id } = useSelector(orderDetails);
 
     const dispatch = useDispatch();
@@ -47,11 +54,6 @@ const FinalPrice = ({ total, ingredientsId, disabled }) => {
         }
       </>
     )
-}
-
-FinalPrice.propTypes = {
-    total: PropTypes.number.isRequired,
-    ingredientsId: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default FinalPrice;

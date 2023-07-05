@@ -1,8 +1,13 @@
 import orderFeedTotalPriceStyle from './order-feed-total-price.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useMemo } from 'react';
+import { FC } from 'react';
 
-const OrderFeedTotalPrice = ({ prices }) => {
+type TOrderFeedTotalPriceProps = {
+    prices: Array<number>;
+}
+
+const OrderFeedTotalPrice: FC<TOrderFeedTotalPriceProps> = ({ prices }) => {
     const total = useMemo(() =>
         prices.reduce((sum, price) => {
             return (sum += price);

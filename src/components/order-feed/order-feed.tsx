@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import orderFeedStyle from './order-feed.module.css';
 import { OrderCard } from '..';
 import { getData } from '../../services/actions/burger-ingredients';
 import { v4 as uuidv4 } from 'uuid';
+import { RootState } from '../../services/types';
 
 const OrderFeed = () => {
     const dispatch = useDispatch();
-    const orders = useSelector((state) => state.ws.orders);
+    const orders = useSelector((state: RootState) => state.ws.orders);
 
     useEffect(() => {
         dispatch(getData())
@@ -19,7 +20,7 @@ const OrderFeed = () => {
             <div className={orderFeedStyle.scroll}>
                 {
                     orders?.map((order) => 
-                        <OrderCard order={order} profileOrders={false} number={order?.number} key={uuidv4()}/>
+                        <OrderCard order={order} cardWidthStyle="" profileOrders={false} number={order?.number} key={uuidv4()}/>
                     )
                 }
             </div>

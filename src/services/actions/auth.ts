@@ -111,7 +111,7 @@ export const postRegister: AppThunk = (email: string, password: string, name: st
 }
 
 export const postForgotPassword: AppThunk = (email: string) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postForgotPasswordRequestAction())
     request('/password-reset', 'POST', '', JSON.stringify({ email: email }))
     .then((data) => {
@@ -126,7 +126,7 @@ export const postForgotPassword: AppThunk = (email: string) => {
 }
 
 export const postResetPassword: AppThunk = (password: string, token: string) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postResetPasswordRequestAction())
     request('/password-reset/reset', 'POST', '', JSON.stringify({ password: password, token: token }))
     .then((data) => {
@@ -141,7 +141,7 @@ export const postResetPassword: AppThunk = (password: string, token: string) => 
 }
 
 export const postAuthorization: AppThunk = (email: string, password: string) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postAuthorizationRequestAction())
     request('/auth/login', 'POST', '', JSON.stringify({ email: email, password: password }))
     .then((data) => {
@@ -220,7 +220,7 @@ export const updateUser: AppThunk = (name: string, email: string, password: stri
 }
 
 export const logoutUser: AppThunk = () => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch(postLogoutUserRequestAction())
     request('/auth/logout', 'POST', '', JSON.stringify({ token: getCookie("refreshToken") }))
     .then((data) => {

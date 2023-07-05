@@ -6,11 +6,11 @@ import {
     CLEAR_CONSTRUCTOR,
 } from '../action-types/burger-constructor-action-types';
 import { TBurgerConstructorActions } from '../action-types/union-types';
-import { TIngredientWithId } from '../types/data';
+import { TIngredientWithId, TIngredient } from '../types/data';
 
 type TBurgerConstructorInitialState = {
     readonly ingredientList: ReadonlyArray<TIngredientWithId>;
-    readonly bunsList: ReadonlyArray<TIngredientWithId>;
+    readonly bunsList: Array<TIngredient>;
 }
 
 const initialState: TBurgerConstructorInitialState = {

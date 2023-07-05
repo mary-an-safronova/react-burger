@@ -2,14 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveTab } from '../../services/actions/burger-ingredients'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import switchStyle from  './switch.module.css';
+import { RootState } from '../../services/types';
 
 const Switch = () => {
 
-  const current = useSelector((store) => store.burgerIngredients.current)
+  const current = useSelector((store: RootState) => store.burgerIngredients.current)
 
   const dispatch = useDispatch()
 
-  const handleTabClick = (value) => {
+  const handleTabClick = (value: string) => {
     dispatch(setActiveTab(value))
     const title = document.getElementById(value);
     if (title) title.scrollIntoView({ behavior: "smooth" });

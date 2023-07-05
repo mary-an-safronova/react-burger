@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/types';
 import ingredientCardOuterStyles from './ingredient-card-outer.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { FC } from 'react';
+import { TIngredient } from '../../services/types/data';
 
-const IngredientCardOuter = ({ position, bun }) => {
+type TIngredientCardOuter = {
+    readonly position: "top" | "bottom" | undefined;
+    readonly bun: TIngredient;
+}
+
+const IngredientCardOuter: FC<TIngredientCardOuter> = ({ position, bun }) => {
 
     return (
         <li className={`${ingredientCardOuterStyles.card__outer} ml-8 mr-4`} key={bun._id}>
@@ -16,11 +21,6 @@ const IngredientCardOuter = ({ position, bun }) => {
             />
         </li>
     )
-}
-
-IngredientCardOuter.propTypes = {
-    position: PropTypes.string.isRequired,
-    bun: ingredientType,
 }
 
 export default IngredientCardOuter;

@@ -2,10 +2,16 @@ import PropTypes from 'prop-types';
 import ingredientDetailsStyles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { RootState } from '../../services/types';
+import { FC } from 'react';
 
-export const IngredientDetails = ({ titleClassName }) => {
+type TIngredientDetailsProps = {
+    readonly titleClassName?: string;
+}
+
+export const IngredientDetails: FC<TIngredientDetailsProps> = ({ titleClassName }) => {
     const { id } = useParams();
-    const cards = useSelector((store) => store.burgerIngredients.ingredients)
+    const cards = useSelector((store: RootState) => store.burgerIngredients.ingredients)
     const card = cards?.find((item) => item._id === id);
 
     return(

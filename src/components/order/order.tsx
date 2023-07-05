@@ -1,26 +1,51 @@
-import PropTypes from 'prop-types';
 import orderStyle from './order.module.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
+import { FC } from 'react';
+import { TOrder } from '../../services/types/data';
+import { TIngredient, TIngredientWithId } from '../../services/types/data';
 
-const Order = ({ orderNumber, location, order, ingredients }) => {
+type TLocation = {
+    hash: string;
+    key: string;
+    pathname: string;
+    search: string;
+    state: any;
+}
 
-    const imageMobileByID = {};
-    const nameByID = {};
-    const priceByID = {};
-    const ingredientTypeByID = {};
-    const ingredientIdByID = {};
+type TOrderProps = {
+    orderNumber: number | string;
+    location: TLocation;
+    order: TOrder;
+    ingredients: Array<TIngredient>;
+}
 
-    ingredients.forEach((ingredient) => {
-        imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
-        nameByID[ingredient['_id']] = ingredient['name'];
-        priceByID[ingredient['_id']] = ingredient['price'];
-        ingredientTypeByID[ingredient['_id']] = ingredient['type'];
-        ingredientIdByID[ingredient['_id']] = ingredient['_id'];
+type TImageMobileByID = { [id: string]: string; };
+type TNameByID = { [id: string]: string; };
+type TPriceByID = { [id: string]: number; };
+type TIngredientTypeByID = { [id: string]: string; };
+type TIngredientIdByID = { [id: string]: string; };
+
+const Order: FC<TOrderProps> = ({ orderNumber, location, order, ingredients }) => {
+
+    const imageMobileByID: TImageMobileByID = {};
+    const nameByID: TNameByID = {};
+    const priceByID: TPriceByID = {};
+    const ingredientTypeByID: TIngredientTypeByID = {};
+    const ingredientIdByID: TIngredientIdByID = {};
+
+    ingredients.forEach((ingredient: TIngredient) => {
+        imageMobileByID[ingredient._id] = ingredient.image_mobile;
+        nameByID[ingredient._id] = ingredient.name;
+        priceByID[ingredient._id] = ingredient.price;
+        ingredientTypeByID[ingredient._id] = ingredient.type;
+        ingredientIdByID[ingredient._id] = ingredient._id;
     })
 
-    const ingredientCounts = order?.ingredients?.reduce((acc, ingredient) => {
+    const ingredientCounts: { [key: string]: TIngredientWithId & { count: number; } } | undefined = 
+    order?.ingredients?.reduce((acc: any, ingredient) => {
         if (acc[ingredient]) {
             acc[ingredient].count += 1;
         } else {
@@ -41,7 +66,9 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
         ingredientsToDisplay.push(ingredientCounts[key]);
     }
 
-    const prices = [];
+    const prices: Array<number> = [];
+
+    const navigate = useNavigate()
 
     return(
         <div className='mb-10 mt-10 mr-10'>
@@ -53,7 +80,7 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
                 {
                     ingredientsToDisplay.map((ingredient, index) => {
                         prices.push(ingredient.count * ingredient.price)
-                        return <Link to={{ pathname: `/ingredients/${ingredient.id}`, state: { background: location } }} className={orderStyle.link} key={index}>
+                        return <div onClick={() => navigate(`/ingredients/${ingredient.id}`, { state: { replace: true } })} className={orderStyle.link} key={index}>
                                     <div className={`${orderStyle.orderIngredientsWrap} mb-4`}>
                                         <div className={orderStyle.imgNameWrap}>
                                             <div className={orderStyle.imgCircle}>
@@ -68,7 +95,7 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
                                             <CurrencyIcon type="primary" />
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                     })
                 }
             </div>
@@ -81,7 +108,3 @@ const Order = ({ orderNumber, location, order, ingredients }) => {
 }
 
 export default Order;
-
-Order.propTypes = {
-    orderNumber: PropTypes.string,
-}

@@ -8,6 +8,7 @@ import { IPostOrderRequestAction,
   IPostOrderSuccessAction,
   ICloseOrderDetailsModalAction
 } from '../interfaces/order-details-interfaces';
+import { AppDispatch } from "../types";
 
 export const postOrderRequestAction = (): IPostOrderRequestAction => ({ type: POST_ORDER_REQUEST });
 export const postOrderFailedAction = (): IPostOrderFailedAction => ({ type: POST_ORDER_FAILED });
@@ -15,9 +16,8 @@ export const postOrderSuccessAction = (number: number): IPostOrderSuccessAction 
 
 export const closeOrderDetailsModal = (): ICloseOrderDetailsModalAction => ({ type: CLOSE_ORDER_DETAILS_MODAL });
 
-
 export const postOrder: AppThunk = (ingredients: ReadonlyArray<string>) => {
-  return function(dispatch) {
+  return function(dispatch: any) {
     dispatch(postOrderRequestAction())
     request('/orders', 'POST', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {

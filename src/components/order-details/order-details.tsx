@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import orderDetailsStyles from './order-details.module.css';
 import doneImage from '../../images/order accpeted-done.svg';
+import { FC } from 'react';
 
-export const OrderDetails = ({ dataOrder }) => {
+type TOrderDetails = {
+    dataOrder: null | number;
+}
+
+export const OrderDetails: FC<TOrderDetails> = ({ dataOrder }) => {
 
     return(
         <div className={`${orderDetailsStyles.wrap} pt-30 pb-30`}>
@@ -13,8 +17,4 @@ export const OrderDetails = ({ dataOrder }) => {
             <p className="text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</p>
         </div>
     )
-}
-
-OrderDetails.propTypes = {
-    dataOrder: PropTypes.number,
 }

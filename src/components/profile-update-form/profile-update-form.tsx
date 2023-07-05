@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from '../../services/hooks';
 import ProfleUpdateFormStyle from './profile-update-form.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getUser } from '../../services/actions/auth';
@@ -22,7 +22,7 @@ const ProfleUpdateForm = () => {
         })
     }, [user.name, user.email])
 
-    const updateProfile = (evt) => {
+    const updateProfile = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         dispatch(updateUser(value.name, value.email, value.password));
     }
@@ -53,7 +53,6 @@ const ProfleUpdateForm = () => {
                         value={value.email}
                         name={'email'}
                         isIcon={true}
-                        icon="EditIcon"
                         extraClass="mb-6"
                     />
                     <PasswordInput

@@ -1,6 +1,12 @@
 import loadingStyle from './loading.module.css';
+import { FC } from 'react';
+import { ReactNode } from 'react';
 
-const Loading = ({ children }) => {
+export type TLoadingProps = {
+    readonly children?: ReactNode;
+}
+
+const Loading: FC = ({ children }: TLoadingProps) => {
     return (
         <div className={loadingStyle.overlay}>
             <p className={`${loadingStyle.span} className="text text_type_main-medium`}>{children}</p>

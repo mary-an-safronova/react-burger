@@ -24,20 +24,27 @@ export type TIngredient = {
   readonly __v: number;
 }
 
-export type TIngredientWithId = TIngredient & { readonly id?: number };
+export type TIngredientWithId = TIngredient & { id: number };
+
+export type TOneOrder = {
+  readonly ingredients: ReadonlyArray<string>;
+  readonly _id: string;
+  readonly status: string;
+  readonly number: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}
 
 export type TOrder = {
   readonly success : boolean;
-  readonly orders: [
-    {
-      readonly ingredients: ReadonlyArray<string>;
-      readonly _id: string;
-      readonly status: string;
-      readonly number: number;
-      readonly createdAt: string;
-      readonly updatedAt: string;
-    }
-  ],
+  readonly orders: ReadonlyArray<TOneOrder>;
+  readonly ingredients: ReadonlyArray<string>;
+  readonly _id: string;
+  readonly status: 'done' | 'pending' | 'created';
+  readonly number: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly total: number;
   readonly totalToday: number;
+  readonly name?: string; 
 } 

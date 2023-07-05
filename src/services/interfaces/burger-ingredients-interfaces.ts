@@ -18,5 +18,5 @@ export interface ISetActiveTabAction {
   }
   export interface IGetIngredientsSuccessAction {
     readonly type: typeof GET_INGREDIENTS_SUCCESS;
-    readonly ingredients: ReadonlyArray<TIngredient>;
+    readonly ingredients: Array<TIngredient>;
   }

@@ -11,7 +11,7 @@ type TBurgerIngredientsInitialState = {
 
     ingredientsRequest: boolean;
     ingredientsFailed: boolean;
-    ingredients: ReadonlyArray<TIngredient>;
+    ingredients: Array<TIngredient>;
   };
 
 const initialState: TBurgerIngredientsInitialState = {

@@ -1,5 +1,5 @@
 import { Order } from '..'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 
 const OrderModal = () => {
@@ -11,10 +11,12 @@ const OrderModal = () => {
     const authOrders = useSelector((state) => state.wsAuth.orders);
 
     const orders = location.pathname === `/feed/${id}` ? feedOrders : authOrders;
+
     const order = orders?.find((item) => item._id === id);
 
     return (
-        <Order location={location} order={order} ingredients={ingredients} />
+        order ?
+            <Order orderNumber={''} location={location} order={order} ingredients={ingredients} /> : null
     )
 }
 

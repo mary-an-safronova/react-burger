@@ -4,9 +4,10 @@ import { useInView } from 'react-intersection-observer';
 import burgerIngredientsStyle from  './burger-ingredients.module.css';
 import { Switch, Cards } from '..';
 import { setActiveTab } from '../../services/actions/burger-ingredients';
+import { RootState } from '../../services/types';
 
 const BurgerIngredients = () => {
-    const burgerIngredients = (state) => state.burgerIngredients;
+    const burgerIngredients = (state: RootState) => state.burgerIngredients;
     const { current } = useSelector(burgerIngredients);
 
     const dispatch = useDispatch()

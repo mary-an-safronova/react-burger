@@ -5,15 +5,18 @@ import { v4 as uuidv4 } from 'uuid';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { IngredientCard, IngredientCardOuter, FinalPrice } from '..';
 import { setBun, addIngredient, deleteIngredient } from '../../services/actions/burger-constructor';
+import { RootState } from '../../services/types';
+import { TIngredientWithId } from '../../services/types/data';
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
 
-    const constructorIngredients = (state) => state.burgerConstructor;
+    const constructorIngredients = (state: RootState) => state.burgerConstructor;
     const { ingredientList, bunsList } = useSelector(constructorIngredients);
 
-    const addElement = (element) => {
-        element = { ...element, id: element._id}
+    const addElement = (element: TIngredientWithId) => {
+        const elementIdToNumber = Number(element._id)
+        element = { ...element, id: elementIdToNumber}
         if (element.type === 'bun') {
             dispatch(setBun(element))
             ingredientsId.push(element._id);
@@ -31,15 +34,15 @@ const BurgerConstructor = () => {
 				opacity: monitor.isOver() ? 0.5 : 1,
 			}
         },
-        drop: (item => addElement(item.ingredient))
+        drop: ((item: any) => addElement(item.ingredient))
     }))
 
-    const deleteElement = (ingredient) => {
+    const deleteElement = (ingredient: TIngredientWithId) => {
         dispatch(deleteIngredient(ingredient))
     }
 
-    const ingredientsId = [];
-    const prices = [];
+    const ingredientsId: Array<string> = [];
+    const prices: Array<number> = [];
 
     useMemo(() =>
         bunsList?.filter((bun) => {
@@ -80,7 +83,7 @@ const BurgerConstructor = () => {
                 })}
                 <div className={`${burgerConstructorStyles.scroll} mb-4 mt-4`}>
                     {ingredientList?.map((ingredient, index) => {
-                        return <IngredientCard ingredient={ingredient} key={uuidv4()} id={index} index={index} deleteElement={deleteElement} ingredientsId={ingredientsId} prices={prices} />
+                        return <IngredientCard ingredient={ingredient} key={uuidv4()} id={index} index={index} deleteElement={deleteElement} />
                     })}
                 </div>
                 {bunsList?.map((bun, index) => {

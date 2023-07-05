@@ -1,31 +1,48 @@
-import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import orderCardStyle from './order-card.module.css';
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
 import { PATH } from '../../utils/api';
+import { FC } from 'react';
+import { TOrder, TOneOrder } from '../../services/types/data';
+import { ReactNode } from 'react';
+import { RootState } from '../../services/types';
+import { TIngredient } from '../../services/types/data';
 
-export default memo(function OrderCard({ order, cardWidthStyle, children, profileOrders, number }) {
-    const ingredients = useSelector((state) => state.burgerIngredients.ingredients);
+type TOrderCard = {
+    order: TOrder;
+    cardWidthStyle: string;
+    children?: ReactNode;
+    profileOrders: boolean;
+    number: number | undefined;
+}
 
-    const imageMobileByID = {};
-    const nameByID = {};
-    const priceByID = {};
-    const ingredientTypeById = {};
+type TImageMobileByID = { [id: string]: string; };
+type TNameByID = { [id: string]: string; };
+type TPriceByID = { [id: string]: number; };
+type TIngredientTypeByID = { [id: string]: string; };
 
-    ingredients.forEach((ingredient) => {
-        imageMobileByID[ingredient['_id']] = ingredient['image_mobile'];
-        nameByID[ingredient['_id']] = ingredient['name'];
-        priceByID[ingredient['_id']] = ingredient['price'];
-        ingredientTypeById[ingredient['_id']] = ingredient['type'];
+export const OrderCard: FC<TOrderCard> = ({ order, cardWidthStyle, children, profileOrders, number }) =>{
+    const ingredients = useSelector((state: RootState) => state.burgerIngredients.ingredients);
+
+    const imageMobileByID: TImageMobileByID = {};
+    const nameByID: TNameByID = {};
+    const priceByID: TPriceByID = {};
+    const ingredientTypeById: TIngredientTypeByID = {};
+
+    ingredients.forEach((ingredient: TIngredient) => {
+        imageMobileByID[ingredient._id] = ingredient.image_mobile;
+        nameByID[ingredient._id] = ingredient.name;
+        priceByID[ingredient._id] = ingredient.price;
+        ingredientTypeById[ingredient._id] = ingredient.type;
     })
 
-    const zIndex = (index) => {
-        return index === 0 ? 10 : index === 1 ? 9 : index === 2 ? 8 : index === 3 ? 7 : index === 4 ? 6 : index === 5 ? 5 : null;
+    const zIndex = (index: number | null): string => {
+        return index === 0 ? '10' : index === 1 ? '9' : index === 2 ? '8' : index === 3 ? '7' : index === 4 ? '6' : index === 5 ? '5' : '1';
     }
 
-    const prices = []
+    const prices: Array<number> = []
 
     return (
         <Link className={orderCardStyle.link} 
@@ -71,4 +88,6 @@ export default memo(function OrderCard({ order, cardWidthStyle, children, profil
             </div>
         </Link>
     )
-})
+}
+
+export default OrderCard;
