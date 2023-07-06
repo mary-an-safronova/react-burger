@@ -14,7 +14,7 @@ const BurgerConstructor = () => {
     const constructorIngredients = (state: RootState) => state.burgerConstructor;
     const { ingredientList, bunsList } = useSelector(constructorIngredients);
 
-    const addElement = (element: TIngredientWithId) => {
+    const addElement = (element: TIngredientWithId): void => {
         const elementIdToNumber = Number(element._id)
         element = { ...element, id: elementIdToNumber}
         if (element.type === 'bun') {

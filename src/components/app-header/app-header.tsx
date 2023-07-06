@@ -13,8 +13,8 @@ const AppHeader: FC = () => {
     const pendingLink = `${appHeaderStyle.header__item} ${appHeaderStyle.header__link} pb-4 pt-4 pl-5 pr-5`;
     const activeLink = `${appHeaderStyle.header__link_active} ${appHeaderStyle.header__item} ${appHeaderStyle.header__link} pb-4 pt-4 pl-5 pr-5`;
 
-    const pendingText = 'text text_type_main-default text_color_inactive ml-2';
-    const activeText = 'text text_type_main-default ml-2';
+    const pendingText: string = 'text text_type_main-default text_color_inactive ml-2';
+    const activeText: string = 'text text_type_main-default ml-2';
 
     return (
         <header className={appHeaderStyle.header}>

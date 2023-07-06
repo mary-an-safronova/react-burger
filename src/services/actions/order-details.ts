@@ -16,7 +16,7 @@ export const postOrderSuccessAction = (number: number): IPostOrderSuccessAction 
 export const closeOrderDetailsModal = (): ICloseOrderDetailsModalAction => ({ type: CLOSE_ORDER_DETAILS_MODAL });
 
 export const postOrder: AppThunk = (ingredients: ReadonlyArray<string>) => {
-  return function(dispatch: any) {
+  return function(dispatch) {
     dispatch(postOrderRequestAction())
     request('/orders', 'POST', 'Bearer ' + getCookie('accessToken'), JSON.stringify({ ingredients: ingredients}))
     .then(({ success, order: { number } }) => {
