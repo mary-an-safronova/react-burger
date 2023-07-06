@@ -30,7 +30,7 @@ const OrderFeedPage = () => {
     return (
         <div className={`${orderFeedPageStyle.wrap} pt-30`}>
             { order &&
-            <Order orderNumber={orderFeedPageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+            <Order orderNumber={orderFeedPageStyle.orderNumber} order={order} ingredients={ingredients} />
             }
         </div>
     )

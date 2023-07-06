@@ -4,7 +4,7 @@ import {
   WS_AUTH_CONNECTION_CLOSED,
   WS_AUTH_GET_MESSAGE
 } from '../action-types/ws-auth-action-types';
-import { TWsAuthActions } from '../action-types/union-types';
+import { TWsAuthActions } from '../interfaces/union-interfaces';
 import { TOrder } from '../types/data';
 
 type TWsAuthInitialState = {

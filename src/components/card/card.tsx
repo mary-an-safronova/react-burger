@@ -1,5 +1,5 @@
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import cardStyle from './card.module.css';

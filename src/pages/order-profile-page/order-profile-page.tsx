@@ -33,7 +33,7 @@ const OrderProfilePage = () => {
     return (
         <div className={`${orderProfilePageStyle.wrap} pt-30`}>
             { order && 
-                <Order orderNumber={orderProfilePageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+                <Order orderNumber={orderProfilePageStyle.orderNumber} order={order} ingredients={ingredients} />
             }
         </div>
     )

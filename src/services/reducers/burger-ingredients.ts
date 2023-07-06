@@ -3,7 +3,7 @@ import { SET_ACTIVE_TAB,
     GET_INGREDIENTS_FAILED,
     GET_INGREDIENTS_SUCCESS,
 } from '../action-types/burger-ingredients-action-types';
-import { TBurgerIngredientsActions } from '../action-types/union-types';
+import { TBurgerIngredientsActions } from '../interfaces/union-interfaces';
 import { TIngredient } from '../types/data';
 
 type TBurgerIngredientsInitialState = {

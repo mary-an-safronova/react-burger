@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Link } from 'react-router-dom';
 import orderCardStyle from './order-card.module.css';
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
 import { PATH } from '../../utils/api';
 import { FC } from 'react';
-import { TOrder, TOneOrder } from '../../services/types/data';
+import { TOrder } from '../../services/types/data';
 import { ReactNode } from 'react';
 import { RootState } from '../../services/types';
 import { TIngredient } from '../../services/types/data';

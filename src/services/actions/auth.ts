@@ -59,7 +59,7 @@ import { IPostRegisterRequestAction,
   IPostLogoutUserSuccessAction,
 } from '../interfaces/auth-action-interfaces';
 
-import { AppDispatch, AppThunk } from '../types/index';
+import { AppThunk } from '../types/index';
 import { TServerMessage, TTokens } from '../types/data';
 
 export const postRegisterRequestAction = (): IPostRegisterRequestAction => ({ type: POST_REGISTER_REQUEST });

@@ -1,5 +1,4 @@
 import orderStyle from './order.module.css';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedTotalPrice } from '..';
@@ -7,17 +6,8 @@ import { FC } from 'react';
 import { TOrder } from '../../services/types/data';
 import { TIngredient, TIngredientWithId } from '../../services/types/data';
 
-type TLocation = {
-    hash: string;
-    key: string;
-    pathname: string;
-    search: string;
-    state: any;
-}
-
 type TOrderProps = {
     orderNumber: number | string;
-    location: TLocation;
     order: TOrder;
     ingredients: Array<TIngredient>;
 }
@@ -28,7 +18,7 @@ type TPriceByID = { [id: string]: number; };
 type TIngredientTypeByID = { [id: string]: string; };
 type TIngredientIdByID = { [id: string]: string; };
 
-const Order: FC<TOrderProps> = ({ orderNumber, location, order, ingredients }) => {
+const Order: FC<TOrderProps> = ({ orderNumber, order, ingredients }) => {
 
     const imageMobileByID: TImageMobileByID = {};
     const nameByID: TNameByID = {};

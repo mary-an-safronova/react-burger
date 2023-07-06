@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { setActiveTab } from '../../services/actions/burger-ingredients'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import switchStyle from  './switch.module.css';

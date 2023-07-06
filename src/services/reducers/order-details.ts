@@ -2,7 +2,7 @@ import { POST_ORDER_REQUEST,
     POST_ORDER_FAILED,
     POST_ORDER_SUCCESS,
     CLOSE_ORDER_DETAILS_MODAL } from "../action-types/order-details-action-types";
-import { TOrderDetailsActions } from "../action-types/union-types";
+import { TOrderDetailsActions } from "../interfaces/union-interfaces";
 
 type TOrderDetailsInitialState = {
     orderRequest: boolean;

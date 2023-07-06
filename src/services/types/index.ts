@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { ActionCreator } from 'redux';
 import { store } from '../store';
-import { TApplicationActions } from '../action-types/union-types';
+import { TApplicationActions } from '../interfaces/union-interfaces';
 
 export type RootState = ReturnType<typeof store.getState>;
 

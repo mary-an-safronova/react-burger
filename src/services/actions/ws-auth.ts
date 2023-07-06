@@ -4,7 +4,7 @@ import { WS_AUTH_CONNECTION_START,
   WS_AUTH_CONNECTION_CLOSED,
   WS_AUTH_GET_MESSAGE,
   WS_AUTH_SEND_MESSAGE } from "../action-types/ws-auth-action-types";
-import { TOrder, TOneOrder } from "../types/data";
+import { TOrder } from "../types/data";
 import { IWsAuthConnectionStartAction,
   IWsAuthConnectionSuccessAction,
   IWsAuthConnectionErrorAction,

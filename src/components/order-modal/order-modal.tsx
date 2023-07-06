@@ -16,7 +16,7 @@ const OrderModal = () => {
 
     return (
         order ?
-            <Order orderNumber={''} location={location} order={order} ingredients={ingredients} /> : null
+            <Order orderNumber={''} order={order} ingredients={ingredients} /> : null
     )
 }
 

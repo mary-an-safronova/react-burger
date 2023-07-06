@@ -29,26 +29,26 @@ import { IPostRegisterRequestAction,
     IPostLogoutUserRequestAction,
     IPostLogoutUserFailedAction,
     IPostLogoutUserSuccessAction,
-} from '../interfaces/auth-action-interfaces';
+} from './auth-action-interfaces';
 
 import { IAddBunAction,
     IAddIngredientAction,
     IDeleteIngredientAction,
     IMoveIngredientAction,
     IClearConstructorAction
-} from '../interfaces/burger-constructor-interfaces';
+} from './burger-constructor-interfaces';
 
 import { ISetActiveTabAction,
     IGetIngredientsRequestAction,
     IGetIngredientsFailedAction,
     IGetIngredientsSuccessAction
-} from '../interfaces/burger-ingredients-interfaces';
+} from './burger-ingredients-interfaces';
 
 import { IPostOrderRequestAction,
   IPostOrderFailedAction,
   IPostOrderSuccessAction,
   ICloseOrderDetailsModalAction
-} from '../interfaces/order-details-interfaces';
+} from './order-details-interfaces';
 
 import { IWsConnectionStartAction,
   IWsConnectionSuccessAction,
@@ -56,7 +56,7 @@ import { IWsConnectionStartAction,
   IWsConnectionClosedAction,
   IWsGetMessageAction,
   IWsSendMessageAction
-} from '../interfaces/ws-interfaces';
+} from './ws-interfaces';
 
 import { IWsAuthConnectionStartAction,
   IWsAuthConnectionSuccessAction,
@@ -64,7 +64,7 @@ import { IWsAuthConnectionStartAction,
   IWsAuthConnectionClosedAction,
   IWsAuthGetMessageAction,
   IWsAuthSendMessageAction
-} from '../interfaces/ws-auth-interfaces';
+} from './ws-auth-interfaces';
 
 export type TAuthActions = IPostRegisterRequestAction
   | IPostRegisterFailedAction

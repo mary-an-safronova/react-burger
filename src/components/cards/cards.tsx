@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import cardsStyle from './cards.module.css';
 import { Card } from '..';
 import { RootState } from '../../services/types';
