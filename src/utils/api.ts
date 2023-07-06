@@ -1,15 +1,11 @@
-export type TResponse = {
-    body: any;
-    bodyUsed: boolean;
-    headers?: any;
-    ok: boolean;
-    redirected: boolean;
-    status: number;
-    statusText: string;
-    type: string;
-    url: string;
-    json: any;
-}
+type TServerResponse<T> = {
+    success: boolean;
+} & T;
+  
+type TRefreshResponse = TServerResponse<{
+    refreshToken: string;
+    accessToken: string;
+}>;
 
 export type TPath = {
     HOME: string;
@@ -33,13 +29,9 @@ export const apiConfig = {
 export const wsUrl = 'wss://norma.nomoreparties.space';
 export const wsUrlOrders = `${wsUrl}/orders`;
 
-const checkResponse = async (res: TResponse): Promise<any> => {
-    if (res.ok) {
-        return res.json();
-    }
-    const errorResponse = await res.json();
-    return Promise.reject(`Ошибка: ${errorResponse.status}`);
-}
+const checkResponse = <T>(res: Response): Promise<T> => {
+     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err)); 
+};
 
 export const request = (endpoint: string, method: string, authorization: string, body: any): Promise<any> => {
     return fetch(`${apiConfig.baseUrl}${endpoint}`, {
@@ -50,7 +42,7 @@ export const request = (endpoint: string, method: string, authorization: string,
         },
         body: body,
     })
-    .then(checkResponse)
+    .then(checkResponse<TRefreshResponse>)
 }
 
 export const PATH: TPath = {
