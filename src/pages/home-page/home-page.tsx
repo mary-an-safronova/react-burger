@@ -1,13 +1,14 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import homePageStyle from  './home-page.module.css';
 import { BurgerIngredients, BurgerConstructor, Loading, AnimationFollowingMouse } from '../../components'
 import { getData } from '../../services/actions/burger-ingredients';
+import { RootState } from "../../services/types";
 
 const HomePage = () => {
-  const orderDetails = (state) => state.orderDetails;
+  const orderDetails = (state: RootState) => state.orderDetails;
   const { isLoading } = useSelector(orderDetails);
 
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const HomePage = () => {
         {
           isLoading && 
             <>
-                <Loading children='Ваш заказ обрабатывается...' />
+                <Loading />
                 <AnimationFollowingMouse />
             </>
         }

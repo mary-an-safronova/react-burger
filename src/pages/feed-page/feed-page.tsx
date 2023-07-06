@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import feedPageStyle from './feed-page.module.css';
 import { OrderFeedStatus, OrderFeed } from '../../components';
 import { wsConnectionStartAction, wsConnectionClosedAction } from '../../services/actions/ws';

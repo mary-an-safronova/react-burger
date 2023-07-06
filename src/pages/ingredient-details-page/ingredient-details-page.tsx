@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { getData } from '../../services/actions/burger-ingredients';
 import ingredientDetailsPageStyle from './ingredient-details-page.module.css';
 import { IngredientDetails } from '../../components'

@@ -20,7 +20,6 @@ export interface IWsConnectionStartAction {
   }
   export interface IWsConnectionClosedAction {
     readonly type: typeof WS_CONNECTION_CLOSED;
-    readonly payload: string | undefined;
   }
   export interface IWsGetMessageAction {
     readonly type: typeof WS_GET_MESSAGE;

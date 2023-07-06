@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from '../../services/hooks';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import registerStyle from './register.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -19,7 +19,7 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const handleRegister = (evt) => {
+    const handleRegister = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         dispatch(postRegister(value.email, value.password, value.name));
         navigate(from, { replace: true });

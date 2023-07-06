@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from '../../services/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import loginStyle from './login.module.css';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -19,7 +19,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const handleAuthorization = (evt) => {
+    const handleAuthorization = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         dispatch(postAuthorization(value.email, value.password));
         navigate(from, { replace: true });

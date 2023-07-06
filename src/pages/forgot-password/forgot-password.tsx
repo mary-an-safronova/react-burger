@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import forgotPasswordStyle from './forgot-password.module.css';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     const email = useSelector((state) => state.auth.email);
     const [value, setValue] = useState({ email: email })
 
-    const handleForgotPassword = (evt) => {
+    const handleForgotPassword = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         dispatch(postForgotPassword(value.email));
         setCookie('resetPassword', value.email, { path: '/' });

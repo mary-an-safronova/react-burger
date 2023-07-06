@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import { getData } from '../../services/actions/burger-ingredients';
 import { wsAuthConnectionStartAction, wsAuthConnectionClosedAction } from '../../services/actions/ws-auth';
@@ -20,7 +20,9 @@ const OrderProfilePage = () => {
 
     useEffect(() => {
         dispatch(wsAuthConnectionStartAction(`${wsUrlOrders}?token=${accessToken}`))
-        return dispatch(wsAuthConnectionClosedAction())
+        return () => {
+            dispatch(wsAuthConnectionClosedAction())
+        }
     }, [dispatch, accessToken])
 
     useEffect(() => {
@@ -30,7 +32,9 @@ const OrderProfilePage = () => {
 
     return (
         <div className={`${orderProfilePageStyle.wrap} pt-30`}>
-            <Order orderNumber={orderProfilePageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+            { order && 
+                <Order orderNumber={orderProfilePageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+            }
         </div>
     )
 }

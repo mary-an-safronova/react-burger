@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import { getData } from '../../services/actions/burger-ingredients';
 import { wsConnectionStartAction, wsConnectionClosedAction } from '../../services/actions/ws';
@@ -18,7 +18,7 @@ const OrderFeedPage = () => {
     useEffect(() => {
         dispatch(wsConnectionStartAction(`${wsUrlOrders}/all`))
         return () => {
-            return dispatch(wsConnectionClosedAction())
+            dispatch(wsConnectionClosedAction())
           }
     }, [dispatch])
 
@@ -29,7 +29,9 @@ const OrderFeedPage = () => {
 
     return (
         <div className={`${orderFeedPageStyle.wrap} pt-30`}>
+            { order &&
             <Order orderNumber={orderFeedPageStyle.orderNumber} location={location} order={order} ingredients={ingredients} />
+            }
         </div>
     )
 }

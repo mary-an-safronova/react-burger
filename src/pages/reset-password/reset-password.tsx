@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import resetPasswordStyle from './reset-password.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -24,10 +24,10 @@ const ResetPassword = () => {
         }
       }, [resetPassword]);
 
-    const handleResetPassword = (evt) => {
+    const handleResetPassword = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         dispatch(postResetPassword(value.password, value.token));
-        deleteCookie('resetPassword', { path: '/' });
+        deleteCookie('resetPassword');
         navigate(PATH.LOGIN, { replace: true });
     }
 
