@@ -8,7 +8,6 @@ import { IPostOrderRequestAction,
   IPostOrderSuccessAction,
   ICloseOrderDetailsModalAction
 } from '../interfaces/order-details-interfaces';
-import { AppDispatch } from "../types";
 
 export const postOrderRequestAction = (): IPostOrderRequestAction => ({ type: POST_ORDER_REQUEST });
 export const postOrderFailedAction = (): IPostOrderFailedAction => ({ type: POST_ORDER_FAILED });
