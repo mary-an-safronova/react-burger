@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import appStyle from  './app.module.css';
 import { HomePage,Login, Register, ForgotPassword, ResetPassword, Profile, NotFound404, IngredientDetailsPage, FeedPage, OrderFeedPage, OrderProfilePage } from '../../pages';
 import { AppHeader, ProfleUpdateForm, IngredientDetails, Modal, ProtectedRouteElement, ProfileOrders, OrderModal } from '..';
@@ -20,7 +20,7 @@ const App = () => {
     if (background === PATH.HOME) {
       navigate(background, { replace: true });
     } else {
-      navigate(-1, { state: { modalFromHomePage: false, background: PATH.HOME } });
+      navigate('-1', { state: { modalFromHomePage: false, background: PATH.HOME } });
     }
   }
 
@@ -28,7 +28,7 @@ const App = () => {
     if (background === PATH.FEED) {
       navigate(background, { replace: true });
     } else {
-      navigate(-1, { state: { modalFromFeedPage: false, background: PATH.FEED } });
+      navigate('-1', { state: { modalFromFeedPage: false, background: PATH.FEED } });
     }
   }
 
@@ -36,7 +36,7 @@ const App = () => {
     if (background === PATH.PROFILE_ORDERS) {
       navigate(background, { replace: true });
     } else {
-      navigate(-1, { state: { modalFromProfilePage: false, background: PATH.PROFILE_ORDERS } });
+      navigate('-1', { state: { modalFromProfilePage: false, background: PATH.PROFILE_ORDERS } });
     }
   }
 

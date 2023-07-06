@@ -1,9 +1,13 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../../services/hooks";
-import { useLocation } from "react-router-dom";
 import { PATH } from "../../utils/api";
+import { ReactNode } from "react"
 
-const ProtectedRouteElement = ({ element }) => {
+interface ProtectedRouteElementProps {
+    element: ReactNode;
+}
+
+const ProtectedRouteElement = ({ element }: ProtectedRouteElementProps) => {
     const location = useLocation();
     const auth = useSelector((state) => state.auth.auth);
 
