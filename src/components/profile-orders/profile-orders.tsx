@@ -33,7 +33,7 @@ const ProfileOrders = () => {
                     orders?.map((order) => {
                         const status = <p className={`${order?.status === 'done' ? profileOrdersStyle.status : profileOrdersStyle.statusNoDone} text text_type_main-small mt-2`}>{order?.status === 'done' ? 'Выполнен' : order?.status === 'pending' ? 'Готовится' : 'Создан'}</p>
                         return <OrderCard order={order} cardWidthStyle={profileOrdersStyle.cardWidth} children={status} profileOrders={true} number={order?.number} key={uuidv4()}/>
-                    })
+                    }).reverse()
                 }
             </div>
         </section>
