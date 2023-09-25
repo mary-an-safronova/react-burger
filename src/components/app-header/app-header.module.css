@@ -1,6 +1,12 @@
 .header {
+    max-width: 2000px;
     width: 100%;
     background: #1C1C21;
+    position: fixed;
+    top: 0;
+    max-height: 88px;
+    height: 100%;
+    z-index: 30;
 }
 
 .header__wrap {

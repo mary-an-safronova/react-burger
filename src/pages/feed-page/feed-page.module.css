@@ -4,4 +4,6 @@
     display: flex;
     justify-content: space-between;
     margin: auto;
+    position: relative;
+    top: 88px;
 }

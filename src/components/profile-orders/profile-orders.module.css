@@ -1,6 +1,5 @@
 .mainWrap {
-    max-width: 860px;
-    width: 100%;
+    width: 67.7%;
 }
 
 .cardWidth {
@@ -27,8 +26,10 @@
 
 .scroll {
     overflow-y: auto;
-    max-height: 932px;
     width: 100%;
+    max-height: 100vh;
+    overflow-x: hidden;
+    padding-right: 16px;
 }
 
 .scroll::-webkit-scrollbar {

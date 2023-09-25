@@ -1,6 +1,10 @@
 .wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     justify-content: flex-start;
-    margin: 0 19vw 0 19vw;
+    position: relative;
+    top: 88px;
+    width: 62vw;
+    margin: auto;
 }
