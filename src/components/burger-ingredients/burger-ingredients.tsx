@@ -23,13 +23,15 @@ const BurgerIngredients = () => {
     }, [current, inViewBuns, inViewMains, inViewSauces, dispatch]);
 
 return (
-    <section className={`${burgerIngredientsStyle.ingredients} mt-5 pt-5`}>
-        <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
+    <section className={`${burgerIngredientsStyle.ingredients} pt-10`}>
+        <h1 className={`${burgerIngredientsStyle.title} text text_type_main-large mb-5`}>Соберите бургер</h1>
         <Switch />
-        <div className={burgerIngredientsStyle.scroll}>
-            <Cards scrollToRef={bunRef} typesItem={'bun'} typesText='Булки' />
-            <Cards scrollToRef={mainRef} typesItem={'main'} typesText='Начинки' />
-            <Cards scrollToRef={sauceRef} typesItem={'sauce'} typesText='Соусы' />
+        <div className={burgerIngredientsStyle.scrollWrap}>
+            <div className={burgerIngredientsStyle.scroll}>
+                <Cards scrollToRef={bunRef} typesItem={'bun'} typesText='Булки' />
+                <Cards scrollToRef={mainRef} typesItem={'main'} typesText='Начинки' />
+                <Cards scrollToRef={sauceRef} typesItem={'sauce'} typesText='Соусы' />
+            </div>
         </div>
     </section>
 )

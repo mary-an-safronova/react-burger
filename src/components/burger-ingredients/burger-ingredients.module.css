@@ -4,6 +4,17 @@
     position: relative;
 }
 
+.title {
+    position: fixed;
+    z-index: 20;
+}
+
+.scrollWrap {
+    margin-top: 112px;
+    overflow: hidden;
+    position: fixed;
+}
+
 .scroll {
     overflow-y: auto;
     max-height: 100vh;

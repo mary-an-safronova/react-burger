@@ -3,6 +3,9 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    position: fixed;
+    padding-top: 56px;
+    z-index: 20;
 }
 
 .switch__link {
